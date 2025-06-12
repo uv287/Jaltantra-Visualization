@@ -296,7 +296,7 @@ def register_callbacks(app):
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
-                    "Total Cost 1 min: ", "Total Cost 5 min: ", "Total Cost 1 hr: ",
+                    "Total Cost 1st File: ", "Total Cost 2nd File: ", "Total Cost 3rd File: ",
                     "", "",
                     "", "",
                     "", "",
@@ -353,14 +353,14 @@ def register_callbacks(app):
             pipeFig_1stfile, pipeFig_2ndfile, pipeFig_3rdfile, par_1stfiletab_pipe_1, par_1stfiletab_pipe_2, par_2ndfiletab_pipe_1, par_3rdfiletab_pipe_1= figGen.create_pipe_1stfile_graph(pos,node_data_1stfile, pipe_data_1stfile, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile, G, start)
             
             logger.info("Pipe output 1 figures created successfully.")  
-            logger.info(f"Total network length: {total_length}, Total cost: {total_cost}")
+            logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
             return (
                     no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     node_data_1stfile, pipe_data_1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile,
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
                     nodeFig_3rdfile, pipeFig_3rdfile,
-                    f"Total Cost 1 min: {total_cost}", no_update, no_update,
+                    f"Total Cost of 1st File: {round(total_cost,3)}", no_update, no_update,
                     DangerouslySetInnerHTML(par_1stfiletab_demand_1),DangerouslySetInnerHTML(par_1stfiletab_demand_2),
                     DangerouslySetInnerHTML(par_1stfiletab_pipe_1),DangerouslySetInnerHTML(par_1stfiletab_pipe_2),
                     DangerouslySetInnerHTML(par_2ndfiletab_demand_1),no_update,
@@ -416,8 +416,8 @@ def register_callbacks(app):
             pipeFig_2ndfile, pipeFig_1stfile, pipeFig_3rdfile, par_2ndfiletab_pipe_1, par_2ndfiletab_pipe_2, par_1stfiletab_pipe_1, par_3rdfiletab_pipe_2 = figGen.create_pipe_2ndfile_graph(pos,node_data_2ndfile, pipe_data_2ndfile, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData1stfile, pipeData1stfile, nodeData3rdfile, pipeData3rdfile, G, start)
             
             logger.info("Pipe output 2ndfile figures created successfully.")
-            logger.info(f"Total network length: {total_length}, Total cost: {total_cost}")
-            ############# 5 min data processing completed ##################
+            logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
+            ############# 2nd File data processing completed ##################
             
             return (
                 no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
@@ -425,7 +425,7 @@ def register_callbacks(app):
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
                     nodeFig_3rdfile, pipeFig_3rdfile,
-                    no_update, f"Total Cost 5 min: {total_cost}", no_update,
+                    no_update, f"Total Cost of 2nd File: {round(total_cost,3)}", no_update,
                     DangerouslySetInnerHTML(par_1stfiletab_node_1),no_update,
                     DangerouslySetInnerHTML(par_1stfiletab_pipe_1),no_update,
                     DangerouslySetInnerHTML(par_2ndfiletab_node_1),DangerouslySetInnerHTML(par_2ndfiletab_node_2), 
@@ -491,7 +491,7 @@ def register_callbacks(app):
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
                     nodeFig_3rdfile, pipeFig_3rdfile,
-                    f"Total Network Length: {total_length}", no_update, no_update,f"Total Cost 1 hr: {total_cost}",
+                    no_update, no_update,f"Total Cost of 3rd File: {round(total_cost,3)}",
                     no_update,DangerouslySetInnerHTML(par_1stfiletab_node_2), 
                     no_update,DangerouslySetInnerHTML(par_1stfiletab_pipe_2),
                     no_update,DangerouslySetInnerHTML(par_2ndfiletab_node_2), 
@@ -520,7 +520,7 @@ def register_callbacks(app):
     #         diff1 = total_cost_3rdfile - total_cost_1stfile
     #         diff2 = total_cost_3rdfile - total_cost_2ndfile
     #         return (
-    #             f"Total Cost: {total_cost}",
+    #             f"Total Cost: {round(total_cost,3)}",
     #             f"Difference with 3rdfile: {diff1}",
     #             f"Difference with 2ndfile: {diff2}"
     #         )
@@ -529,7 +529,7 @@ def register_callbacks(app):
     #         diff1 = total_cost_1stfile - total_cost_3rdfile
     #         diff2 = total_cost_1stfile - total_cost_2ndfile
     #         return (
-    #             f"Total Cost: {total_cost}",
+    #             f"Total Cost: {round(total_cost,3)}",
     #             f"Difference with 2ndfile: {diff2}",
     #             f"Difference with 3rdfile: {diff1}"
     #         )
@@ -538,7 +538,7 @@ def register_callbacks(app):
     #         diff1 = total_cost_2ndfile - total_cost_3rdfile
     #         diff2 = total_cost_2ndfile - total_cost_1stfile
     #         return (
-    #             f"Total Cost: {total_cost}",
+    #             f"Total Cost: {round(total_cost,3)}",
     #             f"Difference with 1stfile: {diff2}",
     #             f"Difference with 3rdfile: {diff1}"
     #         )

@@ -8331,3 +8331,254 @@
 
 2025-06-12 14:31:57,802 - INFO - [dash.py-run-2137] - Dash is running on http://127.0.0.1:8050/
 
+2025-06-12 16:11:57,315 - INFO - [dash.py-run-2137] - Dash is running on http://127.0.0.1:8050/
+
+2025-06-12 16:12:17,799 - INFO - [callbacks.py-update_data-201] - File Sample_input_cycle_parallel.xls uploaded and read successfully.
+2025-06-12 16:12:17,800 - INFO - [callbacks.py-update_data-203] - Processing data from Sample_input_cycle_parallel.xls...
+2025-06-12 16:12:17,806 - INFO - [data_processor.py-process_source-34] - Source ID : 8
+2025-06-12 16:12:17,807 - INFO - [data_processor.py-process_source-35] - Sourcec Elevation : 505
+2025-06-12 16:12:17,808 - INFO - [data_processor.py-process_source-36] - Minimum Pressure :7
+2025-06-12 16:12:17,815 - INFO - [data_processor.py-process_node_data-79] - {'nodeID': [1, 2, 3, 4, 7, 6, 9, 10, 11], 'Elevation': [442, 477, 496, 464, 493, 390, 517, 509, 472], 'Demand': [2.1, 0.8, 3.4, 1.75, 2.6, 1.8, 0.0, 0.0, 0.0], 'MinPressure': [7, 7, 7, 7, 7, 7, 7, 7, 7]}
+2025-06-12 16:12:17,820 - INFO - [data_processor.py-process_pipe_data-112] - {'pipeID': [2, 3, 4, 5, 6, 7, 8, 9, 10, 1], 'startNode': [3, 2, 2, 9, 8, 10, 3, 11, 4, 4], 'endNode': [7, 6, 4, 3, 9, 2, 10, 1, 11, 6], 'length': [7345, 3491, 2442, 1943, 2686, 4808, 924, 4266, 485, 318], 'parallel': [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:12:17,824 - INFO - [data_processor.py-process_commercial_pipe_data-142] - {'diameters': [63, 75, 90, 110, 125, 140, 160, 180, 200, 225, 250, 280, 315], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'cost': [116, 172, 231, 340, 461, 576, 750, 945, 1113, 1430, 1762, 2210, 2794]}
+2025-06-12 16:12:17,827 - INFO - [data_processor.py-general_data-47] - Network name : Sample
+2025-06-12 16:12:17,827 - INFO - [data_processor.py-general_data-48] - Supply Hour : 12
+2025-06-12 16:12:17,827 - INFO - [callbacks.py-update_data-219] - Node data and pipe data processed successfully from Sample_input_cycle_parallel.xls.
+2025-06-12 16:12:17,832 - INFO - [callbacks.py-update_data-220] - Input Node data: {'nodeID': [8, 1, 2, 3, 4, 7, 6, 9, 10, 11], 'Elevation': [505, 442, 477, 496, 464, 493, 390, 517, 509, 472], 'Demand': [-1, 2.1, 0.8, 3.4, 1.75, 2.6, 1.8, 0.0, 0.0, 0.0], 'MinPressure': [-1, 7, 7, 7, 7, 7, 7, 7, 7, 7]}
+2025-06-12 16:12:17,832 - INFO - [callbacks.py-update_data-221] - Input Pipe data: {'pipeID': [2, 3, 4, 5, 6, 7, 8, 9, 10, 1], 'startNode': [3, 2, 2, 9, 8, 10, 3, 11, 4, 4], 'endNode': [7, 6, 4, 3, 9, 2, 10, 1, 11, 6], 'length': [7345, 3491, 2442, 1943, 2686, 4808, 924, 4266, 485, 318], 'parallel': [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:12:17,832 - INFO - [data_processor.py-create_network_graph-192] - Created network graph with 10 nodes and 10 edges.
+2025-06-12 16:12:17,965 - INFO - [data_processor.py-generate_layout-316] - Generated layout for 10 nodes and 10 edges.
+2025-06-12 16:12:17,966 - INFO - [data_processor.py-process_edges_hovertext-256] - Processed 30 edges for visualization.
+2025-06-12 16:12:18,008 - INFO - [callbacks.py-update_data-238] - Edge trace created successfully.
+2025-06-12 16:12:18,030 - INFO - [callbacks.py-update_data-255] - Edge label trace created successfully.
+2025-06-12 16:12:18,030 - INFO - [data_processor.py-process_nodes_for_plotting-309] - Processed 10 nodes for visualization.
+2025-06-12 16:12:18,047 - INFO - [callbacks.py-update_data-276] - Node trace created successfully.
+2025-06-12 16:12:18,102 - INFO - [callbacks.py-update_data-291] - Input File Network created successfully.
+2025-06-12 16:12:58,612 - INFO - [callbacks.py-update_data-308] - Processing Output1 data from par_1min.xls...
+2025-06-12 16:12:58,628 - INFO - [callbacks.py-update_data-317] - Output1 data reading started...
+2025-06-12 16:12:58,631 - INFO - [output_data_processor.py-process_node_data-51] - Node Data sucessfully created.
+2025-06-12 16:12:58,646 - INFO - [output_data_processor.py-process_pipe_data-98] - Pipe Data created successfully
+2025-06-12 16:12:58,649 - INFO - [output_data_processor.py-process_source-12] - Source ID : 8
+2025-06-12 16:12:58,649 - INFO - [output_data_processor.py-process_source-13] - Source Elevation : 505
+2025-06-12 16:12:58,651 - INFO - [output_data_processor.py-process_source-14] - Source Head : 530
+2025-06-12 16:12:58,653 - INFO - [output_data_processor.py-get_length_and_cost-22] - Total length of Network : 35735
+2025-06-12 16:12:58,654 - INFO - [output_data_processor.py-get_length_and_cost-23] - Total Cost : 13048236.705829998
+2025-06-12 16:12:58,654 - INFO - [callbacks.py-update_data-330] - Output1 data reading completed successfully.
+2025-06-12 16:12:58,655 - INFO - [callbacks.py-update_data-331] - Node data: {'nodeID': [8, 1, 2, 3, 4, 6, 7, 9, 10, 11], 'Demand': [-1, 4.2, 1.6, 6.8, 3.5, 3.6, 5.2, 0, 0, 0], 'Elevation': [505, 442, 477, 496, 464, 390, 493, 517, 509, 472], 'Head': [530, 455.2830058518432, 491.1643689640934, 518.0274465796467, 480.0147502845362, 476.5761192114033, 502.49392318328756, 524.0000000034565, 516.0000000053449, 479.0000000080624], 'Pressure': [-1, 13.2830058518432, 14.164368964093399, 22.02744657964672, 16.014750284536206, 86.5761192114033, 9.493923183287563, 7.000000003456535, 7.000000005344873, 7.000000008062386], 'MinPressure': [-1, 7, 7, 7, 7, 7, 7, 7, 7, 7]}
+2025-06-12 16:12:58,656 - INFO - [callbacks.py-update_data-332] - Pipe data: {'pipeID': [2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10], 'startNode': [3, 3, 2, 2, 2, 9, 8, 8, 10, 3, 3, 11, 4], 'endNode': [7, 7, 6, 4, 4, 3, 9, 9, 2, 10, 10, 1, 11], 'length': [7345, 7345, 3491, 914.8500799999999, 1527.14992, 1943, 1004.3129200000001, 1681.68708, 4808, 530.12943, 393.87057, 4266, 485], 'flow': [4.22440829314063, 0.9755917068593698, 3.6, 7.7, 7.7, 24.9, 24.9, 24.9, 12.9, 12.9, 12.9, 4.2, 4.2], 'speed': [0.4445193133829604, 0.31296597145100136, 0.5658842421045167, 0.8102433466496489, 0.6274524476454882, 0.7925916165976388, 0.7925916165976388, 0.6262452279289986, 0.8379994962797754, 0.6415933643392031, 0.5069379668852962, 0.6601982824552695, 0.44195091635435396], 'diameter': [110, 63, 90, 110, 125, 200, 200, 225, 140, 160, 180, 90, 110], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'headloss': [15.533523396359193, 15.5335233963592, 14.588249752690077, 5.881532583041103, 5.268086096516077, 5.972553423809743, 3.0871397678447567, 2.912860228698737, 24.835631041251446, 1.4291304516811656, 0.5983161226207659, 23.71699415621919, 1.014750276473828], 'cost': [0, 852020, 806421, 311049.02719999995, 704016.11312, 2162559, 1117800.2799600002, 2404812.5244, 2769408, 397597.07249999995, 372207.68864999997, 985446, 164900], 'parallel': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:12:58,657 - INFO - [output_data_processor.py-get_unique_parallel_pipes-132] - Parrallel pipes : {(3, 7)}
+2025-06-12 16:12:58,657 - INFO - [callbacks.py-update_data-336] - Unique parallel pipes: [(3, 7)]
+2025-06-12 16:12:59,549 - INFO - [figure_generator.py-extract_node_positions-30] - Extracted node positions: {8.0: (-0.7223555283770986, 0.9323825829600988), 1.0: (0.9999999999999999, -0.7439571210377459), 2.0: (0.1585051198668147, -0.18564804933734708), 3.0: (-0.4500854560033884, 0.35228084952497063), 4.0: (0.46095509011270186, -0.40444278828587965), 7.0: (-0.7151019816964861, 0.28196699886819493), 6.0: (0.2505362075262139, -0.40245183726367767), 9.0: (-0.5959693675774652, 0.676434249337002), 10.0: (-0.1468817083215384, 0.08651773400073973), 11.0: (0.7603976244702464, -0.593082618766356)}
+2025-06-12 16:12:59,550 - INFO - [callbacks.py-update_data-342] - Node positions extracted successfully.
+2025-06-12 16:12:59,550 - INFO - [figure_generator.py-create_graph_with_parallel_edges-40] - Creating graph with node positions: {8.0: (-0.7223555283770986, 0.9323825829600988), 1.0: (0.9999999999999999, -0.7439571210377459), 2.0: (0.1585051198668147, -0.18564804933734708), 3.0: (-0.4500854560033884, 0.35228084952497063), 4.0: (0.46095509011270186, -0.40444278828587965), 7.0: (-0.7151019816964861, 0.28196699886819493), 6.0: (0.2505362075262139, -0.40245183726367767), 9.0: (-0.5959693675774652, 0.676434249337002), 10.0: (-0.1468817083215384, 0.08651773400073973), 11.0: (0.7603976244702464, -0.593082618766356)} and pipe data: {'pipeID': [2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10], 'startNode': [3, 3, 2, 2, 2, 9, 8, 8, 10, 3, 3, 11, 4], 'endNode': [7, 7, 6, 4, 4, 3, 9, 9, 2, 10, 10, 1, 11], 'length': [7345, 7345, 3491, 914.8500799999999, 1527.14992, 1943, 1004.3129200000001, 1681.68708, 4808, 530.12943, 393.87057, 4266, 485], 'flow': [4.22440829314063, 0.9755917068593698, 3.6, 7.7, 7.7, 24.9, 24.9, 24.9, 12.9, 12.9, 12.9, 4.2, 4.2], 'speed': [0.4445193133829604, 0.31296597145100136, 0.5658842421045167, 0.8102433466496489, 0.6274524476454882, 0.7925916165976388, 0.7925916165976388, 0.6262452279289986, 0.8379994962797754, 0.6415933643392031, 0.5069379668852962, 0.6601982824552695, 0.44195091635435396], 'diameter': [110, 63, 90, 110, 125, 200, 200, 225, 140, 160, 180, 90, 110], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'headloss': [15.533523396359193, 15.5335233963592, 14.588249752690077, 5.881532583041103, 5.268086096516077, 5.972553423809743, 3.0871397678447567, 2.912860228698737, 24.835631041251446, 1.4291304516811656, 0.5983161226207659, 23.71699415621919, 1.014750276473828], 'cost': [0, 852020, 806421, 311049.02719999995, 704016.11312, 2162559, 1117800.2799600002, 2404812.5244, 2769408, 397597.07249999995, 372207.68864999997, 985446, 164900], 'parallel': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:12:59,550 - INFO - [figure_generator.py-create_graph_with_parallel_edges-69] - Created graph with edges: [(8.0, 9), (1.0, 11), (2.0, 6), (2.0, 4), (2.0, 10), (3.0, 7), (3.0, 7), (3.0, 9), (3.0, 10), (4.0, 11)]
+2025-06-12 16:12:59,551 - INFO - [figure_generator.py-create_node_1stfile_graph-159] - 1stfile Graph Head Map : {8: 530, 1: 455.2830058518432, 2: 491.1643689640934, 3: 518.0274465796467, 4: 480.0147502845362, 6: 476.5761192114033, 7: 502.49392318328756, 9: 524.0000000034565, 10: 516.0000000053449, 11: 479.0000000080624}
+2025-06-12 16:12:59,551 - INFO - [output_data_processor.py-process_nodes_1stfile_plotting-172] - 1stfile output File node hover text, color and size is created
+2025-06-12 16:12:59,554 - INFO - [figure_generator.py-create_node_1stfile_graph-305] - Node trace created for 1stfile graph
+2025-06-12 16:12:59,554 - INFO - [output_data_processor.py-process_edges_for_plotting-326] - Edge Data for the Node Graph are created
+2025-06-12 16:12:59,555 - INFO - [figure_generator.py-create_node_1stfile_graph-316] - Edge trace created for 1stfile graph
+2025-06-12 16:12:59,556 - INFO - [figure_generator.py-create_node_1stfile_graph-334] - Edge label trace created for 1stfile graph
+2025-06-12 16:12:59,566 - INFO - [callbacks.py-update_data-348] - Node output 1 figures created successfully.
+2025-06-12 16:12:59,567 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-85] - Adding edges to the graph with parallel and multiple edges with relavant data
+2025-06-12 16:12:59,567 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-124] - No of pipes added to the graph: {2: 2, 3: 1, 4: 2, 5: 1, 6: 2, 7: 1, 8: 2, 9: 1, 10: 1}
+2025-06-12 16:12:59,568 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-125] - Multiple same pipe id edges added successfully
+2025-06-12 16:12:59,568 - INFO - [figure_generator.py-create_pipe_1stfile_graph-861] - 1stfile Graph Head Map : {8: 530, 1: 455.2830058518432, 2: 491.1643689640934, 3: 518.0274465796467, 4: 480.0147502845362, 6: 476.5761192114033, 7: 502.49392318328756, 9: 524.0000000034565, 10: 516.0000000053449, 11: 479.0000000080624}
+2025-06-12 16:12:59,568 - INFO - [output_data_processor.py-process_nodes_for_diameter_graph_plotting-285] - Node Data for the pipegraph is generated
+2025-06-12 16:12:59,569 - INFO - [figure_generator.py-create_pipe_1stfile_graph-879] - Node trace created for 1stfile graph
+2025-06-12 16:12:59,569 - INFO - [figure_generator.py-create_pipe_1stfile_graph-922] - 1 minute Result File Pipe ID to Cost Map : defaultdict(<class 'float'>, {2: 852020.0, 3: 806421.0, 4: 1015065.14032, 5: 2162559.0, 6: 3522612.8043600004, 7: 2769408.0, 8: 769804.7611499999, 9: 985446.0, 10: 164900.0})
+2025-06-12 16:12:59,570 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-343] - Exist Pipe 2ndfile : {}
+2025-06-12 16:12:59,570 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-344] - Exist Pipe 3rdfile : {}
+2025-06-12 16:12:59,570 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 6+1 color is the Light Grey
+2025-06-12 16:12:59,571 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,572 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 6+2 color is the Dark Grey
+2025-06-12 16:12:59,574 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,574 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 9+1 color is the Dark Grey
+2025-06-12 16:12:59,575 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,576 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 3+1 color is the Dark Grey
+2025-06-12 16:12:59,576 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,577 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 4+1 color is the Light Grey
+2025-06-12 16:12:59,578 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,578 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 4+2 color is the Dark Grey
+2025-06-12 16:12:59,579 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,579 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 7+1 color is the Dark Grey
+2025-06-12 16:12:59,580 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,581 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-500] - 2_1+1 color is the Dark Grey
+2025-06-12 16:12:59,581 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,582 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-500] - 2_2+2 color is the Dark Grey
+2025-06-12 16:12:59,583 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,583 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 5+1 color is the Dark Grey
+2025-06-12 16:12:59,584 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,585 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 8+1 color is the Light Grey
+2025-06-12 16:12:59,585 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,586 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 8+2 color is the Dark Grey
+2025-06-12 16:12:59,587 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,588 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 10+1 color is the Dark Grey
+2025-06-12 16:12:59,588 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:12:59,589 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1215] - Edge trace created for 1stfile pipe data graph
+2025-06-12 16:12:59,590 - INFO - [output_data_processor.py-process_edge_label_positions_for_graph_plotting-1235] - Label position for the pipe has been created sucessfully
+2025-06-12 16:12:59,591 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_1stfile-1508] - Edge Hovertext has been created sucessfully for 1stfile graph
+2025-06-12 16:12:59,592 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1235] - Edge label trace created for 1stfile pipe data graph
+2025-06-12 16:12:59,609 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1249] - Pipe figure created for 1stfile graph
+2025-06-12 16:12:59,615 - INFO - [callbacks.py-update_data-355] - Pipe output 1 figures created successfully.
+2025-06-12 16:12:59,615 - INFO - [callbacks.py-update_data-356] - Total network length: 35735, Total cost: 13048236.706
+2025-06-12 16:13:37,887 - INFO - [callbacks.py-update_data-373] - Processing Output2 data from par_1min.xls...
+2025-06-12 16:13:37,902 - INFO - [callbacks.py-update_data-382] - Output2 data reading started...
+2025-06-12 16:13:37,906 - INFO - [output_data_processor.py-process_node_data-51] - Node Data sucessfully created.
+2025-06-12 16:13:37,918 - INFO - [output_data_processor.py-process_pipe_data-98] - Pipe Data created successfully
+2025-06-12 16:13:37,923 - INFO - [output_data_processor.py-process_source-12] - Source ID : 8
+2025-06-12 16:13:37,923 - INFO - [output_data_processor.py-process_source-13] - Source Elevation : 505
+2025-06-12 16:13:37,923 - INFO - [output_data_processor.py-process_source-14] - Source Head : 530
+2025-06-12 16:13:37,926 - INFO - [output_data_processor.py-get_length_and_cost-22] - Total length of Network : 21363
+2025-06-12 16:13:37,926 - INFO - [output_data_processor.py-get_length_and_cost-23] - Total Cost : 12994934.081
+2025-06-12 16:13:37,927 - INFO - [callbacks.py-update_data-395] - Output2 data reading completed successfully.
+2025-06-12 16:13:37,927 - INFO - [callbacks.py-update_data-396] - Node data: {'nodeID': [8, 1, 2, 3, 4, 6, 7, 9, 10, 11], 'Demand': [-1, 4.2, 1.6, 6.8, 3.5, 3.6, 5.2, 0, 0, 0], 'Elevation': [505, 442, 477, 496, 464, 390, 493, 517, 509, 472], 'Head': [530, 449, 493.215, 522.824, 480.015, 477.19, 500, 525.803, 518.051, 479], 'Pressure': [-1, 7, 16.214999999999975, 26.823999999999955, 16.014999999999986, 87.19, 7, 8.802999999999997, 9.051000000000045, 7], 'MinPressure': [-1, 7, 7, 7, 7, 7, 7, 7, 7, 7]}
+2025-06-12 16:13:37,927 - INFO - [callbacks.py-update_data-397] - Pipe data: {'pipeID': [4, 4, 3, 8, 1, 10, 6, 6, 5, 5, 7, 9, 9, 2], 'startNode': [2, 2, 2, 3, 4, 4, 8, 8, 9, 9, 10, 11, 11, 3], 'endNode': [4, 4, 6, 10, 6, 11, 9, 9, 3, 3, 2, 1, 1, 7], 'length': [2437.7, 4.3000000000002085, 3491, 924, 318, 485, 2030.26, 655.7400000000002, 1387.86, 555.1400000000001, 4808, 790.281, 3475.7189999999996, 7345], 'flow': [9.81746, 9.81746, 1.48254, 12.9, 2.11746, 4.2, 24.9, 24.9, 24.9, 24.9, 12.9, 4.2, 4.2, 5.2], 'speed': [0.799998611254763, 0.6377539949416159, 0.47559298429117364, 0.8379994962797754, 0.679272815922126, 0.44195091635435396, 0.6262452279289986, 0.5072586346224889, 0.6262452279289986, 0.5072586346224889, 0.8379994962797754, 0.9506855267355881, 0.6601982824552695, 0.5471773250101525], 'diameter': [125, 140, 63, 140, 63, 110, 225, 250, 225, 250, 140, 75, 90, 110], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'headloss': [13.1872133573361, 0.01339520796589384, 16.025345186557306, 4.772904135215544, 2.8248185271289206, 1.014750276473828, 3.516625463946538, 0.6799346215476006, 2.4039205896746436, 0.5756228166741925, 24.835631041251446, 10.67660079405136, 19.323395970853255, 22.823894249879945], 'cost': [1123779.7, 2476.8000000001202, 404956, 532224, 36888, 164900, 2903271.8, 1155413.8800000004, 1984639.7999999998, 978156.6800000002, 2769408, 135928.332, 802891.0889999999, 0], 'parallel': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:13:37,927 - INFO - [output_data_processor.py-get_unique_parallel_pipes-132] - Parrallel pipes : set()
+2025-06-12 16:13:37,928 - INFO - [callbacks.py-update_data-400] - Unique parallel pipes: []
+2025-06-12 16:13:37,971 - INFO - [figure_generator.py-extract_node_positions-30] - Extracted node positions: {8.0: (-0.7223555283770986, 0.9323825829600988), 1.0: (0.9999999999999999, -0.7439571210377459), 2.0: (0.1585051198668147, -0.18564804933734708), 3.0: (-0.4500854560033884, 0.35228084952497063), 4.0: (0.46095509011270186, -0.40444278828587965), 7.0: (-0.7151019816964861, 0.28196699886819493), 6.0: (0.2505362075262139, -0.40245183726367767), 9.0: (-0.5959693675774652, 0.676434249337002), 10.0: (-0.1468817083215384, 0.08651773400073973), 11.0: (0.7603976244702464, -0.593082618766356)}
+2025-06-12 16:13:37,971 - INFO - [callbacks.py-update_data-406] - Node positions extracted successfully.
+2025-06-12 16:13:37,971 - INFO - [figure_generator.py-create_graph_with_parallel_edges-40] - Creating graph with node positions: {8.0: (-0.7223555283770986, 0.9323825829600988), 1.0: (0.9999999999999999, -0.7439571210377459), 2.0: (0.1585051198668147, -0.18564804933734708), 3.0: (-0.4500854560033884, 0.35228084952497063), 4.0: (0.46095509011270186, -0.40444278828587965), 7.0: (-0.7151019816964861, 0.28196699886819493), 6.0: (0.2505362075262139, -0.40245183726367767), 9.0: (-0.5959693675774652, 0.676434249337002), 10.0: (-0.1468817083215384, 0.08651773400073973), 11.0: (0.7603976244702464, -0.593082618766356)} and pipe data: {'pipeID': [4, 4, 3, 8, 1, 10, 6, 6, 5, 5, 7, 9, 9, 2], 'startNode': [2, 2, 2, 3, 4, 4, 8, 8, 9, 9, 10, 11, 11, 3], 'endNode': [4, 4, 6, 10, 6, 11, 9, 9, 3, 3, 2, 1, 1, 7], 'length': [2437.7, 4.3000000000002085, 3491, 924, 318, 485, 2030.26, 655.7400000000002, 1387.86, 555.1400000000001, 4808, 790.281, 3475.7189999999996, 7345], 'flow': [9.81746, 9.81746, 1.48254, 12.9, 2.11746, 4.2, 24.9, 24.9, 24.9, 24.9, 12.9, 4.2, 4.2, 5.2], 'speed': [0.799998611254763, 0.6377539949416159, 0.47559298429117364, 0.8379994962797754, 0.679272815922126, 0.44195091635435396, 0.6262452279289986, 0.5072586346224889, 0.6262452279289986, 0.5072586346224889, 0.8379994962797754, 0.9506855267355881, 0.6601982824552695, 0.5471773250101525], 'diameter': [125, 140, 63, 140, 63, 110, 225, 250, 225, 250, 140, 75, 90, 110], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'headloss': [13.1872133573361, 0.01339520796589384, 16.025345186557306, 4.772904135215544, 2.8248185271289206, 1.014750276473828, 3.516625463946538, 0.6799346215476006, 2.4039205896746436, 0.5756228166741925, 24.835631041251446, 10.67660079405136, 19.323395970853255, 22.823894249879945], 'cost': [1123779.7, 2476.8000000001202, 404956, 532224, 36888, 164900, 2903271.8, 1155413.8800000004, 1984639.7999999998, 978156.6800000002, 2769408, 135928.332, 802891.0889999999, 0], 'parallel': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:13:37,972 - INFO - [figure_generator.py-create_graph_with_parallel_edges-69] - Created graph with edges: [(8.0, 9), (1.0, 11), (2.0, 4), (2.0, 6), (2.0, 10), (3.0, 10), (3.0, 9), (3.0, 7), (4.0, 6), (4.0, 11)]
+2025-06-12 16:13:37,972 - INFO - [figure_generator.py-create_node_2ndfile_graph-399] - 2ndfile Graph Head Map : {8: 530, 1: 449, 2: 493.215, 3: 522.824, 4: 480.015, 6: 477.19, 7: 500, 9: 525.803, 10: 518.051, 11: 479}
+2025-06-12 16:13:37,972 - INFO - [figure_generator.py-create_node_2ndfile_graph-415] - 1 minute Result File Head Map : {8: 530, 1: 455.2830058518432, 2: 491.1643689640934, 3: 518.0274465796467, 4: 480.0147502845362, 6: 476.5761192114033, 7: 502.49392318328756, 9: 524.0000000034565, 10: 516.0000000053449, 11: 479.0000000080624}
+2025-06-12 16:13:37,973 - INFO - [figure_generator.py-create_node_2ndfile_graph-425] - Diffrent Node ID in 1stfile output file compare to the 2ndfile output file : [1, 2, 3, 4, 6, 7, 9, 10, 11]
+2025-06-12 16:13:37,973 - INFO - [figure_generator.py-create_node_2ndfile_graph-443] - Paragraph for 2ndfile tab with 1stfile data is stored
+2025-06-12 16:13:37,973 - INFO - [figure_generator.py-create_node_2ndfile_graph-458] - Paragraph for 1stfile tab with 2ndfile data is stored
+2025-06-12 16:13:37,974 - INFO - [output_data_processor.py-process_nodes_2ndfile_plotting-211] - 2ndfile output file node hover text, color and size is created.
+2025-06-12 16:13:37,975 - INFO - [figure_generator.py-create_node_2ndfile_graph-543] - Node trace created for 2ndfile graph
+2025-06-12 16:13:37,976 - INFO - [output_data_processor.py-process_edges_for_plotting-326] - Edge Data for the Node Graph are created
+2025-06-12 16:13:37,976 - INFO - [figure_generator.py-create_node_2ndfile_graph-554] - Edge trace created for 2ndfile graph
+2025-06-12 16:13:37,977 - INFO - [figure_generator.py-create_node_2ndfile_graph-572] - Edge label trace created for 2ndfile graph
+2025-06-12 16:13:37,985 - INFO - [figure_generator.py-create_node_2ndfile_graph-586] - Node figure created for 2ndfile graph
+2025-06-12 16:13:37,989 - INFO - [output_data_processor.py-get_unique_parallel_pipes-132] - Parrallel pipes : {(3, 7)}
+2025-06-12 16:13:37,989 - INFO - [figure_generator.py-create_graph_with_parallel_edges-40] - Creating graph with node positions: {8.0: (-0.7223555283770986, 0.9323825829600988), 1.0: (0.9999999999999999, -0.7439571210377459), 2.0: (0.1585051198668147, -0.18564804933734708), 3.0: (-0.4500854560033884, 0.35228084952497063), 4.0: (0.46095509011270186, -0.40444278828587965), 7.0: (-0.7151019816964861, 0.28196699886819493), 6.0: (0.2505362075262139, -0.40245183726367767), 9.0: (-0.5959693675774652, 0.676434249337002), 10.0: (-0.1468817083215384, 0.08651773400073973), 11.0: (0.7603976244702464, -0.593082618766356)} and pipe data: {'pipeID': [2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10], 'startNode': [3, 3, 2, 2, 2, 9, 8, 8, 10, 3, 3, 11, 4], 'endNode': [7, 7, 6, 4, 4, 3, 9, 9, 2, 10, 10, 1, 11], 'length': [7345, 7345, 3491, 914.8500799999999, 1527.14992, 1943, 1004.3129200000001, 1681.68708, 4808, 530.12943, 393.87057, 4266, 485], 'flow': [4.22440829314063, 0.9755917068593698, 3.6, 7.7, 7.7, 24.9, 24.9, 24.9, 12.9, 12.9, 12.9, 4.2, 4.2], 'speed': [0.4445193133829604, 0.31296597145100136, 0.5658842421045167, 0.8102433466496489, 0.6274524476454882, 0.7925916165976388, 0.7925916165976388, 0.6262452279289986, 0.8379994962797754, 0.6415933643392031, 0.5069379668852962, 0.6601982824552695, 0.44195091635435396], 'diameter': [110, 63, 90, 110, 125, 200, 200, 225, 140, 160, 180, 90, 110], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'headloss': [15.533523396359193, 15.5335233963592, 14.588249752690077, 5.881532583041103, 5.268086096516077, 5.972553423809743, 3.0871397678447567, 2.912860228698737, 24.835631041251446, 1.4291304516811656, 0.5983161226207659, 23.71699415621919, 1.014750276473828], 'cost': [0, 852020, 806421, 311049.02719999995, 704016.11312, 2162559, 1117800.2799600002, 2404812.5244, 2769408, 397597.07249999995, 372207.68864999997, 985446, 164900], 'parallel': [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:13:37,990 - INFO - [figure_generator.py-create_graph_with_parallel_edges-69] - Created graph with edges: [(8.0, 9), (1.0, 11), (2.0, 6), (2.0, 4), (2.0, 10), (3.0, 7), (3.0, 7), (3.0, 9), (3.0, 10), (4.0, 11)]
+2025-06-12 16:13:37,990 - INFO - [figure_generator.py-create_node_2ndfile_graph-595] - Creating 1stfile graph with 2ndfile data
+2025-06-12 16:13:37,990 - INFO - [figure_generator.py-create_node_1stfile_graph-159] - 1stfile Graph Head Map : {8: 530, 1: 455.2830058518432, 2: 491.1643689640934, 3: 518.0274465796467, 4: 480.0147502845362, 6: 476.5761192114033, 7: 502.49392318328756, 9: 524.0000000034565, 10: 516.0000000053449, 11: 479.0000000080624}
+2025-06-12 16:13:37,991 - INFO - [figure_generator.py-create_node_1stfile_graph-176] - 5 minutes Result File Head Map : {8: 530, 1: 449, 2: 493.215, 3: 522.824, 4: 480.015, 6: 477.19, 7: 500, 9: 525.803, 10: 518.051, 11: 479}
+2025-06-12 16:13:37,991 - INFO - [figure_generator.py-create_node_1stfile_graph-185] - Diffrent Node ID in 2ndfile output file compare to the 1stfile output file : [1, 2, 3, 4, 6, 7, 9, 10, 11]
+2025-06-12 16:13:37,992 - INFO - [figure_generator.py-create_node_1stfile_graph-203] - Paragraph for 1stfile tab with 2ndfile data is stored
+2025-06-12 16:13:37,992 - INFO - [figure_generator.py-create_node_1stfile_graph-218] - Paragraph for 2ndfile tab with 1stfile data is stored
+2025-06-12 16:13:37,992 - INFO - [output_data_processor.py-process_nodes_1stfile_plotting-172] - 1stfile output File node hover text, color and size is created
+2025-06-12 16:13:37,995 - INFO - [figure_generator.py-create_node_1stfile_graph-305] - Node trace created for 1stfile graph
+2025-06-12 16:13:37,995 - INFO - [output_data_processor.py-process_edges_for_plotting-326] - Edge Data for the Node Graph are created
+2025-06-12 16:13:37,996 - INFO - [figure_generator.py-create_node_1stfile_graph-316] - Edge trace created for 1stfile graph
+2025-06-12 16:13:37,997 - INFO - [figure_generator.py-create_node_1stfile_graph-334] - Edge label trace created for 1stfile graph
+2025-06-12 16:13:38,007 - INFO - [callbacks.py-update_data-412] - Node output 2ndfile figures created successfully.
+2025-06-12 16:13:38,007 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-85] - Adding edges to the graph with parallel and multiple edges with relavant data
+2025-06-12 16:13:38,007 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-124] - No of pipes added to the graph: {4: 2, 3: 1, 8: 1, 1: 1, 10: 1, 6: 2, 5: 2, 7: 1, 9: 2, 2: 1}
+2025-06-12 16:13:38,007 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-125] - Multiple same pipe id edges added successfully
+2025-06-12 16:13:38,007 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1285] - 2ndfile Graph Head Map : {8: 530, 1: 449, 2: 493.215, 3: 522.824, 4: 480.015, 6: 477.19, 7: 500, 9: 525.803, 10: 518.051, 11: 479}
+2025-06-12 16:13:38,007 - INFO - [output_data_processor.py-process_nodes_for_diameter_graph_plotting-285] - Node Data for the pipegraph is generated
+2025-06-12 16:13:38,008 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1304] - Node trace created for 2ndfile graph
+2025-06-12 16:13:38,009 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1347] - 5 minute Result File Pipe ID to Cost Map : defaultdict(<class 'float'>, {4: 1126256.5, 3: 404956.0, 8: 532224.0, 1: 36888.0, 10: 164900.0, 6: 4058685.68, 5: 2962796.48, 7: 2769408.0, 9: 938819.4209999999, 2: 0.0})
+2025-06-12 16:13:38,010 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1409] - Pipe ID which are diffrent in 1stfile output file compare to the 2ndfile output file : [2, 3, 4, 5, 6, 8, 9, 1]
+2025-06-12 16:13:38,011 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1460] - Paragraph for 2ndfile tab with 1stfile data is stored
+2025-06-12 16:13:38,012 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1502] - Paragraph for 1stfile tab with 2ndfile data is stored
+2025-06-12 16:13:38,012 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-625] - Different Pipe 1stfile : [2, 3, 4, 5, 6, 8, 9, 1]
+2025-06-12 16:13:38,012 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-626] - Different Pipe 3rdfile : []
+2025-06-12 16:13:38,012 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-627] - Exist Pipe 1stfile : {2: False}
+2025-06-12 16:13:38,012 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-628] - Exist Pipe 3rdfile : {}
+2025-06-12 16:13:38,014 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 6+1 color is the Light Orange
+2025-06-12 16:13:38,014 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 6+2 color is the Dark Orange
+2025-06-12 16:13:38,016 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 9+1 color is the Light Orange
+2025-06-12 16:13:38,017 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 9+2 color is the Dark Orange
+2025-06-12 16:13:38,018 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 4+1 color is the Light Orange
+2025-06-12 16:13:38,019 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 4+2 color is the Dark Orange
+2025-06-12 16:13:38,020 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 3+1 color is the Dark Orange
+2025-06-12 16:13:38,021 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 7+1 color is the Dark Grey
+2025-06-12 16:13:38,021 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 8+1 color is the Dark Orange
+2025-06-12 16:13:38,022 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 5+1 color is the Light Orange
+2025-06-12 16:13:38,022 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 5+2 color is the Dark Orange
+2025-06-12 16:13:38,023 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 2+1 color is the Dark Orange
+2025-06-12 16:13:38,023 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 1+1 color is the Dark Orange
+2025-06-12 16:13:38,023 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-885] - 10+1 color is the Dark Grey
+2025-06-12 16:13:38,024 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_2ndfile-893] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully for 2ndfile graph
+2025-06-12 16:13:38,024 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1655] - Edge trace created for 2ndfile pipe data graph
+2025-06-12 16:13:38,024 - INFO - [output_data_processor.py-process_edge_label_positions_for_graph_plotting-1235] - Label position for the pipe has been created sucessfully
+2025-06-12 16:13:38,024 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1516] - Different Pipe 1stfile : [2, 3, 4, 5, 6, 8, 9, 1]
+2025-06-12 16:13:38,024 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1517] - Different Pipe 3rdfile : []
+2025-06-12 16:13:38,024 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 6 not in edge_hovertext_map
+2025-06-12 16:13:38,025 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 9 not in edge_hovertext_map
+2025-06-12 16:13:38,025 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 4 not in edge_hovertext_map
+2025-06-12 16:13:38,025 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 3 not in edge_hovertext_map
+2025-06-12 16:13:38,025 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 7 not in edge_hovertext_map
+2025-06-12 16:13:38,027 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 8 not in edge_hovertext_map
+2025-06-12 16:13:38,028 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 5 not in edge_hovertext_map
+2025-06-12 16:13:38,028 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 2 not in edge_hovertext_map
+2025-06-12 16:13:38,029 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 1 not in edge_hovertext_map
+2025-06-12 16:13:38,029 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1660] - Full Pipe ID : 10 not in edge_hovertext_map
+2025-06-12 16:13:38,030 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_2ndfile-1747] - Edge Hovertext has been created sucessfully for 2ndfile graph
+2025-06-12 16:13:38,031 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1675] - Edge label trace created for 2ndfile pipe data graph
+2025-06-12 16:13:38,045 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1689] - Pipe figure created for 2ndfile graph
+2025-06-12 16:13:38,051 - INFO - [output_data_processor.py-get_unique_parallel_pipes-132] - Parrallel pipes : {(3, 7)}
+2025-06-12 16:13:38,052 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-85] - Adding edges to the graph with parallel and multiple edges with relavant data
+2025-06-12 16:13:38,052 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-124] - No of pipes added to the graph: {2: 2, 3: 1, 4: 2, 5: 1, 6: 2, 7: 1, 8: 2, 9: 1, 10: 1}
+2025-06-12 16:13:38,053 - INFO - [figure_generator.py-create_graph_with_parallel_and_mutliple_edges-125] - Multiple same pipe id edges added successfully
+2025-06-12 16:13:38,053 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1697] - Creating 1stfile graph with 2ndfile data
+2025-06-12 16:13:38,053 - INFO - [figure_generator.py-create_pipe_2ndfile_graph-1698] - Parallel Pipes : [(3, 7)]
+2025-06-12 16:13:38,053 - INFO - [figure_generator.py-create_pipe_1stfile_graph-861] - 1stfile Graph Head Map : {8: 530, 1: 455.2830058518432, 2: 491.1643689640934, 3: 518.0274465796467, 4: 480.0147502845362, 6: 476.5761192114033, 7: 502.49392318328756, 9: 524.0000000034565, 10: 516.0000000053449, 11: 479.0000000080624}
+2025-06-12 16:13:38,054 - INFO - [output_data_processor.py-process_nodes_for_diameter_graph_plotting-285] - Node Data for the pipegraph is generated
+2025-06-12 16:13:38,056 - INFO - [figure_generator.py-create_pipe_1stfile_graph-879] - Node trace created for 1stfile graph
+2025-06-12 16:13:38,056 - INFO - [figure_generator.py-create_pipe_1stfile_graph-922] - 1 minute Result File Pipe ID to Cost Map : defaultdict(<class 'float'>, {2: 852020.0, 3: 806421.0, 4: 1015065.14032, 5: 2162559.0, 6: 3522612.8043600004, 7: 2769408.0, 8: 769804.7611499999, 9: 985446.0, 10: 164900.0})
+2025-06-12 16:13:38,057 - INFO - [figure_generator.py-create_pipe_1stfile_graph-972] - Pipe ID which are diffrent in 2ndfile output file compare to the 1stfile output file : [4, 3, 8, 1, 6, 5, 9, 2]
+2025-06-12 16:13:38,058 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1025] - Paragraph for 1stfile tab with 2ndfile data is stored
+2025-06-12 16:13:38,059 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1067] - Paragraph for 2ndfile tab with 1stfile data is stored
+2025-06-12 16:13:38,059 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-343] - Exist Pipe 2ndfile : {2: False}
+2025-06-12 16:13:38,060 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-344] - Exist Pipe 3rdfile : {}
+2025-06-12 16:13:38,060 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 6+1 color is the Light Orange
+2025-06-12 16:13:38,061 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,061 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 6+2 color is the Dark Orange
+2025-06-12 16:13:38,061 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,061 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 9+1 color is the Dark Orange
+2025-06-12 16:13:38,062 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,062 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 3+1 color is the Dark Orange
+2025-06-12 16:13:38,063 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,063 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 4+1 color is the Light Orange
+2025-06-12 16:13:38,065 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,065 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 4+2 color is the Dark Orange
+2025-06-12 16:13:38,067 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,068 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 7+1 color is the Dark Grey
+2025-06-12 16:13:38,068 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,069 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-500] - 2_1+1 color is the Dark Orange
+2025-06-12 16:13:38,070 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,070 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-500] - 2_2+2 color is the Dark Orange
+2025-06-12 16:13:38,071 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,072 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 5+1 color is the Dark Orange
+2025-06-12 16:13:38,073 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,074 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 8+1 color is the Light Orange
+2025-06-12 16:13:38,074 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,075 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 8+2 color is the Dark Orange
+2025-06-12 16:13:38,076 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,076 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-601] - 10+1 color is the Dark Grey
+2025-06-12 16:13:38,077 - INFO - [output_data_processor.py-process_edges_for_diameter_graph_plotting_1stfile-611] - Edge traces, edge text and edge color for the pipe graph has been created sucessfully
+2025-06-12 16:13:38,077 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1215] - Edge trace created for 1stfile pipe data graph
+2025-06-12 16:13:38,078 - INFO - [output_data_processor.py-process_edge_label_positions_for_graph_plotting-1235] - Label position for the pipe has been created sucessfully
+2025-06-12 16:13:38,078 - INFO - [output_data_processor.py-process_edge_hovertext_for_diameter_graph_1stfile-1508] - Edge Hovertext has been created sucessfully for 1stfile graph
+2025-06-12 16:13:38,080 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1235] - Edge label trace created for 1stfile pipe data graph
+2025-06-12 16:13:38,092 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1249] - Pipe figure created for 1stfile graph
+2025-06-12 16:13:38,096 - INFO - [callbacks.py-update_data-418] - Pipe output 2ndfile figures created successfully.
+2025-06-12 16:13:38,097 - INFO - [callbacks.py-update_data-419] - Total network length: 21363, Total cost: 12994934.081
+2025-06-12 16:21:47,877 - INFO - [dash.py-run-2137] - Dash is running on http://127.0.0.1:8050/
+
+2025-06-12 16:22:01,478 - INFO - [callbacks.py-update_data-201] - File Sample_input_cycle_parallel.xls uploaded and read successfully.
+2025-06-12 16:22:01,478 - INFO - [callbacks.py-update_data-203] - Processing data from Sample_input_cycle_parallel.xls...
+2025-06-12 16:22:01,483 - INFO - [data_processor.py-process_source-34] - Source ID : 8
+2025-06-12 16:22:01,483 - INFO - [data_processor.py-process_source-35] - Sourcec Elevation : 505
+2025-06-12 16:22:01,483 - INFO - [data_processor.py-process_source-36] - Minimum Pressure :7
+2025-06-12 16:22:01,491 - INFO - [data_processor.py-process_node_data-79] - {'nodeID': [1, 2, 3, 4, 7, 6, 9, 10, 11], 'Elevation': [442, 477, 496, 464, 493, 390, 517, 509, 472], 'Demand': [2.1, 0.8, 3.4, 1.75, 2.6, 1.8, 0.0, 0.0, 0.0], 'MinPressure': [7, 7, 7, 7, 7, 7, 7, 7, 7]}
+2025-06-12 16:22:01,497 - INFO - [data_processor.py-process_pipe_data-112] - {'pipeID': [2, 3, 4, 5, 6, 7, 8, 9, 10, 1], 'startNode': [3, 2, 2, 9, 8, 10, 3, 11, 4, 4], 'endNode': [7, 6, 4, 3, 9, 2, 10, 1, 11, 6], 'length': [7345, 3491, 2442, 1943, 2686, 4808, 924, 4266, 485, 318], 'parallel': [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:22:01,500 - INFO - [data_processor.py-process_commercial_pipe_data-142] - {'diameters': [63, 75, 90, 110, 125, 140, 160, 180, 200, 225, 250, 280, 315], 'roughness': [140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140, 140], 'cost': [116, 172, 231, 340, 461, 576, 750, 945, 1113, 1430, 1762, 2210, 2794]}
+2025-06-12 16:22:01,503 - INFO - [data_processor.py-general_data-47] - Network name : Sample
+2025-06-12 16:22:01,504 - INFO - [data_processor.py-general_data-48] - Supply Hour : 12
+2025-06-12 16:22:01,505 - INFO - [callbacks.py-update_data-219] - Node data and pipe data processed successfully from Sample_input_cycle_parallel.xls.
+2025-06-12 16:22:01,505 - INFO - [callbacks.py-update_data-220] - Input Node data: {'nodeID': [8, 1, 2, 3, 4, 7, 6, 9, 10, 11], 'Elevation': [505, 442, 477, 496, 464, 493, 390, 517, 509, 472], 'Demand': [-1, 2.1, 0.8, 3.4, 1.75, 2.6, 1.8, 0.0, 0.0, 0.0], 'MinPressure': [-1, 7, 7, 7, 7, 7, 7, 7, 7, 7]}
+2025-06-12 16:22:01,506 - INFO - [callbacks.py-update_data-221] - Input Pipe data: {'pipeID': [2, 3, 4, 5, 6, 7, 8, 9, 10, 1], 'startNode': [3, 2, 2, 9, 8, 10, 3, 11, 4, 4], 'endNode': [7, 6, 4, 3, 9, 2, 10, 1, 11, 6], 'length': [7345, 3491, 2442, 1943, 2686, 4808, 924, 4266, 485, 318], 'parallel': [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+2025-06-12 16:22:01,506 - INFO - [data_processor.py-create_network_graph-192] - Created network graph with 10 nodes and 10 edges.
+2025-06-12 16:22:01,584 - INFO - [data_processor.py-generate_layout-316] - Generated layout for 10 nodes and 10 edges.
+2025-06-12 16:22:01,584 - INFO - [data_processor.py-process_edges_hovertext-256] - Processed 30 edges for visualization.
+2025-06-12 16:22:01,607 - INFO - [callbacks.py-update_data-238] - Edge trace created successfully.
+2025-06-12 16:22:01,621 - INFO - [callbacks.py-update_data-255] - Edge label trace created successfully.
+2025-06-12 16:22:01,622 - INFO - [data_processor.py-process_nodes_for_plotting-309] - Processed 10 nodes for visualization.
+2025-06-12 16:22:01,643 - INFO - [callbacks.py-update_data-276] - Node trace created successfully.
+2025-06-12 16:22:01,699 - INFO - [callbacks.py-update_data-291] - Input File Network created successfully.
