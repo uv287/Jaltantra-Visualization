@@ -194,7 +194,7 @@ class Layout:
                                                         dbc.Col(html.Div(id='1stfile-demand-2', className='p-3 mb-3', 
                                                                         style={'backgroundColor': 'white', 'height':'300px', 'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dcc.Graph(id='graph-2', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-2', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
 
                                                 dcc.Tab(label='Pipes', value='length', children=html.Div([
@@ -210,7 +210,7 @@ class Layout:
                                                         dbc.Col(html.Div(id='1stfile-length-2', className='p-3 mb-3', 
                                                                         style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dcc.Graph(id='graph-4', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-4', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
                                             ],
                                             className='mt-3'
@@ -236,7 +236,7 @@ class Layout:
                                                         dbc.Col(html.Div(id='2ndfile-demand-2', className='p-3 mb-3', 
                                                                         style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dcc.Graph(id='graph-8', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-8', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
 
                                                 dcc.Tab(label='Pipes', value='length', children=html.Div([
@@ -252,7 +252,7 @@ class Layout:
                                                         dbc.Col(html.Div(id='2ndfile-length-2', className='p-3 mb-3', 
                                                                         style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dcc.Graph(id='graph-10', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-10', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
                                                 
                                             ],
@@ -279,7 +279,7 @@ class Layout:
                                                     dbc.Col(html.Div(id='3rdfile-demand-2', className='p-3 mb-3', 
                                                                     style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                 ]),
-                                                dcc.Graph(id='graph-14', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                dcc.Graph(id='graph-14', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                             ], className='mt-3')),
 
                                             dcc.Tab(label='Pipes', value='length', children=html.Div([
@@ -295,7 +295,7 @@ class Layout:
                                                     dbc.Col(html.Div(id='3rdfile-length-2', className='p-3 mb-3', 
                                                                     style={'backgroundColor': 'white',  'height':'300px',  'overflowY': 'auto'}), width=6),
                                                 ]),
-                                                dcc.Graph(id='graph-16', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                dcc.Graph(id='graph-16', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                             ], className='mt-3')),
 
                                         ],

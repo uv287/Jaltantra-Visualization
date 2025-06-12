@@ -894,6 +894,8 @@ class FigureGenerator:
         flow_parallel = {}#for the static pipe which cost is zero 
         speed_parallel= {} #for the static pipe which cost is zero
         unique_pipeid_1stfile= []
+        sorted_difference_cost_pipeid_2ndfile = {}
+        sorted_difference_cost_pipeid_3rdfile = {}
         
         for i in range(len(pipe_data["pipeID"])):
             pipe_id = pipe_data["pipeID"][i]
@@ -1216,7 +1218,7 @@ class FigureGenerator:
         
         edge_label_x, edge_label_y = data_processor.process_edge_label_positions_for_graph_plotting(G, pos, unique_parallel_pipes)
         
-        edge_hovertext =data_processor.process_edge_hovertext_for_diameter_graph_1stfile(G, pos, unique_parallel_pipes, edge_colors, pipeData2ndfile, pipeData3rdfile, different_pipe_2ndfile, different_pipe_3rdfile, exist_pipe_status_2ndfile, exist_pipe_status_3rdfile)
+        edge_hovertext =data_processor.process_edge_hovertext_for_diameter_graph_1stfile(G, pos, unique_parallel_pipes, edge_colors, pipeData2ndfile, pipeData3rdfile, different_pipe_2ndfile, different_pipe_3rdfile, exist_pipe_status_2ndfile, exist_pipe_status_3rdfile, id_to_cost_map_1stfile, id_to_cost_map_2ndfile, id_to_cost_map_3rdfile, sorted_difference_cost_pipeid_2ndfile,sorted_difference_cost_pipeid_3rdfile)
         
         edge_label_trace = go.Scatter(
             x=edge_label_x,
@@ -1317,6 +1319,10 @@ class FigureGenerator:
         flow_parallel = {} #for the static pipe which cost is zero 
         speed_parallel= {}  #for the static pipe which cost is zero
         unique_pipeid_2ndfile= []
+        sorted_difference_cost_pipeid_1stfile = {}
+        sorted_difference_cost_pipeid_3rdfile = {}
+        id_to_cost_map_3rdfile = defaultdict(float)  # Map to store pipeID to cost for 3rdfile data
+        id_to_cost_map_1stfile = defaultdict(float)  # Map to store pipeID to cost for 1stfile data
         
         for i in range(len(pipe_data["pipeID"])):
             pipe_id = pipe_data["pipeID"][i]
@@ -1348,7 +1354,6 @@ class FigureGenerator:
         
         if pipeData1stfile is not None:
             unique_id = unique_pipeid_2ndfile.copy()
-            id_to_cost_map_1stfile = defaultdict(float)  # Map to store pipeID to cost for 1stfile data
             for i in range(len(pipeData1stfile["pipeID"])):
                 pipe_id = pipeData1stfile["pipeID"][i]
                 diameter = pipeData1stfile["diameter"][i]
@@ -1503,7 +1508,6 @@ class FigureGenerator:
 
         if pipeData3rdfile is not None:
             unique_id = unique_pipeid_2ndfile.copy()
-            id_to_cost_map_3rdfile = defaultdict(float)  # Map to store pipeID to cost for 3rdfile data
             for i in range(len(pipeData3rdfile["pipeID"])):
                 pipe_id = pipeData3rdfile["pipeID"][i]
                 diameter = pipeData3rdfile["diameter"][i]
@@ -1656,7 +1660,7 @@ class FigureGenerator:
         
         edge_label_x, edge_label_y = data_processor.process_edge_label_positions_for_graph_plotting(G, pos, unique_parallel_pipes)
         
-        edge_hovertext =data_processor.process_edge_hovertext_for_diameter_graph_2ndfile(G, pos, unique_parallel_pipes, edge_colors, pipeData1stfile, pipeData3rdfile, different_pipe_1stfile, different_pipe_3rdfile, exist_pipe_status_1stfile, exist_pipe_status_3rdfile)
+        edge_hovertext =data_processor.process_edge_hovertext_for_diameter_graph_2ndfile(G, pos, unique_parallel_pipes, edge_colors, pipeData1stfile, pipeData3rdfile, different_pipe_1stfile, different_pipe_3rdfile, exist_pipe_status_1stfile, exist_pipe_status_3rdfile, id_to_cost_map_1stfile, id_to_cost_map_3rdfile, id_to_cost_map_2ndfile, sorted_difference_cost_pipeid_1stfile, sorted_difference_cost_pipeid_3rdfile)
         
         edge_label_trace = go.Scatter(
             x=edge_label_x,
@@ -1759,7 +1763,11 @@ class FigureGenerator:
         exist_pipe_status_1stfile = {} #static parallel pipe flow and speed is same or not
         exist_pipe_status_2ndfile = {}
         flow_parallel = {} #for the static pipe which cost is zero 
+        sorted_difference_cost_pipeid_1stfile ={}
+        sorted_difference_cost_pipeid_2ndfile ={}
         speed_parallel= {}  #for the static pipe which cost is zero
+        id_to_cost_map_1stfile = defaultdict(float)  # Map to store pipeID to cost for 1stfile data
+        id_to_cost_map_2ndfile = defaultdict(float)  # Map to store pipeID to cost for 2ndfile data
         
         for i in range(len(pipe_data["pipeID"])):
             pipe_id = pipe_data["pipeID"][i]
@@ -1789,7 +1797,6 @@ class FigureGenerator:
                 
         if pipeData1stfile is not None:
             unique_id = unique_pipeid_3rdfile.copy()
-            id_to_cost_map_1stfile = defaultdict(float)  # Map to store pipeID to cost for 1stfile data
             for i in range(len(pipeData1stfile["pipeID"])):
                 pipe_id = pipeData1stfile["pipeID"][i]
                 diameter = pipeData1stfile["diameter"][i]
@@ -1929,7 +1936,6 @@ class FigureGenerator:
 
         if pipeData2ndfile is not None:
             unique_id = unique_pipeid_3rdfile.copy()
-            id_to_cost_map_2ndfile = defaultdict(float)  # Map to store pipeID to cost for 2ndfile data
             for i in range(len(pipeData2ndfile["pipeID"])):
                 pipe_id = pipeData2ndfile["pipeID"][i]
                 diameter = pipeData2ndfile["diameter"][i]
@@ -2081,7 +2087,10 @@ class FigureGenerator:
         
         edge_label_x, edge_label_y = data_processor.process_edge_label_positions_for_graph_plotting(G, pos, unique_parallel_pipes)
         
-        edge_hovertext =data_processor.process_edge_hovertext_for_diameter_graph_3rdfile(G, pos, unique_parallel_pipes, edge_colors, pipeData1stfile, pipeData2ndfile, different_pipe_1stfile, different_pipe_2ndfile, exist_pipe_status_1stfile, exist_pipe_status_2ndfile)
+        edge_hovertext =data_processor.process_edge_hovertext_for_diameter_graph_3rdfile(G, pos, unique_parallel_pipes, edge_colors, pipeData1stfile, 
+                                                                                         pipeData2ndfile, different_pipe_1stfile, different_pipe_2ndfile, exist_pipe_status_1stfile, exist_pipe_status_2ndfile
+                                                                                         , id_to_cost_map_1stfile, id_to_cost_map_2ndfile, id_to_cost_map_3rdfile,
+                                                                                         sorted_difference_cost_pipeid_1stfile, sorted_difference_cost_pipeid_2ndfile)
         
         edge_label_trace = go.Scatter(
             x=edge_label_x,

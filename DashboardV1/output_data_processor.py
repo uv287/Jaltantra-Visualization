@@ -4,6 +4,10 @@ import pandas as pd
 from logger_config import logger
 
 class OutputDataProcessor :
+    def safe_format(self, val):
+        return f"{val:.{3}f}" if isinstance(val, (int, float)) else val
+
+    
     def process_source(self, df):
         source_ID = df.loc[df[0] == "Source Node ID", 3].values[0]
         source_Elevation = df.loc[df[0] == "Source Elevation", 3].values[0]
@@ -158,13 +162,13 @@ class OutputDataProcessor :
             if node in diffrent_2ndfile or node in diffrent_3rdfile:
                 hover_text = (
                     f"Node ID: {node}<br>"
-                    f"1st File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Demand : {round(node_demand_map.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_map.get(node, 'N/A'),3)}<br>"
-                    f"2nd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Demand : {round(node_demand_2ndfile.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_2ndfile.get(node, 'N/A'),3)}<br>"
-                    f"3rd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Demand : {round(node_demand_3rdfile.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_3rdfile.get(node, 'N/A'),3)}<br>"
+                    f"1st File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Demand : {self.safe_format(node_demand_map.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_map.get(node, 'N/A'))}<br>"
+                    f"2nd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Demand : {self.safe_format(node_demand_2ndfile.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_2ndfile.get(node, 'N/A'))}<br>"
+                    f"3rd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Demand : {self.safe_format(node_demand_3rdfile.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_3rdfile.get(node, 'N/A'))}<br>"
                 )
             else:
-                hover_text = f"Node ID: {node} <br> &nbspDemand : {round(node_demand_map.get(node, 'N/A'),3)} <br> &nbspHead : {round(node_head_map.get(node, 'N/A'),3)}"
-            
+                hover_text = f"Node ID: {node} <br> &nbsp; Demand : {self.safe_format(node_demand_map.get(node, 'N/A'))} <br> &nbsp; Head : {self.safe_format(node_head_map.get(node, 'N/A'))}"
+
             node_hovertext.append(hover_text)
             node_colors.append(G.nodes[node]['color'])  # Use the assigned color from the graph attributes
             node_size.append(G.nodes[node]['size'])
@@ -197,13 +201,15 @@ class OutputDataProcessor :
             if node in diffrent_1stfile or node in diffrent_3rdfile:
                 hover_text = (
                     f"Node ID: {node}<br>"
-                    f"2nd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {round(node_demand_map.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_map.get(node, 'N/A'),3)}<br>"
-                    f"1st File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {round(node_demand_1stfile.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_1stfile.get(node, 'N/A'),3)}<br>"
-                    f"3rd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {round(node_demand_3rdfile.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_3rdfile.get(node, 'N/A'),3)}<br>"
+                    f"2nd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {self.safe_format(node_demand_map.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_map.get(node, 'N/A'))}<br>"
+                    f"1st File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {self.safe_format(node_demand_1stfile.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_1stfile.get(node, 'N/A'))}<br>"
+                    f"3rd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {self.safe_format(node_demand_3rdfile.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_3rdfile.get(node, 'N/A'))}<br>"
                 )
             else:
-                hover_text = f"Node ID: {node} <br> &nbsp; Supply : {round(node_demand_map.get(node, 'N/A'),3)} <br> &nbsp; Supply : {round(node_head_map.get(node, 'N/A'),3)}"
-
+                hover_text = (f"Node ID: {node} <br> "
+                            f"&nbsp; Supply : {self.safe_format(node_demand_map.get(node, 'N/A'))} <br>"
+                            f"&nbsp; Supply : {self.safe_format(node_head_map.get(node, 'N/A'))}"
+                )   
             node_hovertext.append(hover_text)
             node_colors.append(G.nodes[node]['color'])  # Use the assigned color from the graph attributes
             node_size.append(G.nodes[node]['size'])
@@ -235,12 +241,12 @@ class OutputDataProcessor :
             if node in diffrent_1stfile or node in diffrent_2ndfile:
                 hover_text = (
                     f"Node ID: {node}<br>"
-                    f"3rd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {round(node_demand_map.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_map.get(node, 'N/A'),3)}<br>"
-                    f"1st File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {round(node_demand_1stfile.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_1stfile.get(node, 'N/A'),3)}<br>"
-                    f"2nd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {round(node_demand_2ndfile.get(node, 'N/A'),3)}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {round(node_head_2ndfile.get(node, 'N/A'),3)}<br>"
+                    f"3rd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {self.safe_format(node_demand_map.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_map.get(node, 'N/A'))}<br>"
+                    f"1st File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {self.safe_format(node_demand_1stfile.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_1stfile.get(node, 'N/A'))}<br>"
+                    f"2nd File: <br> &nbsp; &nbsp; &nbsp; &nbsp; Supply : {self.safe_format(node_demand_2ndfile.get(node, 'N/A'))}<br> &nbsp; &nbsp; &nbsp; &nbsp; Head : {self.safe_format(node_head_2ndfile.get(node, 'N/A'))}<br>"
                 )
             else:
-                hover_text = f"Node ID: {node} <br> &nbsp; Supply : {round(node_demand_map.get(node, 'N/A'),3)} <br> &nbsp; Supply : {round(node_head_map.get(node, 'N/A'),3)}"
+                hover_text = f"Node ID: {node} <br> &nbsp; Supply : {self.safe_format(node_demand_map.get(node, 'N/A'))} <br> &nbsp; Supply : {self.safe_format(node_head_map.get(node, 'N/A'))}"
 
             node_hovertext.append(hover_text)
             node_colors.append(G.nodes[node]['color'])  # Use the assigned color from the graph attributes
@@ -357,7 +363,7 @@ class OutputDataProcessor :
                 # For simplicity, we're just offsetting by a small value, e.g., ±0.02
                 #key is like 2_2+1 or 2_1+2 
                 key = full_key.split('+')[0] #now key is like 2_2 or 2_1
-                short_key = int(key.split('_')[0] )#now short_key is like 2
+                short_key = int(key.split('_')[0] )
                 # print("key : " + key) 
                 #this is cost=0 pipe
                 if '_1' in key :
@@ -378,9 +384,7 @@ class OutputDataProcessor :
                         edge_color="#333333" #grey -> same length and diameter in both the file
                         edge_colors[full_key]="Dark Grey"
                     edge_text.append(f'{key}')
-                    
-                    # logger.info(f"{full_key} color is the {edge_colors[full_key]}")
-                #if cost is not equal to zero and key contains the  '_2'
+    
 
                 else : 
                     total_length = total_length_pipe_map[int(float(key.split('_')[0]))]
@@ -637,9 +641,6 @@ class OutputDataProcessor :
 
             # Check if the edge is a parallel edge
             if (u, v) in unique_parallel_pipes or (v, u) in unique_parallel_pipes:
-                # Offset for parallel edges to make them visually distinct
-                # For simplicity, we're just offsetting by a small value, e.g., ±0.02
-                #key is like 2_2+1 or 2_1+2 
                 key = full_key.split('+')[0] #now key is like 2_2 or 2_1
                 short_key = int(key.split('_')[0] )#now short_key is like 2
                 # print("key" + key) 
@@ -1281,7 +1282,11 @@ class OutputDataProcessor :
 
         return edge_label_x, edge_label_y
     
-    def process_edge_hovertext_for_diameter_graph_1stfile(self, G, node_pos, unique_parallel_pipes, edge_colors,pipeData2ndfile, pipeData3rdfile, different_pipe_2ndfile, different_pipe_3rdfile, exist_pipe_status_2ndfile, exist_pipe_status_3rdfile) :
+    def process_edge_hovertext_for_diameter_graph_1stfile(self, G, node_pos, unique_parallel_pipes, edge_colors,
+                                                          pipeData2ndfile, pipeData3rdfile, different_pipe_2ndfile, different_pipe_3rdfile, 
+                                                          exist_pipe_status_2ndfile, exist_pipe_status_3rdfile,
+                                                          id_to_cost_map_1stfile, id_to_cost_map_2ndfile, id_to_cost_map_3rdfile, 
+                                                          sorted_difference_cost_pipeid_2ndfile,sorted_difference_cost_pipeid_3rdfile) :
         edge_hovertext_map = {}
 
         # Iterate over all edges in the graph
@@ -1321,7 +1326,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)} <br>"
+                                    f"&nbsp; &nbsp; Total cost in 1st File : 0 <br>")
 
                         for i in range(len(pipeData2ndfile["pipeID"])) :
                             if pipeData2ndfile["pipeID"][i] == pipe_id and pipeData2ndfile["cost"][i] == 0:
@@ -1330,7 +1336,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData2ndfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData2ndfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData2ndfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br>"
+                                                f"&nbsp; &nbsp; Total Cost in 2nd File : 0 <br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0<br>")
 
                     elif(exist_pipe_status_2ndfile.get(pipe_id, True) and not exist_pipe_status_3rdfile.get(pipe_id, True)):
                         hover_info += ( f"Pipe ID : {full_pipe_id} <br>"
@@ -1342,7 +1350,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>"
+                                    f"&nbsp; &nbsp; Total cost in 1st File : 0 <br>")
                         
                         for i in range(len(pipeData3rdfile["pipeID"])) :
                             if pipeData3rdfile["pipeID"][i] == pipe_id and pipeData3rdfile["cost"][i] == 0:
@@ -1351,7 +1360,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData3rdfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData3rdfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData3rdfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br>"
+                                                f"&nbsp; &nbsp; Total Cost in 3rd File : 0 <br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0<br>")
 
                     if(not exist_pipe_status_2ndfile.get(pipe_id, True) and not exist_pipe_status_3rdfile.get(pipe_id, True)):
                         hover_info += ( f"Pipe ID : {full_pipe_id} <br>"
@@ -1363,7 +1374,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>"
+                                    f"&nbsp; &nbsp; Total Cost in 1st File : 0 <br>")
 
                         for i in range(len(pipeData2ndfile["pipeID"])) :
                             if pipeData2ndfile["pipeID"][i] == pipe_id and pipeData2ndfile["cost"][i] == 0:
@@ -1372,7 +1384,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData2ndfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData2ndfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData2ndfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br><br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br>"
+                                                f"&nbsp; &nbsp; Total Cost in 2nd File : 0 <br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0 <br>")
 
                         for i in range(len(pipeData3rdfile["pipeID"])) :
                             if pipeData3rdfile["pipeID"][i] == pipe_id and pipeData3rdfile["cost"][i] == 0:
@@ -1382,6 +1396,8 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData3rdfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData3rdfile['flow'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br>")
+                        hover_info += ( f"&nbsp; &nbsp; Total Cost in 3rd File : 0 <br>"
+                                        f"&nbsp; Cost Difference : 0 <br>")
 
                     edge_hovertext_map[full_pipe_id]=hover_info
                 # if the edge is parallel, and cost is not zero
@@ -1426,7 +1442,7 @@ class OutputDataProcessor :
                         hover_info = ( f"Pipe ID : {full_pipe_id} <br>"
                                         f"Start Node : {u} <br>"
                                         f"End Node : {v} <br>"
-                                        f"&nbsp;1st File: <br>"  
+                                        f"&nbsp; 1st File: <br>"  
                                         f"&nbsp; &nbsp; &nbsp; Color :{edge_colors[key]} <br>"    
                                         f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>" 
                                         f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
@@ -1452,6 +1468,12 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br> <br>")
             edge_hovertext_map[full_pipe_id]=hover_info
+        
+        #for the total cost of the pipe in the 1st file
+        for full_pipe_id in edge_hovertext_map :
+            if "_1" not in full_pipe_id:
+                pipe_id = int(full_pipe_id.split('_')[0])
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost in 1st File : {round(id_to_cost_map_1stfile.get(pipe_id, 0),3)} <br>" )
 
         #prepare hover info for the diffrent edge
         for full_pipe_id in edge_hovertext_map :
@@ -1469,7 +1491,9 @@ class OutputDataProcessor :
                                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData2ndfile['cost'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData2ndfile['flow'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br><br>")
-                # edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {total_cost} <br>" )
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost in 2nd File : {round(total_cost,3)} <br>" 
+                                                     f"&nbsp; &nbsp; Cost Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3)} <br><br>")
+                
             if(pipe_id in different_pipe_3rdfile and "_1" not in full_pipe_id):
                 total_cost = 0
                 edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; 3rd File: <br>" )
@@ -1482,7 +1506,8 @@ class OutputDataProcessor :
                                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData3rdfile['cost'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData3rdfile['flow'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br><br>")
-                # edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {total_cost} <br>" )
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost in 3rd File : {round(total_cost,3)} <br>" )
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Cost Difference : {round(sorted_difference_cost_pipeid_3rdfile[pipe_id],3)} <br><br>")
 
         hovertext=[]
         #for the list
@@ -1504,13 +1529,18 @@ class OutputDataProcessor :
                     hovertext.append(edge_hovertext_map[pipe_id])
             
             # print("Hover : " + pipe_id)
+        print("Hovertext of Pipe 6 : " + str(hovertext[6]))
         
         logger.info("Edge Hovertext has been created sucessfully for 1stfile graph")
         
         return hovertext
     
     
-    def process_edge_hovertext_for_diameter_graph_2ndfile(self, G, node_pos, unique_parallel_pipes, edge_colors,pipeData1stfile, pipeData3rdfile, different_pipe_1stfile, different_pipe_3rdfile, exist_pipe_status_1stfile, exist_pipe_status_3rdfile) :
+    def process_edge_hovertext_for_diameter_graph_2ndfile(self, G, node_pos, unique_parallel_pipes, edge_colors,pipeData1stfile, 
+                                                          pipeData3rdfile, different_pipe_1stfile, different_pipe_3rdfile, 
+                                                          exist_pipe_status_1stfile, exist_pipe_status_3rdfile,
+                                                          id_to_cost_map_1stfile, id_to_cost_map_3rdfile, id_to_cost_map_2ndfile, 
+                                                          sorted_difference_cost_pipeid_1stfile, sorted_difference_cost_pipeid_3rdfile) :
         edge_hovertext_map = {}
         
         logger.info(f"Different Pipe 1stfile : {different_pipe_1stfile}")
@@ -1543,7 +1573,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 2nd File : 0 <br>")
                     
                     #if static parallel edge data is not same in the 1st File file
                     if(not exist_pipe_status_1stfile.get(pipe_id, True) and exist_pipe_status_3rdfile.get(pipe_id, True)):
@@ -1556,7 +1587,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 2nd File : 0 <br>")
                         
                         for i in range(len(pipeData1stfile["pipeID"])) :
                             if pipeData1stfile["pipeID"][i] == pipe_id and pipeData1stfile["cost"][i] == 0:
@@ -1565,7 +1597,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData1stfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData1stfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData1stfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>"
+                                                f"&nbsp; &nbsp; Total Cost in 1st File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0 <br>")
 
                     if(not exist_pipe_status_3rdfile.get(pipe_id, True) and exist_pipe_status_1stfile.get(pipe_id, True)):
                         hover_info += ( f"Pipe ID : {full_pipe_id} <br>"
@@ -1577,7 +1611,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>"
+                                    f"&nbsp; &nbsp; Total cost in 2nd File : 0 <br><br>")
                         
                         for i in range(len(pipeData3rdfile["pipeID"])) :
                             if pipeData3rdfile["pipeID"][i] == pipe_id and pipeData3rdfile["cost"][i] == 0:
@@ -1586,7 +1621,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData3rdfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData3rdfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData3rdfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br>"
+                                                f"&nbsp; &nbsp; Total Cost in 3rd File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0 <br>")
 
                     if(not exist_pipe_status_1stfile.get(pipe_id, True) and not exist_pipe_status_3rdfile.get(pipe_id, True)):
                         hover_info += ( f"Pipe ID : {full_pipe_id} <br>"
@@ -1598,7 +1635,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 2nd File : 0 <br><br>")
                         
                         for i in range(len(pipeData1stfile["pipeID"])) :
                             if pipeData1stfile["pipeID"][i] == pipe_id and pipeData1stfile["cost"][i] == 0:
@@ -1608,7 +1646,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData1stfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData1stfile['flow'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>")
-                        
+                        hover_info += ( f"&nbsp; &nbsp; Total Cost in 1st File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; &nbsp; Cost Difference : 0 <br><br>")
+
                         for i in range(len(pipeData3rdfile["pipeID"])) :
                             if pipeData3rdfile["pipeID"][i] == pipe_id and pipeData3rdfile["cost"][i] == 0:
                                 hover_info += ( f"&nbsp; &nbsp; 3rd File: <br>"    
@@ -1616,7 +1656,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData3rdfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData3rdfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData3rdfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br><br>"
+                                                f"&nbsp; &nbsp; Total Cost in 3rd File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; &nbsp; Cost Difference : 0 <br>")
                     
                     edge_hovertext_map[full_pipe_id]=hover_info
                 # if the edge is parallel, and cost is not zero
@@ -1690,8 +1732,11 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br> <br>")
             edge_hovertext_map[full_pipe_id]=hover_info
             
-            
-        
+        for full_pipe_id in edge_hovertext_map :
+            if "_1" not in full_pipe_id:
+                pipe_id = int(full_pipe_id.split('_')[0])
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost in 2nd File : {round(id_to_cost_map_2ndfile.get(pipe_id, 0),3)} <br><br>" )
+
         #prepare hover info for the diffrent edge
         for full_pipe_id in edge_hovertext_map :
             pipe_id = int(full_pipe_id.split('_')[0])
@@ -1708,7 +1753,8 @@ class OutputDataProcessor :
                                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData1stfile['cost'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData1stfile['flow'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>")
-                # edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {total_cost} <br>" )
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {round(total_cost,3)} <br><br>"
+                                                     f"&nbsp; Cost Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3)} <br><br>")
             if(pipe_id in different_pipe_3rdfile and "_1" not in full_pipe_id):
                 total_cost = 0
                 edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; 3rd File: <br>" )
@@ -1721,7 +1767,8 @@ class OutputDataProcessor :
                                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData3rdfile['cost'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData3rdfile['flow'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData3rdfile['speed'][i],3)}<br><br>")
-                # edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {total_cost} <br>" )
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {round(total_cost,3)} <br><br>"
+                                                     f"&nbsp; Cost Difference : {round(sorted_difference_cost_pipeid_3rdfile[pipe_id],3)} <br><br>" )
 
         hovertext=[]
         #for the list
@@ -1797,7 +1844,11 @@ class OutputDataProcessor :
     #         # print("Hover : " + pipe_id)
         
     #     return hovertext
-    def process_edge_hovertext_for_diameter_graph_3rdfile(self, G, node_pos, unique_parallel_pipes, edge_colors,pipeData1stfile, pipeData2ndfile, different_pipe_1stfile, different_pipe_2ndfile, exist_pipe_status_1stfile, exist_pipe_status_2ndfile) :
+    def process_edge_hovertext_for_diameter_graph_3rdfile(self, G, node_pos, unique_parallel_pipes, edge_colors,pipeData1stfile, 
+                                                          pipeData2ndfile, different_pipe_1stfile, different_pipe_2ndfile, 
+                                                          exist_pipe_status_1stfile, exist_pipe_status_2ndfile,
+                                                          id_to_cost_map_1stfile, id_to_cost_map_2ndfile, id_to_cost_map_3rdfile,
+                                                          sorted_difference_cost_pipeid_1stfile, sorted_difference_cost_pipeid_2ndfile) :
         edge_hovertext_map = {}
 
         # Iterate over all edges in the graph
@@ -1825,7 +1876,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 3rd File : 0 <br>")
                     
                     #if static parallel edge data is not same in the 1st File file
                     if(not exist_pipe_status_1stfile.get(pipe_id, True) and exist_pipe_status_2ndfile.get(pipe_id, True)):
@@ -1838,7 +1890,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 3rd File : 0 <br> <br>")
                         
                         for i in range(len(pipeData1stfile["pipeID"])) :
                             if pipeData1stfile["pipeID"][i] == pipe_id and pipeData1stfile["cost"][i] == 0:
@@ -1847,7 +1900,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData1stfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData1stfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData1stfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>"
+                                                f"&nbsp; &nbsp; Total Cost in 1st File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0 <br><br>")
 
                     if(not exist_pipe_status_2ndfile.get(pipe_id, True) and exist_pipe_status_1stfile.get(pipe_id, True)):
                         hover_info += ( f"Pipe ID : {full_pipe_id} <br>"
@@ -1859,7 +1914,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 3rd File : 0 <br><br>")
                         
                         for i in range(len(pipeData2ndfile["pipeID"])) :
                             if pipeData2ndfile["pipeID"][i] == pipe_id and pipeData2ndfile["cost"][i] == 0:
@@ -1868,7 +1924,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData2ndfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData2ndfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData2ndfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br><br>"
+                                                f"&nbsp; &nbsp; Total Cost in 2nd File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0 <br><br>")
 
                     if(not exist_pipe_status_1stfile.get(pipe_id, True) and not exist_pipe_status_2ndfile.get(pipe_id, True)):
                         hover_info += ( f"Pipe ID : {full_pipe_id} <br>"
@@ -1880,7 +1938,8 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br><br>"
+                                    f"&nbsp; &nbsp; Total cost in 3rd File : 0 <br><br>")
 
                         for i in range(len(pipeData1stfile["pipeID"])) :
                             if pipeData1stfile["pipeID"][i] == pipe_id and pipeData1stfile["cost"][i] == 0:
@@ -1889,7 +1948,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData1stfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData1stfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData1stfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>"
+                                                f"&nbsp; &nbsp; Total Cost in 1st File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; Cost Difference : 0 <br>")
 
                         for i in range(len(pipeData2ndfile["pipeID"])) :
                             if pipeData2ndfile["pipeID"][i] == pipe_id and pipeData2ndfile["cost"][i] == 0:
@@ -1898,7 +1959,9 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(pipeData2ndfile['length'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData2ndfile['cost'][i],3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData2ndfile['flow'][i],3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br>")
+                                                f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br><br>"
+                                                f"&nbsp; &nbsp; Total Cost in 2nd File : 0 <br><br>")
+                        hover_info += ( f"&nbsp; Cost Difference: 0 <br>")
 
                     edge_hovertext_map[full_pipe_id]=hover_info
                 # if the edge is parallel, and cost is not zero
@@ -1958,7 +2021,7 @@ class OutputDataProcessor :
                                         f"End Node : {v} <br>"
                                         f"&nbsp; &nbsp; &nbsp; Color : {edge_colors[key]} <br>"
                                         f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)}"
+                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)}<br>"
                                         f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                         f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
                                         f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br> <br>")
@@ -1969,11 +2032,15 @@ class OutputDataProcessor :
                                     f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)}"
                                     f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br>"
                                     f"&nbsp; &nbsp; &nbsp; Flow : {round(flow,3)} <br>"
-                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br> <br>")
+                                    f"&nbsp; &nbsp; &nbsp; Speed : {round(speed,3)}<br> ")
             edge_hovertext_map[full_pipe_id]=hover_info
-            
-            
         
+        for full_pipe_id in edge_hovertext_map :
+            if "_1" not in full_pipe_id:
+                pipe_id = int(full_pipe_id.split('_')[0])
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost in 3rd File : {round(id_to_cost_map_3rdfile.get(pipe_id, 0),3)} <br><br>" )
+
+
         #prepare hover info for the diffrent edge
         for full_pipe_id in edge_hovertext_map :
             pipe_id = int(full_pipe_id.split('_')[0])
@@ -1990,7 +2057,8 @@ class OutputDataProcessor :
                                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData1stfile['cost'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData1stfile['flow'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData1stfile['speed'][i],3)}<br><br>")
-                # edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {total_cost} <br>" )
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {round(total_cost,3)} <br><br>"
+                                                     f"&nbsp; Cost Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3)} <br><br>")
             if(pipe_id in different_pipe_2ndfile and "_1" not in full_pipe_id):
                 total_cost = 0
                 edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; 2nd File: <br>" )
@@ -2003,8 +2071,8 @@ class OutputDataProcessor :
                                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(pipeData2ndfile['cost'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Flow : {round(pipeData2ndfile['flow'][i],3)} <br>"
                                                                 f"&nbsp; &nbsp; &nbsp; Speed : {round(pipeData2ndfile['speed'][i],3)}<br><br>")
-                # edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {total_cost} <br>" )
-
+                edge_hovertext_map[full_pipe_id] += ( f"&nbsp; &nbsp; Total Cost : {round(total_cost,3)} <br><br>"
+                                                     f"&nbsp; Cost Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3)} <br><br>")
         hovertext=[]
         #for the list
         visited_edge = []
