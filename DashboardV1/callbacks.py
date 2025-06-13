@@ -115,6 +115,8 @@ def register_callbacks(app):
     #read data from the 1st file and update the graphs
     @app.callback(
     [
+        Output("file-alert", "is_open"),
+        Output("file-alert", "children"),
         Output('input-data','data'),
         Output('node-data-store', 'data'),
         Output('pipe-data-store', 'data'),
@@ -135,7 +137,6 @@ def register_callbacks(app):
         Output('graph-2', 'figure'), Output('graph-4', 'figure'),
         Output('graph-8', 'figure'), Output('graph-10', 'figure'),
         Output('graph-14', 'figure'), Output('graph-16', 'figure'),
-        # Output('total-network-length','children'),
         Output('total-cost1','children'),
         Output('total-cost2','children'),
         Output('total-cost3','children'),
@@ -170,7 +171,7 @@ def register_callbacks(app):
     def update_data(content ,content1, content2, content3, mainfig, mainNodeData, mainPipeData, commercial_pipe_data, nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile, inputfilename, filename):
         if (content is None) and (content1 is None) and (content2 is None) and (content3 is None):
             return (
-                    None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ",
+                    False, no_update, None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ",
                     None, None, None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
@@ -291,7 +292,8 @@ def register_callbacks(app):
             logger.info("Input File Network created successfully.")
             input_data = df.to_dict('records')
 
-            return (input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}",
+            return (False, no_update,
+                    input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}",
                     None, None, None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
@@ -314,6 +316,8 @@ def register_callbacks(app):
             # sheet= workbook.sheet_by_index(0)
             df = pd.read_excel(buffer,header=None)
             
+            data_processor = DataProcessor()
+            
             logger.info("Output1 data reading started...")
             node_data_1stfile = output1_data_processor.process_node_data(df)
             pipe_data_1stfile = output1_data_processor.process_pipe_data(df)
@@ -328,6 +332,26 @@ def register_callbacks(app):
             node_data_1stfile["Pressure"].insert(0,-1)
             node_data_1stfile["MinPressure"].insert(0,-1)
             logger.info("Output1 data reading completed successfully.")
+            
+            valid = data_processor.validate_node_data(node_data_1stfile, mainNodeData)
+            
+            if not valid:
+                logger.error("Node data validation failed. Please check the input file.")
+                return (True, "Data validation failed. Please check the 1st Output file.",
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, 
+                        no_update, no_update,
+                        no_update, no_update,
+                        no_update, no_update,
+                        no_update, no_update,no_update,
+                        no_update, no_update, 
+                        no_update, no_update,
+                        no_update, no_update, 
+                        no_update, no_update, 
+                        no_update,no_update, 
+                        no_update,no_update 
+                    )  
+            
             logger.info(f"Node data: {node_data_1stfile}")
             logger.info(f"Pipe data: {pipe_data_1stfile}")
             
@@ -354,7 +378,7 @@ def register_callbacks(app):
             
             logger.info("Pipe output 1 figures created successfully.")  
             logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
-            return (
+            return (False, no_update,
                     no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     node_data_1stfile, pipe_data_1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile,
                     nodeFig_1stfile, pipeFig_1stfile,
@@ -379,6 +403,7 @@ def register_callbacks(app):
             # sheet= workbook.sheet_by_index(0)
             df = pd.read_excel(buffer,header=None)
             
+            data_processor = DataProcessor()
             logger.info("Output2 data reading started...")
             node_data_2ndfile = output1_data_processor.process_node_data(df)
             pipe_data_2ndfile = output1_data_processor.process_pipe_data(df)
@@ -393,6 +418,25 @@ def register_callbacks(app):
             node_data_2ndfile["Pressure"].insert(0,-1)
             node_data_2ndfile["MinPressure"].insert(0,-1)
             logger.info("Output2 data reading completed successfully.")
+            
+            valid = data_processor.validate_node_data(node_data_2ndfile, mainNodeData)
+            
+            if not valid:
+                logger.error("Node data validation failed. Please check the input file.")
+                return (True, "Data validation failed. Please check the 2nd Output file.",
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, 
+                        no_update, no_update,
+                        no_update, no_update,
+                        no_update, no_update,
+                        no_update, no_update,no_update,
+                        no_update, no_update, 
+                        no_update, no_update,
+                        no_update, no_update, 
+                        no_update, no_update, 
+                        no_update,no_update, 
+                        no_update,no_update 
+                    )  
             logger.info(f"Node data: {node_data_2ndfile}")
             logger.info(f"Pipe data: {pipe_data_2ndfile}")
             
@@ -419,7 +463,7 @@ def register_callbacks(app):
             logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
             ############# 2nd File data processing completed ##################
             
-            return (
+            return (False, no_update,
                 no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                 nodeData1stfile, pipeData1stfile, node_data_2ndfile, pipe_data_2ndfile, nodeData3rdfile, pipeData3rdfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
@@ -447,6 +491,8 @@ def register_callbacks(app):
             # sheet= workbook.sheet_by_index(0)
             df = pd.read_excel(buffer,header=None)
             
+            data_processor = DataProcessor()
+            
             node_data_3rdfile = output1_data_processor.process_node_data(df)
             pipe_data_3rdfile = output1_data_processor.process_pipe_data(df)
             sourceID, sourceElevation, sourceHead = output1_data_processor.process_source(df)
@@ -461,6 +507,25 @@ def register_callbacks(app):
             node_data_3rdfile["MinPressure"].insert(0,-1)
             
             logger.info("Output3 data reading completed successfully.")
+            valid = data_processor.validate_node_data(node_data_3rdfile, mainNodeData)
+            
+            if not valid:
+                logger.error("Node data validation failed. Please check the input file.")
+                return (True, "Data validation failed. Please check the 3rd Output file.",
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, 
+                        no_update, no_update,
+                        no_update, no_update,
+                        no_update, no_update,
+                        no_update, no_update,no_update,
+                        no_update, no_update, 
+                        no_update, no_update,
+                        no_update, no_update, 
+                        no_update, no_update, 
+                        no_update,no_update, 
+                        no_update,no_update 
+                    )            
+            
             logger.info(f"Node data: {node_data_3rdfile}")
             logger.info(f"Pipe data: {pipe_data_3rdfile}")
             
@@ -485,7 +550,7 @@ def register_callbacks(app):
             
             logger.info("Pipe output 3rdfile figures created successfully.")
             
-            return (
+            return (False, no_update,
                     no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, node_data_3rdfile, pipe_data_3rdfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
@@ -501,47 +566,3 @@ def register_callbacks(app):
                     # no_update, no_update, total_cost,
                     # no_update, no_update, total_length
                     )
-        
-    #If the tab is clicked then change the total cost and diffrence between them
-    # @app.callback(
-    #         [Output('total-cost', 'children'), Output('total-diff1', 'children'), Output('total-diff2', 'children')],
-    #         Input('tab-3rdfile', 'value'),
-    #         Input('tab-1stfile', 'value'),
-    #         Input('tab-2ndfile', 'value'),
-    #         State('Cost-file1', 'data'),
-    #         State('Cost-file2', 'data'),
-    #         State('Cost-file3', 'data')
-    #     )
-    # def update_total_cost_and_diff(tab_3rdfile, tab_1stfile, tab_2ndfile, total_cost_1stfile, total_cost_2ndfile, total_cost_3rdfile):
-    #     triggered_id = ctx.triggered_id
-        
-    #     if triggered_id == '3rdfile':
-    #         total_cost = total_cost_3rdfile
-    #         diff1 = total_cost_3rdfile - total_cost_1stfile
-    #         diff2 = total_cost_3rdfile - total_cost_2ndfile
-    #         return (
-    #             f"Total Cost: {round(total_cost,3)}",
-    #             f"Difference with 3rdfile: {diff1}",
-    #             f"Difference with 2ndfile: {diff2}"
-    #         )
-    #     elif triggered_id == '1stfile':
-    #         total_cost = total_cost_1stfile
-    #         diff1 = total_cost_1stfile - total_cost_3rdfile
-    #         diff2 = total_cost_1stfile - total_cost_2ndfile
-    #         return (
-    #             f"Total Cost: {round(total_cost,3)}",
-    #             f"Difference with 2ndfile: {diff2}",
-    #             f"Difference with 3rdfile: {diff1}"
-    #         )
-    #     elif triggered_id == '2ndfile':
-    #         total_cost = total_cost_2ndfile
-    #         diff1 = total_cost_2ndfile - total_cost_3rdfile
-    #         diff2 = total_cost_2ndfile - total_cost_1stfile
-    #         return (
-    #             f"Total Cost: {round(total_cost,3)}",
-    #             f"Difference with 1stfile: {diff2}",
-    #             f"Difference with 3rdfile: {diff1}"
-    #         )
-    #     else:
-    #         # If no tab is selected, return default values
-    #         return "Total Cost: 0", "", ""

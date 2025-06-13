@@ -48,6 +48,12 @@ class DataProcessor:
         logger.info("Supply Hour : " + str(supply))
         
         return  network_name, supply
+    
+    def validate_node_data(self, node_data, mainNodeData):
+        # Validate node data against mainNodeData
+        if (len(node_data["nodeID"])!=len(mainNodeData["nodeID"])):
+            return False
+        return True
         
 
     def process_node_data(self, df, minp):

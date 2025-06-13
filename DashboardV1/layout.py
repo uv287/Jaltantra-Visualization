@@ -62,6 +62,14 @@ class Layout:
 
         # Left panel with inputs and overview
         left_panel = html.Div([
+            dbc.Alert(
+                    id="file-alert",
+                    children="You uploaded the wrong file!",
+                    color="danger",
+                    dismissable=True,
+                    is_open=False,  #intiallty hidden
+                    className="mt-2"
+                ),
             html.H4("Upload Data and Network Overview", className='font-weight-bold mb-4'),
             html.Div(
                 dcc.Upload(
