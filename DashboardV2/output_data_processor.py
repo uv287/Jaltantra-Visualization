@@ -371,7 +371,7 @@ class OutputDataProcessor :
                     edge_color=self.value_to_color(sorted_difference_cost_pipeid_2ndfile[int(full_key.split('_')[0])], min_diff, max_diff) 
                     edge_colors[full_key]="Dark Orange"
                 else:
-                    edge_color="#333333"
+                    edge_color="#666666"
                     edge_colors[full_key]="Dark Grey" 
                 edge_text.append(f'{full_key}.0')
 
@@ -434,7 +434,7 @@ class OutputDataProcessor :
                         edge_color=self.value_to_color(sorted_difference_cost_pipeid_1stfile[int(full_key.split('_')[0])], min_diff, max_diff)
                         edge_colors[full_key]="Dark Orange"
                     else:
-                        edge_color="#333333" #grey -> same length and diameter in both the file
+                        edge_color="#666666" #grey -> same length and diameter in both the file
                         edge_colors[full_key]="Dark Grey"
                     edge_text.append(f'{full_key}')
 
@@ -445,7 +445,7 @@ class OutputDataProcessor :
                     edge_color=self.value_to_color(sorted_difference_cost_pipeid_1stfile[int(full_key.split('_')[0])], min_diff, max_diff)
                     edge_colors[full_key]="Dark Orange"
                 else:
-                    edge_color="#333333"
+                    edge_color="#666666"
                     edge_colors[full_key]="Dark Grey"
                 edge_text.append(f'{full_key}')
 
@@ -641,8 +641,8 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_2ndfile[pipe_id]}<br> <br>"
-                                    f"&nbsp; Difference : {sorted_difference_cost_pipeid_2ndfile[pipe_id]}")
+                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3)}")
 
             #edge is not parallel
             else:
@@ -661,7 +661,7 @@ class OutputDataProcessor :
                                         f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                         f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
                 
-                hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]}")
+                hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)} <br><br>")
                 
                 if pipe_id in different_pipe_2ndfile:
                     hover_info+=(f"2nd File :<br>")
@@ -677,8 +677,8 @@ class OutputDataProcessor :
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
                                             f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                             f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_2ndfile[pipe_id]}<br> <br>"
-                                    f"&nbsp; Difference : {sorted_difference_cost_pipeid_2ndfile[pipe_id]}")
+                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3)}")
 
             edge_hovertext_map[key]=hover_info
         hovertext=[]
@@ -756,9 +756,9 @@ class OutputDataProcessor :
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
                                             f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                             f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                    
-                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_2ndfile[pipe_id]}")
-                    
+
+                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br><br>")
+
                     if pipe_id in different_pipe_1stfile:
                         hover_info+=(f"1st File :<br>")
                         
@@ -773,8 +773,8 @@ class OutputDataProcessor :
                                                 f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                                 f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]}<br> <br>"
-                                    f"&nbsp; Difference : {sorted_difference_cost_pipeid_1stfile[pipe_id]}")
+                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3)}")
 
             #edge is not parallel
             else:
@@ -793,7 +793,7 @@ class OutputDataProcessor :
                                         f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                         f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
                 
-                hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]}<br><br>")
+                hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)}<br><br>")
                 
                 if pipe_id in different_pipe_1stfile:
                     hover_info+=(f"1st File :<br>")
@@ -809,8 +809,8 @@ class OutputDataProcessor :
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
                                             f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
                                             f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]}<br> <br>"
-                                    f"&nbsp; Difference : {sorted_difference_cost_pipeid_1stfile[pipe_id]}")
+                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3)}")
 
             edge_hovertext_map[key]=hover_info
 

@@ -766,7 +766,7 @@ class FigureGenerator:
                     unique_id.remove(pipe_id)
                     
 
-            print("Unique Pipe ID in 2ndfile data: ", unique_id)
+            # print("Unique Pipe ID in 2ndfile data: ", unique_id)
             if len(unique_id) > 0:
                 different_pipe_1stfile += unique_id
 
