@@ -18,14 +18,10 @@ class Layout:
             dcc.Store(id='pipe-data-upload1'),
             dcc.Store(id='node-data-upload2'),
             dcc.Store(id='pipe-data-upload2'),
-            dcc.Store(id='node-data-upload3'),
-            dcc.Store(id='pipe-data-upload3'),
             dcc.Store(id='Cost-file1'),
             dcc.Store(id='Length-file1'),
             dcc.Store(id='Cost-file2'),
-            dcc.Store(id='Length-file2'),
-            dcc.Store(id='Cost-file3'),
-            dcc.Store(id='Length-file3')
+            dcc.Store(id='Length-file2')
         ])
         
         # Left Sidebar 
@@ -78,7 +74,7 @@ class Layout:
                 dcc.Upload(
                     id='upload-Output1',
                     children=html.Button(
-                        "Upload 1min Output File",
+                        "Upload 1st Output File",
                         className='button'
                     ),
                     multiple=False
@@ -89,18 +85,7 @@ class Layout:
                 dcc.Upload(
                     id='upload-Output2',
                     children=html.Button(
-                        "Upload 5min Output File",
-                        className='button'
-                    ),
-                    multiple=False
-                ),
-                className='mb-3'
-            ),
-            html.Div(
-                dcc.Upload(
-                    id='upload-Output3',
-                    children=html.Button(
-                        "Upload 1hr Output File",
+                        "Upload 2nd Output File",
                         className='button'
                     ),
                     multiple=False
@@ -112,11 +97,9 @@ class Layout:
                 html.P(id='network-name', children="Network Name: "),
                 html.P(id='supply-hours', children="Supply Hours: "),
                 html.P(id='active-nodes', children="Active Nodes: "),
-                html.P(id='total-network-length', children="Total Network Length: "),
-                html.P(id='total-cost1', children="Total Cost in 1min Output: "),
-                html.P(id='total-cost2', children="Total Cost in 5min Output: "),
-                html.P(id='total-cost3', children="Total Cost in 1hr Output: "),
-                # html.P(id='updated-total-cost', children="Updated total Cost: ")
+                html.P(id='total-cost1', children="Total Cost of 1st Output File: "),
+                html.P(id='total-cost2', children="Total Cost of 2nd Output File: "),
+                html.P(id='total-cost3', children="Difference in Cost : ")
             ], className='card mt-4'),
             html.H4("Do you want to change the Input?", className='text-primary mt-4 mb-4 font-weight-bold'),
             dbc.Label("Select an option", className='text-primary font-weight-bold'),
@@ -177,84 +160,84 @@ class Layout:
                         dcc.Tabs(id='main-tab', value='main-graph', children=[
                             dcc.Tab(label='Main Graph', value='main-graph', children=[
                                 dcc.Graph(id='graph-1', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '100vh'})]),
-                            dcc.Tab(label='1 Min', value='1min', id="tab-1min", children=[
+                            dcc.Tab(label='1st File', value='1stfile', id="tab-1stfile", children=[
                                 html.Div([
                                         dcc.Tabs(
-                                            id='inner-tab-1min',
+                                            id='inner-tab-1stfile',
                                             value='demand',
                                             children=[
                                                 dcc.Tab(label='Node Graph', value='demand', children=html.Div([
+                                                    # dbc.Row([
+                                                    #     dbc.Col(html.Div("2nd File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    #     dbc.Col(html.Div("3rd File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    # ]),
                                                     dbc.Row([
-                                                        dbc.Col(html.Div("5 min", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                        dbc.Col(html.Div("1 hr", className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                        dbc.Col(html.Div(id='1stfile-demand-1', className='p-3 mb-3',
+                                                                        style={'backgroundColor': 'white', 'height':'300px', 'overflowY': 'auto'})),
+                                                        # dbc.Col(html.Div(id='1stfile-demand-2', className='p-3 mb-3', 
+                                                        #                 style={'backgroundColor': 'white', 'height':'300px', 'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dbc.Row([
-                                                        dbc.Col(html.Div(id='1min-demand-1', className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'height':'300px', 'overflowY': 'auto'}), width=6),
-                                                        dbc.Col(html.Div(id='1min-demand-2', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px', 'overflowY': 'auto'}), width=6),
-                                                    ]),
-                                                    dcc.Graph(id='graph-2', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-2', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
 
-                                                dcc.Tab(label='Pipe Graph', value='length', children=html.Div([
+                                                dcc.Tab(label='Pipes', value='length', children=html.Div([
+                                                    # dbc.Row([
+                                                    #     dbc.Col(html.Div("2nd File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    #     dbc.Col(html.Div("3rd File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    # ]),
                                                     dbc.Row([
-                                                        dbc.Col(html.Div("5 min", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                        dbc.Col(html.Div("1 hr", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                        dbc.Col(html.Div(id='1stfile-length-1', className='p-3 mb-3', 
+                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'})),
+                                                        # dbc.Col(html.Div(id='1stfile-length-2', className='p-3 mb-3', 
+                                                        #                 style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dbc.Row([
-                                                        dbc.Col(html.Div(id='1min-length-1', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                        dbc.Col(html.Div(id='1min-length-2', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                    ]),
-                                                    dcc.Graph(id='graph-4', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-4', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
                                             ],
                                             className='mt-3'
                                         )
                                     ]),
                                 ]), 
-                            dcc.Tab(label='5 Min', value='5min', id="tab-5min", children=[
+                            dcc.Tab(label='2nd file', value='2ndfile', id="tab-2ndfile", children=[
                                     html.Div([
                                         dcc.Tabs(
-                                            id='inner-tab-5min',
+                                            id='inner-tab-2ndfile',
                                             value='demand',
                                             children=[
-                                                dcc.Tab(label='Node Graph', value='demand', children=html.Div([
+                                                dcc.Tab(label='Nodes', value='demand', children=html.Div([
+                                                    # dbc.Row([
+                                                    #     dbc.Col(html.Div("1st File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    #     dbc.Col(html.Div("3rd File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    # ]),
                                                     dbc.Row([
-                                                        dbc.Col(html.Div("1 min", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                        dbc.Col(html.Div("1 hr", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                        dbc.Col(html.Div(id='2ndfile-demand-1', className='p-3 mb-3', 
+                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'})),
+                                                        # dbc.Col(html.Div(id='2ndfile-demand-2', className='p-3 mb-3', 
+                                                        #                 style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dbc.Row([
-                                                        dbc.Col(html.Div(id='5min-demand-1', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                        dbc.Col(html.Div(id='5min-demand-2', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                    ]),
-                                                    dcc.Graph(id='graph-8', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-8', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
 
-                                                dcc.Tab(label='Pipe Graph', value='length', children=html.Div([
+                                                dcc.Tab(label='Pipes', value='length', children=html.Div([
+                                                    # dbc.Row([
+                                                    #     dbc.Col(html.Div("1st File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    #     dbc.Col(html.Div("3rd File", className='p-3 mb-3',
+                                                    #                     style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                    # ]),
                                                     dbc.Row([
-                                                        dbc.Col(html.Div("1 min", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                        dbc.Col(html.Div("1 hr", className='p-3 mb-3',
-                                                                        style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                                                        dbc.Col(html.Div(id='2ndfile-length-1', className='p-3 mb-3', 
+                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}) ),
+                                                        # dbc.Col(html.Div(id='2ndfile-length-2', className='p-3 mb-3', 
+                                                        #                 style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
                                                     ]),
-                                                    dbc.Row([
-                                                        dbc.Col(html.Div(id='5min-length-1', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                        dbc.Col(html.Div(id='5min-length-2', className='p-3 mb-3', 
-                                                                        style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                    ]),
-                                                    dcc.Graph(id='graph-10', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
+                                                    dcc.Graph(id='graph-10', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
                                                 ], className='mt-3')),
                                                 
                                             ],
@@ -262,49 +245,49 @@ class Layout:
                                         )
                                     ]),
                                 ]),
-                            dcc.Tab(label='1 Hr', value='1hr', id="tab-1hr", children=[
-                                html.Div([
-                                    dcc.Tabs(
-                                        id='inner-tab-1hr',
-                                        value='demand',
-                                        children=[
-                                            dcc.Tab(label='Node Graph', value='demand', children=html.Div([
-                                                dbc.Row([
-                                                    dbc.Col(html.Div("1 min", className='p-3 mb-3',
-                                                                    style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                    dbc.Col(html.Div("5 min", className='p-3 mb-3',
-                                                                    style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                ]),
-                                                dbc.Row([
-                                                    dbc.Col(html.Div(id='1hr-demand-1', className='p-3 mb-3', 
-                                                                    style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                    dbc.Col(html.Div(id='1hr-demand-2', className='p-3 mb-3', 
-                                                                    style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                ]),
-                                                dcc.Graph(id='graph-14', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
-                                            ], className='mt-3')),
+                            # dcc.Tab(label='3rd File', value='3rdfile', id="tab-3rdfile", children=[
+                            #     html.Div([
+                            #         dcc.Tabs(
+                            #             id='inner-tab-3rdfile',
+                            #             value='demand',
+                            #             children=[
+                            #                 dcc.Tab(label='Nodes', value='demand', children=html.Div([
+                            #                     dbc.Row([
+                            #                         dbc.Col(html.Div("1st File", className='p-3 mb-3',
+                            #                                         style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                            #                         dbc.Col(html.Div("2nd File", className='p-3 mb-3',
+                            #                                         style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                            #                     ]),
+                            #                     dbc.Row([
+                            #                         dbc.Col(html.Div(id='3rdfile-demand-1', className='p-3 mb-3', 
+                            #                                         style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
+                            #                         dbc.Col(html.Div(id='3rdfile-demand-2', className='p-3 mb-3', 
+                            #                                         style={'backgroundColor': 'white', 'height':'300px',  'overflowY': 'auto'}), width=6),
+                            #                     ]),
+                            #                     dcc.Graph(id='graph-14', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
+                            #                 ], className='mt-3')),
 
-                                            dcc.Tab(label='Pipe Graph', value='length', children=html.Div([
-                                                dbc.Row([
-                                                    dbc.Col(html.Div("1 min", className='p-3 mb-3',
-                                                                    style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                    dbc.Col(html.Div("5 min", className='p-3 mb-3',
-                                                                    style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
-                                                ]),
-                                                dbc.Row([
-                                                    dbc.Col(html.Div(id='1hr-length-1', className='p-3 mb-3', 
-                                                                    style={'backgroundColor': 'white',  'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                    dbc.Col(html.Div(id='1hr-length-2', className='p-3 mb-3', 
-                                                                    style={'backgroundColor': 'white',  'height':'300px',  'overflowY': 'auto'}), width=6),
-                                                ]),
-                                                dcc.Graph(id='graph-16', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '70vh'})
-                                            ], className='mt-3')),
+                            #                 dcc.Tab(label='Pipes', value='length', children=html.Div([
+                            #                     dbc.Row([
+                            #                         dbc.Col(html.Div("1st File", className='p-3 mb-3',
+                            #                                         style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                            #                         dbc.Col(html.Div("2nd File", className='p-3 mb-3',
+                            #                                         style={'backgroundColor': 'white', 'textAlign': 'center'}), width=6),
+                            #                     ]),
+                            #                     dbc.Row([
+                            #                         dbc.Col(html.Div(id='3rdfile-length-1', className='p-3 mb-3', 
+                            #                                         style={'backgroundColor': 'white',  'height':'300px',  'overflowY': 'auto'}), width=6),
+                            #                         dbc.Col(html.Div(id='3rdfile-length-2', className='p-3 mb-3', 
+                            #                                         style={'backgroundColor': 'white',  'height':'300px',  'overflowY': 'auto'}), width=6),
+                            #                     ]),
+                            #                     dcc.Graph(id='graph-16', config={'modeBarButtonsToRemove': ['select2d', 'lasso2d']}, style={'height': '90vh'})
+                            #                 ], className='mt-3')),
 
-                                        ],
-                                        className='mt-3'
-                                    )
-                                ])
-                                ]),
+                            #             ],
+                            #             className='mt-3'
+                            #         )
+                            #     ])
+                            #     ]),
                         ], className='mb-3'),
                         # html.Div(id='graph-tabs-content')  # Placeholder for dynamic content
                     ]), md=8),

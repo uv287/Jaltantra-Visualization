@@ -130,28 +130,20 @@ def register_callbacks(app):
         Output('pipe-data-upload1', 'data'),
         Output('node-data-upload2', 'data'),
         Output('pipe-data-upload2', 'data'),
-        Output('node-data-upload3', 'data'),
-        Output('pipe-data-upload3', 'data'),
         Output('graph-2', 'figure'), Output('graph-4', 'figure'),
         Output('graph-8', 'figure'), Output('graph-10', 'figure'),
-        Output('graph-14', 'figure'), Output('graph-16', 'figure'),
-        Output('total-network-length','children'),
         Output('total-cost1','children'),
         Output('total-cost2','children'),
-        Output('total-cost3','children'),
-        Output('1min-demand-1', 'children'), Output('1min-demand-2', 'children'),
-        Output('1min-length-1', 'children'), Output('1min-length-2', 'children'),
-        Output('5min-demand-1', 'children'), Output('5min-demand-2', 'children'),
-        Output('5min-length-1', 'children'), Output('5min-length-2', 'children'),
-        Output('1hr-demand-1', 'children'), Output('1hr-demand-2', 'children'),
-        Output('1hr-length-1', 'children'), Output('1hr-length-2', 'children')
+        Output('1stfile-demand-1', 'children'), 
+        Output('1stfile-length-1', 'children'), 
+        Output('2ndfile-demand-1', 'children'), 
+        Output('2ndfile-length-1', 'children')
     ],
     [
         Input('upload-input1', 'contents'),
         Input('upload-Output1', 'contents'),
         Input('upload-Output2', 'contents'),
-        Input('upload-Output3', 'contents'),
-        Input('graph-1', 'figure'),
+        Input('graph-1', 'figure')
     ],
     [
         State('node-data-store', 'data'),
@@ -161,27 +153,22 @@ def register_callbacks(app):
         State('pipe-data-upload1', 'data'),
         State('node-data-upload2', 'data'),
         State('pipe-data-upload2', 'data'),
-        State('node-data-upload3', 'data'),
-        State('pipe-data-upload3', 'data'),
         State('upload-input1', 'filename'),
-        State('upload-Output1', 'filename'),
+        State('upload-Output1', 'filename')
     ]
     )
-    def update_data(content ,content1, content2, content3, mainfig, mainNodeData, mainPipeData, commercial_pipe_data, nodeData1min, pipeData1min, nodeData5min, pipeData5min, nodeData1hr, pipeData1hr, inputfilename, filename):
-        if (content is None) and (content1 is None) and (content2 is None) and (content3 is None):
+    def update_data(content ,content1, content2, mainfig, mainNodeData, mainPipeData, commercial_pipe_data, nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, inputfilename, filename):
+        if (content is None) and (content1 is None) and (content2 is None):
             return (
                     None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ",
-                    None, None, None, None, None, None,
+                    None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
-                    go.Figure(), go.Figure(),
-                    "Total Network Length: ", "Total Cost 1 min: ", "Total Cost 5 min: ", "Total Cost 1 hr: ",
-                    "", "",
-                    "", "",
-                    "", "",
-                    "", "",
-                    "", "",
-                    "", ""
+                     "Total Cost 1st File: ", "Total Cost 2nd File: ",
+                    "", 
+                    "",
+                    "",
+                    ""
                     )
 
         triggered_id = ctx.triggered_id
@@ -292,17 +279,14 @@ def register_callbacks(app):
             input_data = df.to_dict('records')
 
             return (input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}",
-                    None, None, None, None, None, None,
+                    None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
-                    go.Figure(), go.Figure(),
-                    "Total Network Length: ", "Total Cost 1 min: ", "Total Cost 5 min: ", "Total Cost 1 hr: ",
-                    "", "",
-                    "", "",
-                    "", "",
-                    "", "",
-                    "", "",
-                    "", ""
+                    "Total Cost 1st File: ", "Total Cost 2nd File: ", 
+                    "",
+                    "",
+                    "",
+                    ""
                     )
         if triggered_id == 'upload-Output1':
             logger.info(f"Processing Output1 data from {filename}...")
@@ -315,23 +299,23 @@ def register_callbacks(app):
             df = pd.read_excel(buffer,header=None)
             
             logger.info("Output1 data reading started...")
-            node_data_1min = output1_data_processor.process_node_data(df)
-            pipe_data_1min = output1_data_processor.process_pipe_data(df)
+            node_data_1stfile = output1_data_processor.process_node_data(df)
+            pipe_data_1stfile = output1_data_processor.process_pipe_data(df)
             sourceID, sourceElevation, sourceHead = output1_data_processor.process_source(df)
             
             total_length, total_cost = output1_data_processor.get_length_and_cost(df)
             
-            node_data_1min['nodeID'].insert(0,sourceID)
-            node_data_1min['Elevation'].insert(0,sourceElevation)
-            node_data_1min['Demand'].insert(0,-1)
-            node_data_1min['Head'].insert(0,sourceHead)
-            node_data_1min["Pressure"].insert(0,-1)
-            node_data_1min["MinPressure"].insert(0,-1)
+            node_data_1stfile['nodeID'].insert(0,sourceID)
+            node_data_1stfile['Elevation'].insert(0,sourceElevation)
+            node_data_1stfile['Demand'].insert(0,-1)
+            node_data_1stfile['Head'].insert(0,sourceHead)
+            node_data_1stfile["Pressure"].insert(0,-1)
+            node_data_1stfile["MinPressure"].insert(0,-1)
             logger.info("Output1 data reading completed successfully.")
-            logger.info(f"Node data: {node_data_1min}")
-            logger.info(f"Pipe data: {pipe_data_1min}")
+            logger.info(f"Node data: {node_data_1stfile}")
+            logger.info(f"Pipe data: {pipe_data_1stfile}")
             
-            unique_parallel_pipes = output1_data_processor.get_unique_parallel_pipes(pipe_data_1min)
+            unique_parallel_pipes = output1_data_processor.get_unique_parallel_pipes(pipe_data_1stfile)
             
             logger.info(f"Unique parallel pipes: {unique_parallel_pipes}")
             
@@ -341,32 +325,27 @@ def register_callbacks(app):
             pos = figGen.extract_node_positions(mainfig)
             logger.info("Node positions extracted successfully.")
             
-            G = figGen.create_graph_with_parallel_edges(pos, pipe_data_1min, unique_parallel_pipes)
+            G, no_of_pipes= figGen.create_graph_with_parallel_edges(pos, pipe_data_1stfile, unique_parallel_pipes)
             
-            nodeFig_1min, nodeFig_5min, nodeFig_1hr, par_1mintab_demand_1, par_1mintab_demand_2, par_5mintab_demand_1, par_1hrtab_demand_1 = figGen.create_node_1min_graph(pos,node_data_1min, pipe_data_1min, unique_parallel_pipes, mainNodeData, mainPipeData, nodeData5min, pipeData5min, nodeData1hr, pipeData1hr, G, start)
+            nodeFig_1stfile, nodeFig_2ndfile, par_1stfiletab_demand_1, par_2ndfiletab_demand_1 = figGen.create_node_1stfile_graph(pos,node_data_1stfile, pipe_data_1stfile, unique_parallel_pipes, mainNodeData, mainPipeData, nodeData2ndfile, pipeData2ndfile, G, start)
             
-            logger.info("Node output 1 figures created successfully.")
-            
-            G, no_of_pipes = figGen.create_graph_with_parallel_and_mutliple_edges(pos, pipe_data_1min, unique_parallel_pipes)
-            
-            
-            pipeFig_1min, pipeFig_5min, pipeFig_1hr, par_1mintab_pipe_1, par_1mintab_pipe_2, par_5mintab_pipe_1, par_1hrtab_pipe_1= figGen.create_pipe_1min_graph(pos,node_data_1min, pipe_data_1min, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData5min, pipeData5min, nodeData1hr, pipeData1hr, G, start)
-            
-            logger.info("Pipe output 1 figures created successfully.")  
-            logger.info(f"Total network length: {total_length}, Total cost: {total_cost}")
+            # G, no_of_pipes = figGen.create_graph_with_parallel_and_mutliple_edges(pos, pipe_data_1stfile, unique_parallel_pipes)
+            # G = figGen.create_graph_with_parallel_edges(pos, pipe_data_1stfile, unique_parallel_pipes)
+
+            pipeFig_1stfile, pipeFig_2ndfile, par_1stfiletab_pipe_1, par_2ndfiletab_pipe_1 = figGen.create_pipe_1stfile_graph(pos,node_data_1stfile, pipe_data_1stfile, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData2ndfile, pipeData2ndfile, G, start)
+
+            logger.info("Pipe output 1 figures created successfully.")
+            logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
             return (
                     no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
-                    node_data_1min, pipe_data_1min, nodeData5min, pipeData5min, nodeData1hr, pipeData1hr,
-                    nodeFig_1min, pipeFig_1min,
-                    nodeFig_5min, pipeFig_5min,
-                    nodeFig_1hr, pipeFig_1hr,
-                    f"Total Network Length: {total_length}", f"Total Cost 1 min: {total_cost}", no_update, no_update,
-                    DangerouslySetInnerHTML(par_1mintab_demand_1),DangerouslySetInnerHTML(par_1mintab_demand_2),
-                    DangerouslySetInnerHTML(par_1mintab_pipe_1),DangerouslySetInnerHTML(par_1mintab_pipe_2),
-                    DangerouslySetInnerHTML(par_5mintab_demand_1),no_update,
-                    DangerouslySetInnerHTML(par_5mintab_pipe_1),no_update,
-                    DangerouslySetInnerHTML(par_1hrtab_demand_1),no_update, 
-                    DangerouslySetInnerHTML(par_1hrtab_pipe_1),no_update,  
+                    node_data_1stfile, pipe_data_1stfile, nodeData2ndfile, pipeData2ndfile,
+                    nodeFig_1stfile, pipeFig_1stfile,
+                    nodeFig_2ndfile, pipeFig_2ndfile,
+                    f"Total Cost of 1st File: {round(total_cost,3)}", no_update,
+                    DangerouslySetInnerHTML(par_1stfiletab_demand_1),
+                    DangerouslySetInnerHTML(par_1stfiletab_pipe_1),
+                    DangerouslySetInnerHTML(par_2ndfiletab_demand_1),
+                    DangerouslySetInnerHTML(par_2ndfiletab_pipe_1)
                     )
         
         if triggered_id == 'upload-Output2':
@@ -380,23 +359,23 @@ def register_callbacks(app):
             df = pd.read_excel(buffer,header=None)
             
             logger.info("Output2 data reading started...")
-            node_data_5min = output1_data_processor.process_node_data(df)
-            pipe_data_5min = output1_data_processor.process_pipe_data(df)
+            node_data_2ndfile = output1_data_processor.process_node_data(df)
+            pipe_data_2ndfile = output1_data_processor.process_pipe_data(df)
             sourceID, sourceElevation, sourceHead = output1_data_processor.process_source(df)
             
             total_length, total_cost = output1_data_processor.get_length_and_cost(df)
             
-            node_data_5min['nodeID'].insert(0,sourceID)
-            node_data_5min['Elevation'].insert(0,sourceElevation)
-            node_data_5min['Demand'].insert(0,-1)
-            node_data_5min['Head'].insert(0,sourceHead)
-            node_data_5min["Pressure"].insert(0,-1)
-            node_data_5min["MinPressure"].insert(0,-1)
+            node_data_2ndfile['nodeID'].insert(0,sourceID)
+            node_data_2ndfile['Elevation'].insert(0,sourceElevation)
+            node_data_2ndfile['Demand'].insert(0,-1)
+            node_data_2ndfile['Head'].insert(0,sourceHead)
+            node_data_2ndfile["Pressure"].insert(0,-1)
+            node_data_2ndfile["MinPressure"].insert(0,-1)
             logger.info("Output2 data reading completed successfully.")
-            logger.info(f"Node data: {node_data_5min}")
-            logger.info(f"Pipe data: {pipe_data_5min}")
+            logger.info(f"Node data: {node_data_2ndfile}")
+            logger.info(f"Pipe data: {pipe_data_2ndfile}")
             
-            unique_parallel_pipes = output1_data_processor.get_unique_parallel_pipes(pipe_data_5min)
+            unique_parallel_pipes = output1_data_processor.get_unique_parallel_pipes(pipe_data_2ndfile)
             logger.info(f"Unique parallel pipes: {unique_parallel_pipes}")
             
             #new class for the figure generator
@@ -405,143 +384,30 @@ def register_callbacks(app):
             pos = figGen.extract_node_positions(mainfig)
             logger.info("Node positions extracted successfully.")
             
-            G = figGen.create_graph_with_parallel_edges(pos, pipe_data_5min, unique_parallel_pipes)
+            G , no_of_pipes= figGen.create_graph_with_parallel_edges(pos, pipe_data_2ndfile, unique_parallel_pipes)
             
-            nodeFig_5min, nodeFig_1min, nodeFig_1hr, par_5mintab_node_1, par_5mintab_node_2, par_1mintab_node_1, par_1hrtab_node_2 = figGen.create_node_5min_graph(pos,node_data_5min, pipe_data_5min, unique_parallel_pipes, mainNodeData, mainPipeData, nodeData1min, pipeData1min, nodeData1hr, pipeData1hr, G, start)
+            nodeFig_2ndfile, nodeFig_1stfile, par_2ndfiletab_node_1, par_1stfiletab_node_1 = figGen.create_node_2ndfile_graph(pos,node_data_2ndfile, pipe_data_2ndfile, unique_parallel_pipes, mainNodeData, mainPipeData, nodeData1stfile, pipeData1stfile, G, start)
             
-            logger.info("Node output 5min figures created successfully.")
+            logger.info("Node output 2ndfile figures created successfully.")
             
-            G, no_of_pipes = figGen.create_graph_with_parallel_and_mutliple_edges(pos, pipe_data_5min, unique_parallel_pipes)
+            # G, no_of_pipes = figGen.create_graph_with_parallel_and_mutliple_edges(pos, pipe_data_2ndfile, unique_parallel_pipes)
             
-            pipeFig_5min, pipeFig_1min, pipeFig_1hr, par_5mintab_pipe_1, par_5mintab_pipe_2, par_1mintab_pipe_1, par_1hrtab_pipe_2 = figGen.create_pipe_5min_graph(pos,node_data_5min, pipe_data_5min, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData1min, pipeData1min, nodeData1hr, pipeData1hr, G, start)
+            pipeFig_2ndfile, pipeFig_1stfile, par_2ndfiletab_pipe_1, par_1stfiletab_pipe_1 = figGen.create_pipe_2ndfile_graph(pos,node_data_2ndfile, pipe_data_2ndfile, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData1stfile, pipeData1stfile, G, start)
             
-            logger.info("Pipe output 5min figures created successfully.")
-            logger.info(f"Total network length: {total_length}, Total cost: {total_cost}")
-            ############# 5 min data processing completed ##################
-            
+            logger.info("Pipe output 2ndfile figures created successfully.")
+            logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
+            ############# 2nd File data processing completed ##############
+
             return (
-                no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
-                nodeData1min, pipeData1min, node_data_5min, pipe_data_5min, nodeData1hr, pipeData1hr, 
-                    nodeFig_1min, pipeFig_1min,
-                    nodeFig_5min, pipeFig_5min,
-                    nodeFig_1hr, pipeFig_1hr,
-                    f"Total Network Length: {total_length}", no_update, f"Total Cost 5 min: {total_cost}", no_update,
-                    DangerouslySetInnerHTML(par_1mintab_node_1),no_update,
-                    DangerouslySetInnerHTML(par_1mintab_pipe_1),no_update,
-                    DangerouslySetInnerHTML(par_5mintab_node_1),DangerouslySetInnerHTML(par_5mintab_node_2), 
-                    DangerouslySetInnerHTML(par_5mintab_pipe_1),DangerouslySetInnerHTML(par_5mintab_pipe_2), 
-                    no_update,DangerouslySetInnerHTML(par_1hrtab_node_2), 
-                    no_update,DangerouslySetInnerHTML(par_1hrtab_pipe_2)
-                    # no_update, total_cost, no_update,
-                    # no_update, total_length, no_update
+                no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                nodeData1stfile, pipeData1stfile, node_data_2ndfile, pipe_data_2ndfile, 
+                    nodeFig_1stfile, pipeFig_1stfile,
+                    nodeFig_2ndfile, pipeFig_2ndfile,
+                    no_update, f"Total Cost of 2nd File: {round(total_cost,3)}",
+                    DangerouslySetInnerHTML(par_1stfiletab_node_1),
+                    DangerouslySetInnerHTML(par_1stfiletab_pipe_1),
+                    DangerouslySetInnerHTML(par_2ndfiletab_node_1), 
+                    DangerouslySetInnerHTML(par_2ndfiletab_pipe_1) 
                     )
         
-        if ctx.triggered_id == 'upload-Output3':
-            
-            logger.info(f"Processing Output3 data from {filename}...")
-            contents = content3
-            content_type, content_string = contents.split(',')
-            decoded = base64.b64decode(content_string)
-            buffer = io.BytesIO(decoded)
-            # workbook = xlrd.open_workbook(file_contents=buffer.getvalue())
-            # sheet= workbook.sheet_by_index(0)
-            df = pd.read_excel(buffer,header=None)
-            
-            node_data_1hr = output1_data_processor.process_node_data(df)
-            pipe_data_1hr = output1_data_processor.process_pipe_data(df)
-            sourceID, sourceElevation, sourceHead = output1_data_processor.process_source(df)
-            
-            total_length, total_cost = output1_data_processor.get_length_and_cost(df)
-            
-            node_data_1hr['nodeID'].insert(0,sourceID)
-            node_data_1hr['Elevation'].insert(0,sourceElevation)
-            node_data_1hr['Demand'].insert(0,-1)
-            node_data_1hr['Head'].insert(0,sourceHead)
-            node_data_1hr["Pressure"].insert(0,-1)
-            node_data_1hr["MinPressure"].insert(0,-1)
-            
-            logger.info("Output3 data reading completed successfully.")
-            logger.info(f"Node data: {node_data_1hr}")
-            logger.info(f"Pipe data: {pipe_data_1hr}")
-            
-            unique_parallel_pipes = output1_data_processor.get_unique_parallel_pipes(pipe_data_1hr)
-            
-            logger.info(f"Unique parallel pipes: {unique_parallel_pipes}")
-            
-            #new class for the figure generator
-            figGen = FigureGenerator()
-            
-            pos = figGen.extract_node_positions(mainfig)
-            
-            G = figGen.create_graph_with_parallel_edges(pos, pipe_data_1hr, unique_parallel_pipes)
-            
-            nodeFig_1hr, nodeFig_1min, nodeFig_5min, par_1hrtab_node_1, par_1hrtab_node_2, par_1mintab_node_2, par_5mintab_node_2 = figGen.create_node_1hr_graph(pos,node_data_1hr, pipe_data_1hr, unique_parallel_pipes, mainNodeData, mainPipeData, nodeData1min, pipeData1min, nodeData5min, pipeData5min, G, start)
-            
-            logger.info("Node output 1hr figures created successfully.")
-                     
-            G, no_of_pipes = figGen.create_graph_with_parallel_and_mutliple_edges(pos, pipe_data_1hr, unique_parallel_pipes)
-            
-            pipeFig_1hr, pipeFig_1min, pipeFig_5min, par_1hrtab_pipe_1, par_1hrtab_pipe_2, par_1mintab_pipe_2, par_5mintab_pipe_2 = figGen.create_pipe_1hr_graph(pos,node_data_1hr, pipe_data_1hr, unique_parallel_pipes, no_of_pipes, mainNodeData,  mainPipeData, nodeData1min, pipeData1min, nodeData5min, pipeData5min, G, start)
-            
-            logger.info("Pipe output 1hr figures created successfully.")
-            
-            return (
-                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
-                    nodeData1min, pipeData1min, nodeData5min, pipeData5min, node_data_1hr, pipe_data_1hr, 
-                    nodeFig_1min, pipeFig_1min,
-                    nodeFig_5min, pipeFig_5min,
-                    nodeFig_1hr, pipeFig_1hr,
-                    f"Total Network Length: {total_length}", no_update, no_update,f"Total Cost 1 hr: {total_cost}",
-                    no_update,DangerouslySetInnerHTML(par_1mintab_node_2), 
-                    no_update,DangerouslySetInnerHTML(par_1mintab_pipe_2),
-                    no_update,DangerouslySetInnerHTML(par_5mintab_node_2), 
-                    no_update,DangerouslySetInnerHTML(par_5mintab_pipe_2), 
-                    DangerouslySetInnerHTML(par_1hrtab_node_1),DangerouslySetInnerHTML(par_1hrtab_node_2), 
-                    DangerouslySetInnerHTML(par_1hrtab_pipe_1),DangerouslySetInnerHTML(par_1hrtab_pipe_2), 
-                    # no_update, no_update, total_cost,
-                    # no_update, no_update, total_length
-                    )
         
-    #If the tab is clicked then change the total cost and diffrence between them
-    # @app.callback(
-    #         [Output('total-cost', 'children'), Output('total-diff1', 'children'), Output('total-diff2', 'children')],
-    #         Input('tab-1hr', 'value'),
-    #         Input('tab-1min', 'value'),
-    #         Input('tab-5min', 'value'),
-    #         State('Cost-file1', 'data'),
-    #         State('Cost-file2', 'data'),
-    #         State('Cost-file3', 'data')
-    #     )
-    # def update_total_cost_and_diff(tab_1hr, tab_1min, tab_5min, total_cost_1min, total_cost_5min, total_cost_1hr):
-    #     triggered_id = ctx.triggered_id
-        
-    #     if triggered_id == '1hr':
-    #         total_cost = total_cost_1hr
-    #         diff1 = total_cost_1hr - total_cost_1min
-    #         diff2 = total_cost_1hr - total_cost_5min
-    #         return (
-    #             f"Total Cost: {total_cost}",
-    #             f"Difference with 1hr: {diff1}",
-    #             f"Difference with 5min: {diff2}"
-    #         )
-    #     elif triggered_id == '1min':
-    #         total_cost = total_cost_1min
-    #         diff1 = total_cost_1min - total_cost_1hr
-    #         diff2 = total_cost_1min - total_cost_5min
-    #         return (
-    #             f"Total Cost: {total_cost}",
-    #             f"Difference with 5min: {diff2}",
-    #             f"Difference with 1hr: {diff1}"
-    #         )
-    #     elif triggered_id == '5min':
-    #         total_cost = total_cost_5min
-    #         diff1 = total_cost_5min - total_cost_1hr
-    #         diff2 = total_cost_5min - total_cost_1min
-    #         return (
-    #             f"Total Cost: {total_cost}",
-    #             f"Difference with 1min: {diff2}",
-    #             f"Difference with 1hr: {diff1}"
-    #         )
-    #     else:
-    #         # If no tab is selected, return default values
-    #         return "Total Cost: 0", "", ""
