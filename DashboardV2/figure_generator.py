@@ -594,10 +594,8 @@ class FigureGenerator:
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flow : {round(flow, 3)}<br>"
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Speed : {round(speed, 3)}<br><br>")
                 par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3)}</b><br><br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3)} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})</b><br><br><br>")
 
             logger.info("Paragraph for 1stfile tab with 2ndfile data is stored")
                 
@@ -616,8 +614,6 @@ class FigureGenerator:
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flow : {round(flow, 3)}<br>"
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Speed : {round(speed, 3)}<br><br>")
                 par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
                 
                 par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp; <b>1stfile Data :</b> <br>")
@@ -631,11 +627,9 @@ class FigureGenerator:
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flow : {round(flow, 3)}<br>"
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Speed : {round(speed, 3)}<br>")
                 
                 par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3)}<br><br>")
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; <b>Difference in cost : {(-1)*round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3)}</b><br><br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; <b>Difference in cost : {(-1)*round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3)} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})</b><br><br><br>")
             
             logger.info("Paragraph for 2ndfile tab with 1stfile data is stored") 
         
@@ -823,7 +817,7 @@ class FigureGenerator:
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
                 par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3)}<br><br>")
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3)}</b><br><br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3)} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})</b><br><br><br>")
 
             logger.info("Paragraph for 2ndfile tab with 1stfile data is stored")
                 
@@ -859,11 +853,9 @@ class FigureGenerator:
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br> <br>")
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flow : {round(flow, 3)}<br>"
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Speed : {round(speed, 3)}<br><br>")
 
                 par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; <b>Difference in cost : {-round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3)}</b><br><br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; <b>Difference in cost : {-round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3)} {data_processor.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_1stfile[pipe_id])}</b><br><br><br>")
 
         logger.info("Paragraph for 1stfile tab with 2ndfile data is stored")
 

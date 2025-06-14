@@ -283,6 +283,10 @@ def register_callbacks(app):
                                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                                 dragmode='pan'
                             ))
+            # fig.update_layout(
+            #     paper_bgcolor='white',   # Outside the plot area
+            #     plot_bgcolor='#bbbbbb'     # Inside the plot area (where graph is drawn)
+            # )
             
             logger.info("Input File Network created successfully.")
             input_data = df.to_dict('records')
@@ -431,7 +435,7 @@ def register_callbacks(app):
             logger.info(f"Pipe data: {pipe_data_2ndfile}")
             
             if content1 is not None:
-                diff_cost = f"Difference in Cost : {round(cost1 - total_cost, 3)}"
+                diff_cost = f"Difference in Cost : {round(cost1 - total_cost, 3)} ({output1_data_processor.percentage_difference((cost1-total_cost), cost1)})"
             else:
                 diff_cost = f"Difference in Cost : "
             
