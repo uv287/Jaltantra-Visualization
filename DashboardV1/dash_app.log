@@ -15028,3 +15028,7 @@
 2025-06-14 10:57:02,237 - INFO - [figure_generator.py-create_pipe_1stfile_graph-1251] - Pipe figure created for 1stfile graph
 2025-06-14 10:57:02,240 - INFO - [callbacks.py-update_data-462] - Pipe output 2ndfile figures created successfully.
 2025-06-14 10:57:02,240 - INFO - [callbacks.py-update_data-463] - Total network length: 9533.975, Total cost: 3097327.057
+2025-06-14 12:54:57,435 - INFO - [dash.py-run-2137] - Dash is running on http://127.0.0.1:8050/
+
+2025-06-14 12:56:19,246 - INFO - [dash.py-run-2137] - Dash is running on http://127.0.0.1:8050/
+
