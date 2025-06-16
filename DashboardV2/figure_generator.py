@@ -150,8 +150,8 @@ class FigureGenerator:
         logger.info(f"1stfile Graph Head Map : " + str(node_head_map))
         
         for node in G.nodes():
-            G.nodes[node]['color'] = 'blue'
-            G.nodes[node]['size'] = 30  # Default size for all nodes
+            G.nodes[node]['color'] = "#AABFF5", # Default color for all nodes
+            G.nodes[node]['size'] = 10  # Default size for all nodes
         
         
         if nodeData2ndfile is not None:
@@ -178,40 +178,51 @@ class FigureGenerator:
             #reverse sort the list with the node
             sorted_head_difference_2ndfile = dict(sorted(head_difference_2ndfile.items(), key=lambda item: item[1], reverse=True))
             
+            para_1stfiletab_2ndfile += (f"Total Nodes : {len(sorted_head_difference_2ndfile)}<br>"
+                                        f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>")
+            
+            para_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
+            
             #traverse the sorted list and create the list 
             for node in sorted_head_difference_2ndfile:
                 para_1stfiletab_2ndfile +=(f"<b>Node : {node}</b><br>"
                                         f"&nbsp; &nbsp; Head : <br>"
                                             f"&nbsp;&nbsp;&nbsp;Head in 1stfile : {round(node_head_map[node],3)}<br>"
                                             f"&nbsp;&nbsp;&nbsp;Head in 2ndfile : {round(node_head_2ndfile[node],3)}<br>"
-                                            f"&nbsp;&nbsp; <b>Difference : {round(sorted_head_difference_2ndfile[node],3)}</b><br><br>"
+                                            f"&nbsp;&nbsp; <b>Difference : {round(sorted_head_difference_2ndfile[node],3)} ({data_processor.percentage_difference(sorted_head_difference_2ndfile[node], node_head_map[node])})</b><br><br>"
                                         f"&nbsp; &nbsp; Demand : <br>"
                                             f"&nbsp;&nbsp;&nbsp;Supply in 1stfile : {round(node_demand_map[node],3)}<br>" 
                                             f"&nbsp;&nbsp;&nbsp;Supply in 2ndfile : {round(node_demand_2ndfile[node],3)}<br>"
-                                            f"&nbsp;&nbsp;<b>Difference : {round(node_demand_map[node]- node_demand_2ndfile[node],3)}</b><br><br><br>"
+                                            f"&nbsp;&nbsp;<b>Difference : {round(node_demand_map[node]- node_demand_2ndfile[node],3)} ({data_processor.percentage_difference((node_demand_map[node]- node_demand_2ndfile[node]), node_demand_map[node])})</b><br><br>"
                                     )
+                para_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
             
             logger.info("Paragraph for 1stfile tab with 2ndfile data is stored")
             #sort the list with the node
             sorted_head_difference_2ndfile = dict(sorted(head_difference_2ndfile.items(), key=lambda item: item[1], reverse=False))
+            
+            para_2ndfiletab_1stfile += (f"Total Nodes : {len(sorted_head_difference_2ndfile)}<br>"
+                                        f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>")
+            
+            para_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
             
             for node in sorted_head_difference_2ndfile:                        
                 para_2ndfiletab_1stfile +=(f"Node : {node}<br>"
                                         f"&nbsp; &nbsp; Head : <br>"
                                             f"&nbsp;&nbsp;&nbsp;Head in 2ndfile : {round(node_head_2ndfile[node],3)}<br>"
                                             f"&nbsp;&nbsp;&nbsp;Head in 1stfile : {round(node_head_map[node],3)}<br>"
-                                            f"&nbsp;&nbsp;<b>Difference : {round(node_head_2ndfile[node]-node_head_map[node],3)}</b><br>"
+                                            f"&nbsp;&nbsp;<b>Difference : {round(node_head_2ndfile[node]-node_head_map[node],3)} ({data_processor.percentage_difference((node_head_2ndfile[node]-node_head_map[node]), node_head_2ndfile[node])})</b><br>"
                                         f"&nbsp; &nbsp; Demand : <br>"
                                             f"&nbsp;&nbsp;&nbsp;Supply in 2ndfile : {round(node_demand_2ndfile[node],3)}<br>"
                                             f"&nbsp;&nbsp;&nbsp;Supply in 1stfile : {round(node_demand_map[node],3)}<br>"
-                                        f"&nbsp;&nbsp;<b>Difference : {round(node_demand_2ndfile[node]-node_demand_map[node],3)}</b><br><br><br>")
-
+                                        f"&nbsp;&nbsp;<b>Difference : {round(node_demand_2ndfile[node]-node_demand_map[node],3)} ({data_processor.percentage_difference((node_demand_2ndfile[node]-node_demand_map[node]), node_demand_2ndfile[node])})</b><br><br>")
+                para_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
             logger.info("Paragraph for 2ndfile tab with 1stfile data is stored")
             
             for node in G.nodes():
                 if node in diffrent_2ndfile:
                     G.nodes[node]['color'] = 'red'  # diffrent demand or head then 2ndfile -> Red
-                    G.nodes[node]['size'] = 45
+                    G.nodes[node]['size'] = 20
                 
         node_x, node_y, node_text, node_hovertext, node_colors, node_size = data_processor.process_nodes_1stfile_plotting(G, node_pos, node_demand_map, node_head_map, node_demand_2ndfile, node_head_2ndfile, diffrent_2ndfile)
         
@@ -219,6 +230,10 @@ class FigureGenerator:
             x=node_x,
             y=node_y,
             text=node_text,
+            textfont=dict(
+                size=15,
+                color='#222222'
+            ),
             hovertext=node_hovertext,
             mode='markers+text',
             hoverinfo='text',
@@ -238,7 +253,7 @@ class FigureGenerator:
             x=edge_x,
             y=edge_y,
             mode='lines',
-            line=dict(width=3, color='#bbb')
+            line=dict(width=3, color='#bbbbbb')
         )
         
         logger.info("Edge trace created for 1stfile graph")
@@ -255,7 +270,7 @@ class FigureGenerator:
             textposition='middle center',
             textfont=dict(
                 size=15,
-                color='red'  # You can change the color as needed
+                color='#939393'  # You can change the color as needed
             )
         )
         
@@ -272,6 +287,10 @@ class FigureGenerator:
                             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                             dragmode='pan'
                         ))
+        nodeFig_1stfile.update_layout(
+            paper_bgcolor='white',  # background outside the plot
+            plot_bgcolor='white',   # background inside the plot grid
+        )
         
         nodeFig_2ndfile = go.Figure()
         
@@ -310,8 +329,8 @@ class FigureGenerator:
         logger.info(f"2ndfile Graph Head Map : " + str(node_head_map))
         
         for node in G.nodes():
-            G.nodes[node]['color'] = 'blue'
-            G.nodes[node]['size'] = 30  # Default size for all nodes
+            G.nodes[node]['color'] = "#AABFF5",
+            G.nodes[node]['size'] = 10  # Default size for all nodes
         
         # print("hello from 5 min")
         if nodeData1stfile is not None:
@@ -338,6 +357,10 @@ class FigureGenerator:
             #reverse sort the list
             sorted_head_difference_1stfile = dict(sorted(head_difference_1stfile.items(), key=lambda item: item[1], reverse=True))
             
+            para_2ndfiletab_1stfile += (f"Total Nodes : {len(sorted_head_difference_1stfile)}<br>"
+                                        f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>")
+            
+            para_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
             #traverse the sorted list and create the list 
             for node in sorted_head_difference_1stfile:
                 para_2ndfiletab_1stfile +=(f"<b>Node : {node}</b><br>"
@@ -348,12 +371,18 @@ class FigureGenerator:
                                         f"&nbsp; &nbsp; Demand : <br>"
                                             f"&nbsp;&nbsp;&nbsp;Supply in 1stfile : {round(node_demand_map[node],3)}<br>" 
                                             f"&nbsp;&nbsp;&nbsp;Supply in 2ndfile : {round(node_demand_1stfile[node],3)}<br>"
-                                            f"&nbsp;&nbsp;<b>Difference : {round(node_demand_map[node] - node_demand_1stfile[node],3)}</b><br><br><br>"
+                                            f"&nbsp;&nbsp;<b>Difference : {round(node_demand_map[node] - node_demand_1stfile[node],3)}</b><br><br>"
                                     )
+                para_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
             
             logger.info("Paragraph for 2ndfile tab with 1stfile data is stored")
             #sort the list with the node
             sorted_head_difference_1stfile = dict(sorted(head_difference_1stfile.items(), key=lambda item: item[1], reverse=False))
+            
+            para_1stfiletab_2ndfile += (f"Total Nodes : {len(sorted_head_difference_1stfile)}<br>"
+                                        f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>")
+            
+            para_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
             
             for node in sorted_head_difference_1stfile:                        
                 para_1stfiletab_2ndfile +=(f"<b>Node : {node}</b><br>"
@@ -365,13 +394,14 @@ class FigureGenerator:
                                             f"&nbsp;&nbsp;&nbsp;Supply in 1stfile : {round(node_demand_1stfile[node],3)}<br>"
                                             f"&nbsp;&nbsp;&nbsp;Supply in 2ndfile : {round(node_demand_map[node],3)}<br>"
                                         f"&nbsp;&nbsp;<b>Difference : {round(node_demand_1stfile[node]-node_demand_map[node],3)}</b><br><br><br>")
-
+                para_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
+                
             logger.info("Paragraph for 1stfile tab with 2ndfile data is stored")
             
             for node in G.nodes():
                 if node in diffrent_1stfile:
                     G.nodes[node]['color'] = 'red'  # diffrent demand or head then 1stfile -> Red
-                    G.nodes[node]['size'] = 45
+                    G.nodes[node]['size'] = 20
                 
         node_x, node_y, node_text, node_hovertext, node_colors, node_size = data_processor.process_nodes_2ndfile_plotting(G, node_pos, node_demand_map, node_head_map, node_demand_1stfile, node_head_1stfile, diffrent_1stfile)
         
@@ -379,6 +409,10 @@ class FigureGenerator:
             x=node_x,
             y=node_y,
             text=node_text,
+            textfont=dict(
+                size=15,
+                color='#222222'
+            ),
             hovertext=node_hovertext,
             mode='markers+text',
             hoverinfo='text',
@@ -398,7 +432,7 @@ class FigureGenerator:
             x=edge_x,
             y=edge_y,
             mode='lines',
-            line=dict(width=3, color='#bbb')
+            line=dict(width=3, color='#bbbbbb')
         )
         
         logger.info("Edge trace created for 2ndfile graph")
@@ -415,7 +449,7 @@ class FigureGenerator:
             textposition='middle center',
             textfont=dict(
                 size=15,
-                color='red'  # You can change the color as needed
+                color="#939393"  # You can change the color as needed
             )
         )
         
@@ -433,6 +467,11 @@ class FigureGenerator:
                             dragmode='pan'
                         ))
         
+        nodeFig_2ndfile.update_layout(
+            paper_bgcolor='white',  # background outside the plot
+            plot_bgcolor='white',   # background inside the plot grid
+        )
+        
         logger.info("Node figure created for 2ndfile graph")
         
         nodeFig_1stfile = go.Figure()
@@ -444,12 +483,6 @@ class FigureGenerator:
             G1, no_of_pipes= self.create_graph_with_parallel_edges(node_pos, pipeData1stfile, parrallel_pipes)
             logger.info("Creating 1stfile graph with 2ndfile data")
             nodeFig_1stfile, _, _, _ = self.create_node_1stfile_graph(node_pos, nodeData1stfile, pipeData1stfile, parrallel_pipes, mainNodeData, mainpipe, node_data, pipe_data, G1, start+1)
-
-        # if (nodeData3rdfile is not None) and (start == 0):
-        #     parrallel_pipes = data_processor.get_unique_parallel_pipes(pipeData3rdfile)
-        #     G2 = self.create_graph_with_parallel_edges(node_pos, pipeData3rdfile, parrallel_pipes)
-        #     logger.info("Creating 3rdfile graph with 2ndfile data")
-        #     nodeFig_3rdfile, _, _, _, _, _, _ = self.create_node_3rdfile_graph(node_pos, nodeData3rdfile, pipeData3rdfile, parrallel_pipes, mainNodeData, mainpipe, nodeData1stfile, pipeData1stfile, node_data, pipe_data, G2, start+1)
 
         return nodeFig_2ndfile, nodeFig_1stfile, para_2ndfiletab_1stfile, para_1stfiletab_2ndfile
    
@@ -477,12 +510,14 @@ class FigureGenerator:
             text=node_text,
             hovertext=node_hovertext,
             mode='markers+text',
-            hoverinfo='text',
+            textfont=dict(
+                size=10
+            ),
             textposition='top center',
             marker=dict(
-                size=30,
-                color="blue", 
-                line=dict(width=2, color='black')
+                size=10,
+                color="#AABFF5", 
+                line=dict(width=1, color='black')
             )
         )
         logger.info("Node trace created for 1stfile graph")
@@ -491,8 +526,6 @@ class FigureGenerator:
         different_pipe_2ndfile = []
         difference_cost_pipeid_2ndfile ={}
         id_to_cost_map_2ndfile = defaultdict(float)
-        flow_parallel = {}
-        speed_parallel= {}
         unique_pipeid_1stfile= []
         sorted_difference_cost_pipeid_2ndfile = {}
         max_diff=-math.inf
@@ -563,6 +596,10 @@ class FigureGenerator:
             
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_2ndfile = dict(sorted(difference_cost_pipeid_2ndfile.items(), key=lambda item: item[1], reverse=True))
+            par_1stfiletab_2ndfile+=(f"Total Pipes : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
+                                     f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>")
+            
+            par_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_2ndfile:
                 par_1stfiletab_2ndfile += (f"Pipe ID : <b>{pipe_id}</b><br>"
@@ -576,12 +613,10 @@ class FigureGenerator:
                         # speed = pipe_data["speed"][i]
                         par_1stfiletab_2ndfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flow : {round(flow, 3)}<br>"
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Speed : {round(speed, 3)}<br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
 
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3)}<br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3):,}<br><br>")
 
                 par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp; <b>2ndfile Data :</b> <br>")
                 
@@ -592,15 +627,20 @@ class FigureGenerator:
                         cost = pipeData2ndfile["cost"][i]
                         par_1stfiletab_2ndfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3)} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})</b><br><br><br>")
-
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3):,}<br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 0):,} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})</b><br><br>")
+                par_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
+                
             logger.info("Paragraph for 1stfile tab with 2ndfile data is stored")
                 
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_2ndfile = dict(sorted(difference_cost_pipeid_2ndfile.items(), key=lambda item: item[1], reverse=False))
+            par_2ndfiletab_1stfile+=(f"Total Pipes : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
+                                     f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>")
+            
+            par_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_2ndfile:
                 par_2ndfiletab_1stfile += ( f"<b>Pipe ID : {pipe_id}</b><br>"
@@ -612,9 +652,9 @@ class FigureGenerator:
                         cost = pipeData2ndfile["cost"][i]
                         par_2ndfiletab_1stfile += ( 
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id],0):,}<br><br>")
                 
                 par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp; <b>1stfile Data :</b> <br>")
                 
@@ -625,15 +665,17 @@ class FigureGenerator:
                         cost = pipe_data["cost"][i]
                         par_2ndfiletab_1stfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
                 
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3)}<br><br>")
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; <b>Difference in cost : {(-1)*round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3)} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})</b><br><br><br>")
-            
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3):,}<br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; <b>Difference in cost : {(-1)*round(sorted_difference_cost_pipeid_2ndfile[pipe_id], 3):,} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})</b><br><br><br>")
+                
+                par_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
+                
             logger.info("Paragraph for 2ndfile tab with 1stfile data is stored") 
         
-        edge_trace ,edge_text, edge_colors= data_processor.process_edges_for_diameter_graph_plotting_1stfile(G, pos, pipe_data, total_length_pipe_map, unique_parallel_pipes, different_pipe_2ndfile, min_diff, max_diff, sorted_difference_cost_pipeid_2ndfile)
+        edge_trace ,edge_text, edge_colors, edge_text_color, _= data_processor.process_edges_for_diameter_graph_plotting_1stfile(G, pos, pipe_data, total_length_pipe_map, unique_parallel_pipes, different_pipe_2ndfile, min_diff, max_diff, sorted_difference_cost_pipeid_2ndfile)
         
         logger.info("Edge trace created for 1stfile pipe data graph")
         
@@ -644,14 +686,14 @@ class FigureGenerator:
         edge_label_trace = go.Scatter(
             x=edge_label_x,
             y=edge_label_y,
-            text=edge_text,  # Text to be displayed as labels
-            hovertext=edge_hovertext,  # Hover information to be displayed when hovering over the labels
+            text=edge_text,  
+            hovertext=edge_hovertext,  
             mode='text',
-            hoverinfo='text',  # This allows the hovertext to be shown (since hovertext acts like "text")
+            hoverinfo='text',  
             textposition='middle center',
             textfont=dict(
                 size=15,
-                color='red'  # You can change the color as needed
+                color=edge_text_color 
             )
         )
         
@@ -668,6 +710,11 @@ class FigureGenerator:
                             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                             dragmode='pan'
                         ))
+        
+        pipeFig_1stfile.update_layout(
+            paper_bgcolor='white',  # background outside the plot
+            plot_bgcolor='white',   # background inside the plot grid
+        )
         
         logger.info("Pipe figure created for 1stfile graph")
         
@@ -686,8 +733,8 @@ class FigureGenerator:
         data_processor = OutputDataProcessor()
         total_length_pipe_map, elevation_map = data_processor.process_main_network_pipedata(mainNodeData, mainpipe)
         node_head_map = {} 
-        par_2ndfiletab_1stfile = ""  # Paragraph for 2ndfile tab with 1stfile data
-        par_1stfiletab_2ndfile = ""  # Paragraph for 1stfile tab with 2ndfile data
+        par_2ndfiletab_1stfile = ""  
+        par_1stfiletab_2ndfile = ""  
         id_to_cost_map_2ndfile = defaultdict(float)  # Map to store pipeID to cost
         
         for i in range(len(node_data["nodeID"])):
@@ -705,14 +752,17 @@ class FigureGenerator:
             text=node_text,
             hovertext=node_hovertext,
             mode='markers+text',
-            hoverinfo='text',
+            textfont=dict(
+                size=10
+            ),
             textposition='top center',
             marker=dict(
-                size=30,
-                color="blue", 
-                line=dict(width=2, color='black')
+                size=10,
+                color="#AABFF5", 
+                line=dict(width=1, color='black')
             )
         )
+        
         
         logger.info("Node trace created for 2ndfile graph")
         
@@ -786,6 +836,11 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_1stfile = dict(sorted(difference_cost_pipeid_1stfile.items(), key=lambda item: item[1], reverse=True))
             
+            par_2ndfiletab_1stfile+=(f"Total Pipes : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
+                                     f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>")
+            
+            par_2ndfiletab_1stfile+="--------------------------------------------------------------------------<br><br>"
+            
             for pipe_id in sorted_difference_cost_pipeid_1stfile:
                 par_2ndfiletab_1stfile += (f"<b>Pipe ID : {pipe_id}</b><br>"
                                             f"&nbsp; &nbsp; &nbsp; <b>2ndfile Data :</b> <br>")
@@ -796,12 +851,10 @@ class FigureGenerator:
                         cost = pipe_data["cost"][i]
                         par_2ndfiletab_1stfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flow : {round(flow, 3)}<br>"
-                                            # f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Speed : {round(speed, 3)}<br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
 
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3):,}<br><br>")
 
                 par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp; <b>1stfile Data :</b> <br>")
                 
@@ -810,19 +863,24 @@ class FigureGenerator:
                         diameter = pipeData1stfile["diameter"][i]
                         length = pipeData1stfile["length"][i]
                         cost = pipeData1stfile["cost"][i]
-                        flow = pipeData1stfile["flow"][i]
-                        speed = pipeData1stfile["speed"][i]
                         par_2ndfiletab_1stfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3)}<br><br>")
-                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3)} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})</b><br><br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3):,}<br><br>")
+                par_2ndfiletab_1stfile += (f"&nbsp; &nbsp; &nbsp;<b>Difference in cost : {round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3):,} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})</b><br><br>")
 
+                par_2ndfiletab_1stfile += "--------------------------------------------------------------------------<br><br>"
+                
             logger.info("Paragraph for 2ndfile tab with 1stfile data is stored")
                 
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_1stfile = dict(sorted(difference_cost_pipeid_1stfile.items(), key=lambda item: item[1], reverse=False))
+            
+            par_1stfiletab_2ndfile += (f"Total Pipes : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
+                                     f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>")
+            
+            par_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_1stfile:
                 par_1stfiletab_2ndfile += ( f"<b>Pipe ID : {pipe_id}</b><br>"
@@ -832,13 +890,11 @@ class FigureGenerator:
                         diameter = pipeData1stfile["diameter"][i]
                         length = pipeData1stfile["length"][i]
                         cost = pipeData1stfile["cost"][i]
-                        flow = pipeData1stfile["flow"][i]
-                        speed = pipeData1stfile["speed"][i]
                         par_1stfiletab_2ndfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br><br>")
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3)}<br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 1stfile : {round(id_to_cost_map_1stfile[pipe_id], 3):,}<br><br>")
 
                 par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp; <b>2ndfile Data :</b> <br>")
                 
@@ -851,15 +907,17 @@ class FigureGenerator:
                         speed = pipe_data["speed"][i]
                         par_1stfiletab_2ndfile += (
                                             f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Diameter : {round(diameter, 3)}<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3)} m<br>"
-                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3)}<br> <br>")
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Length : {round(length, 3):,} m<br>"
+                                            f"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cost : {round(cost, 3):,}<br> <br>")
 
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3)}<br><br>")
-                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; <b>Difference in cost : {-round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3)} {data_processor.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_1stfile[pipe_id])}</b><br><br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; &nbsp;Total cost of 2ndfile : {round(id_to_cost_map_2ndfile[pipe_id], 3):,}<br><br>")
+                par_1stfiletab_2ndfile += (f"&nbsp; &nbsp; <b>Difference in cost : {-round(sorted_difference_cost_pipeid_1stfile[pipe_id], 3):,} ({data_processor.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})</b><br><br><br>")
 
+                par_1stfiletab_2ndfile += "--------------------------------------------------------------------------<br><br>"
+                
         logger.info("Paragraph for 1stfile tab with 2ndfile data is stored")
 
-        edge_trace ,edge_text, edge_colors= data_processor.process_edges_for_diameter_graph_plotting_2ndfile(G, pos, pipe_data, total_length_pipe_map, unique_parallel_pipes, different_pipe_1stfile, min_diff, max_diff, sorted_difference_cost_pipeid_1stfile)
+        edge_trace ,edge_text, edge_colors, edge_text_color= data_processor.process_edges_for_diameter_graph_plotting_2ndfile(G, pos, pipe_data, total_length_pipe_map, unique_parallel_pipes, different_pipe_1stfile, min_diff, max_diff, sorted_difference_cost_pipeid_1stfile)
         
         logger.info("Edge trace created for 2ndfile pipe data graph")
         
@@ -877,7 +935,7 @@ class FigureGenerator:
             textposition='middle center',
             textfont=dict(
                 size=15,
-                color='red'  # You can change the color as needed
+                color=edge_text_color  # You can change the color as needed
             )
         )
         
@@ -895,6 +953,11 @@ class FigureGenerator:
                             dragmode='pan'
                         ))
         
+        pipeFig_2ndfile.update_layout(
+            paper_bgcolor='white',  # background outside the plot
+            plot_bgcolor='white',   # background inside the plot grid
+        )
+        
         logger.info("Pipe figure created for 2ndfile graph")   
         
         pipeFig_1stfile = go.Figure()
@@ -904,7 +967,6 @@ class FigureGenerator:
             G1, no_of_pipe = self.create_graph_with_parallel_edges(pos, pipeData1stfile, parrallel_pipes)
             logger.info("Creating 1stfile graph with 2ndfile data")
             logger.info("Parallel Pipes : " + str(parrallel_pipes))
-            # print("Number of Pipes in 1stfile data: ", no_of_pipe)
             pipeFig_1stfile, _, _, _ = self.create_pipe_1stfile_graph(pos, nodeData1stfile, pipeData1stfile, parrallel_pipes, no_of_pipe, mainNodeData, mainpipe, node_data, pipe_data, G1, start+1)
             
         

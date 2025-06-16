@@ -30,9 +30,9 @@ class Layout:
         sidebar = html.Div([
             html.H2("Jaltantra Water Network Visualization", className='text-white font-weight-bold mb-4'),
             dbc.Nav([
-                dbc.NavLink("Overview", href="#", active='exact', className='text-white mb-2'),
-                dbc.NavLink("Upload Data", href="#upload", active='exact', className='text-white mb-2'),
-                dbc.NavLink("Statistics", href="#states", active='exact', className='text-white mb-2'),
+                dbc.NavLink("Overview", active='exact', className='text-white mb-2'),
+                dbc.NavLink("Upload Data", active='exact', className='text-white mb-2'),
+                dbc.NavLink("Statistics", active='exact', className='text-white mb-2'),
             ], vertical=True, pills=True)
         ], className='p-3', style={
             'height': '100vh',

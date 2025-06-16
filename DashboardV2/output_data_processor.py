@@ -20,25 +20,24 @@ class OutputDataProcessor :
     def value_to_color(self, value, min_val, max_val):
         if min_val >= 0:
             norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)  # gamma < 1 = better spread
-            cmap = mcolors.LinearSegmentedColormap.from_list("red_scale", ["white", "darkred"])
+            cmap = mcolors.LinearSegmentedColormap.from_list("red_scale", ["white", "red"])
             return mcolors.to_hex(cmap(norm(value)))
 
         elif max_val <= 0:
             norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)
-            cmap = mcolors.LinearSegmentedColormap.from_list("green_scale", ["green", "white"])
+            cmap = mcolors.LinearSegmentedColormap.from_list("green_scale", ["#1E6C02","#88EF7D"])
             return mcolors.to_hex(cmap(norm(value)))
 
         else:
             mid = 0
             if value <= 0:
                 norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=mid)
-                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["green", "white"])
+                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#2B7706", "#A6F946"])
             else:
                 norm = mcolors.PowerNorm(gamma=0.5, vmin=mid, vmax=max_val)
-                cmap = mcolors.LinearSegmentedColormap.from_list("white_to_red", ["white", "red"])
+                cmap = mcolors.LinearSegmentedColormap.from_list("white_to_red", ["#F38181", "#FF0000"])
             return mcolors.to_hex(cmap(norm(value)))
 
-    
     def process_source(self, df):
         source_ID = df.loc[df[0] == "Source Node ID", 3].values[0]
         source_Elevation = df.loc[df[0] == "Source Elevation", 3].values[0]
@@ -186,7 +185,7 @@ class OutputDataProcessor :
                 y= node_pos[node][1]# Get the position of the node from the provided node_pos dictionary
             node_x.append(x)
             node_y.append(y)
-            node_text.append(f"Node: {node}")  # Node ID label
+            node_text.append(f"{node}")  # Node ID label
 
             # Generate detailed hover text for each node
             
@@ -224,7 +223,7 @@ class OutputDataProcessor :
                 y= node_pos[node][1]# Get the position of the node from the provided node_pos dictionary
             node_x.append(x)
             node_y.append(y)
-            node_text.append(f"Node: {node}")  # Node ID label
+            node_text.append(f"{node}")  # Node ID label
 
             # Generate detailed hover text for each node
             
@@ -261,7 +260,7 @@ class OutputDataProcessor :
                 y= node_pos[node][1]# Get the position of the node from the provided node_pos dictionary
             node_x.append(x)
             node_y.append(y)
-            node_text.append(f"Node: {node}")  # Node ID label
+            node_text.append(f"{node}")  # Node ID label
 
             # Generate detailed hover text for each node
             
@@ -272,7 +271,7 @@ class OutputDataProcessor :
                     f"Elevation: {round(elevation_map[node],3)}"
                 )
             else:
-                hover_text = f"Node ID: {node}<br>Demand data unavailable"
+                hover_text = f"{node}<br>Demand data unavailable"
             
             node_hovertext.append(hover_text)
 
@@ -291,6 +290,7 @@ class OutputDataProcessor :
         edge_y = []
         edge_text = []
         edge_hovertext = []
+        edge_text_color=[]
         # print("Edges : " , end= " ")
         
         # print(G.edges(keys=True))
@@ -303,8 +303,6 @@ class OutputDataProcessor :
 
             # Check if the edge is a parallel edge
             if (u, v) in unique_parallel_pipes or (v, u) in unique_parallel_pipes:
-                # Offset for parallel edges to make them visually distinct
-                # For simplicity, we're just offsetting by a small value, e.g., ±0.02
                 offset = 0.005 if key.endswith('_1') else -0.005
                 edge_x.extend([x0 + offset, x1 + offset, None])
                 edge_y.extend([y0 + offset, y1 + offset, None])
@@ -317,7 +315,7 @@ class OutputDataProcessor :
             # pipe_id = pipe_data['pipeID'][int(key.split('_')[0])] if '_' in key else key
             hover_info = f"Pipe ID: {key} <br> Start Node: {u} <br> End Node : {v}"
             edge_hovertext.append(hover_info)
-            edge_text.append(f"{key}.0")
+            edge_text.append(f"{key}")
         
         logger.info("Edge Data for the Node Graph are created")
 
@@ -330,12 +328,11 @@ class OutputDataProcessor :
                                                           sorted_difference_cost_pipeid_2ndfile):
         """Process edge data for Plotly visualization, including handling of parallel and multiple edges between the Nodes."""
 
-        edge_x = []
-        edge_y = []
         edge_text = []
-        edge_length ={}
         edge_traces= []
         edge_colors= {}
+        edge_text_color =[]
+        edge_text_size=[]
         
         logger.info(f"Different pipe from second file : {different_pipe_2ndfile}")
 
@@ -356,9 +353,11 @@ class OutputDataProcessor :
                     y0=y0+0.005
                     y1=y1+0.005
                     x1=x1+0.005
-                    edge_color="#666666" #grey -> same length and diameter in both the file
+                    edge_color="#aaaaaa" #grey -> same length and diameter in both the file
                     edge_colors[full_key]="Grey"
                     edge_text.append(f'{full_key}')
+                    edge_text_color.append("#939393")
+                    edge_text_size.append(10)
                 else : 
                     x0=x0-0.005
                     y0=y0-0.005
@@ -368,34 +367,58 @@ class OutputDataProcessor :
                         edge_color=self.value_to_color(sorted_difference_cost_pipeid_2ndfile[int(full_key.split('_')[0])], min_diff, max_diff) 
                         #orange -> diffrent length and diameter from the 5 min file
                         edge_colors[full_key]="Dark Orange"
+                        if sorted_difference_cost_pipeid_2ndfile[int(full_key.split('_')[0])] < 0:
+                            edge_text_color.append("#FF0000")
+                        else :
+                            edge_text_color.append("#FF0000")
+                        edge_text_size.append(20)
                     else:
-                        edge_color="#666666" #grey -> same length and diameter and cost in both the file
+                        edge_color="#aaaaaa" #grey -> same length and diameter and cost in both the file
                         edge_colors[full_key]="Grey"
+                        edge_text_color.append("#939393")
+                        edge_text_size.append(10)
                     edge_text.append(f'{full_key}')
                 logger.info(f"{full_key} color is the {edge_colors[full_key]}")
             # Not parallel edge
             else:
                 if int(full_key.split('_')[0]) in different_pipe_2ndfile:
                     edge_color=self.value_to_color(sorted_difference_cost_pipeid_2ndfile[int(full_key.split('_')[0])], min_diff, max_diff) 
-                    edge_colors[full_key]="Dark Orange"
+                    if sorted_difference_cost_pipeid_2ndfile[int(full_key.split('_')[0])] < 0:
+                        edge_text_color.append("#FF0000")
+                    else :
+                        edge_text_color.append("#FF0000")
+                        
+                    edge_text_size.append(20)
                 else:
-                    edge_color="#666666"
+                    edge_color="#aaaaaa"
                     edge_colors[full_key]="Dark Grey" 
-                edge_text.append(f'{full_key}.0')
+                    edge_text_color.append("#939393")
+                    edge_text_size.append(10)
+                edge_text.append(f'{full_key}')
 
-            logger.info(f"{full_key} color is the {edge_colors[full_key]}")
+            # logger.info(f"{full_key} color is the {edge_colors[full_key]}")
         
-            edge_trace = go.Scatter(
-                x=[x0, x1, None],
-                y=[y0, y1, None],
-                mode='lines',
-                line=dict(width=3, color=edge_color)
-            )
+            
+            if full_key in different_pipe_2ndfile :
+                edge_trace = go.Scatter(
+                    x=[x0, x1, None],
+                    y=[y0, y1, None],
+                    mode='lines',
+                    line=dict(width=50, color=edge_color)
+                )
+            else:
+                edge_trace = go.Scatter(
+                    x=[x0, x1, None],
+                    y=[y0, y1, None],
+                    mode='lines',
+                    line=dict(width=2, color=edge_color)
+                )
+            
             edge_traces.append(edge_trace)
             
         logger.info("Edge traces, edge text and edge color for the pipe graph has been created sucessfully")
 
-        return edge_traces, edge_text, edge_colors
+        return edge_traces, edge_text, edge_colors, edge_text_color, edge_text_size
     
     def process_edges_for_diameter_graph_plotting_2ndfile(self,G, node_pos, pipe_data, total_length_pipe_map, 
                                                           unique_parallel_pipes, different_pipe_1stfile, min_diff, max_diff,
@@ -408,6 +431,7 @@ class OutputDataProcessor :
         edge_length ={}
         edge_traces= []
         edge_colors= {}
+        edge_text_color =[]
         
         logger.info("Different Pipe 1stfile : " + str(different_pipe_1stfile))
 
@@ -429,7 +453,7 @@ class OutputDataProcessor :
                     y1=y1+0.005
                     x1=x1+0.005
 
-                    edge_color="#666666" 
+                    edge_color="#aaaaaa" 
                     edge_colors[full_key]="Grey"
                     edge_text.append(f'{full_key}')
                 #if cost is not equal to zero and key contains the  '_2'
@@ -441,8 +465,10 @@ class OutputDataProcessor :
                     if int(full_key.split('_')[0]) in different_pipe_1stfile:
                         edge_color=self.value_to_color(sorted_difference_cost_pipeid_1stfile[int(full_key.split('_')[0])], min_diff, max_diff)
                         edge_colors[full_key]="Dark Orange"
+                        edge_text_color.append('#FF0000')
                     else:
-                        edge_color="#666666" #grey -> same length and diameter in both the file
+                        edge_color="#aaaaaa" #grey -> same length and diameter in both the file
+                        edge_text_color.append('#939393')
                         edge_colors[full_key]="Dark Grey"
                     edge_text.append(f'{full_key}')
 
@@ -451,23 +477,35 @@ class OutputDataProcessor :
                 key = int(float(full_key.split('+')[0]))
                 if key in different_pipe_1stfile:
                     edge_color=self.value_to_color(sorted_difference_cost_pipeid_1stfile[int(full_key.split('_')[0])], min_diff, max_diff)
+                    edge_text_color.append('#FF0000')
                     edge_colors[full_key]="Dark Orange"
                 else:
-                    edge_color="#666666"
+                    edge_color="#aaaaaa"
+                    edge_text_color.append('#939393')
                     edge_colors[full_key]="Dark Grey"
-                edge_text.append(f'{full_key}.0')
+                edge_text.append(f'{full_key}')
 
             logger.info(f"{full_key} color is the {edge_colors[full_key]}")
-            edge_trace = go.Scatter(
-                x=[x0, x1, None],
-                y=[y0, y1, None],
-                mode='lines',
-                line=dict(width=3, color=edge_color)
-            )
+            
+            if(full_key in different_pipe_1stfile) :
+            
+                edge_trace = go.Scatter(
+                    x=[x0, x1, None],
+                    y=[y0, y1, None],
+                    mode='lines',
+                    line=dict(width=50, color=edge_color)
+                )
+            else:
+                edge_trace = go.Scatter(
+                    x=[x0, x1, None],
+                    y=[y0, y1, None],
+                    mode='lines',
+                    line=dict(width=2, color=edge_color)
+                )
             edge_traces.append(edge_trace)
         logger.info("Edge traces, edge text and edge color for the pipe graph has been created sucessfully for 2ndfile graph")
 
-        return edge_traces, edge_text, edge_colors
+        return edge_traces, edge_text, edge_colors, edge_text_color
     
     def process_edge_label_positions_for_graph_plotting(self, G, pos, unique_parallel_pipes) :
         edge_label_x = []
@@ -580,6 +618,7 @@ class OutputDataProcessor :
                                                           id_to_cost_map_1stfile, id_to_cost_map_2ndfile,
                                                           sorted_difference_cost_pipeid_2ndfile) :
         edge_hovertext_map = {}
+        
         # Iterate over all edges in the graph
         for u, v, key in G.edges(keys=True):
             pipe_id = int(key.split('_')[0])  # Extract the pipe ID from the key
@@ -601,8 +640,8 @@ class OutputDataProcessor :
                             hover_info += (
                                         # f"&nbsp; &nbsp; &nbsp; Color :{edge_colors[key]} <br>"    
                                         f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>" 
-                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
+                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
 
                     hover_info += (f"&nbsp; &nbsp; Total Cost : 0<br>")
                     
@@ -621,10 +660,14 @@ class OutputDataProcessor :
                             if cost!=0:
                                 hover_info += (
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
                     
-                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]}<br><br>")
+                    if pipe_id in different_pipe_2ndfile:
+                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]:,}<br><br>")
+                    else:
+                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {id_to_cost_map_1stfile[pipe_id]:,}<br><br>"
+                                     f"&nbsp; Difference : 0 (0%)")
                     
                     if pipe_id in different_pipe_2ndfile:
                         hover_info+=(f"2nd File :<br>")
@@ -638,10 +681,10 @@ class OutputDataProcessor :
                                 if cost!=0:
                                     hover_info += (
                                                 f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br> <br>"
-                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3)} ({self.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})")
+                                                f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                                f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
+                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3):,}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3):,} ({self.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})")
 
             #edge is not parallel
             else:
@@ -657,10 +700,10 @@ class OutputDataProcessor :
                         if cost!=0:
                             hover_info += (
                                         f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
+                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
                 
-                hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)} <br><br>")
+                hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],):,} <br><br>")
                 
                 if pipe_id in different_pipe_2ndfile:
                     hover_info+=(f"2nd File :<br>")
@@ -674,10 +717,10 @@ class OutputDataProcessor :
                             if cost!=0:
                                 hover_info += (
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br> <br>"
-                                f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3)} ({self.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})")
+                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
+                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3):,}<br> <br>"
+                                f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_2ndfile[pipe_id],3):,} ({self.percentage_difference(sorted_difference_cost_pipeid_2ndfile[pipe_id], id_to_cost_map_1stfile[pipe_id])})")
 
             edge_hovertext_map[key]=hover_info
         hovertext=[]
@@ -730,10 +773,10 @@ class OutputDataProcessor :
                         
                         if cost==0:
                             hover_info += (
-                                        f"&nbsp; &nbsp; &nbsp; Color :{edge_colors[key]} <br>"    
+                                        # f"&nbsp; &nbsp; &nbsp; Color :{edge_colors[key]} <br>"    
                                         f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>" 
-                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
+                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
 
                     hover_info += (f"&nbsp; &nbsp; Total Cost : 0<br>")
                     
@@ -753,8 +796,8 @@ class OutputDataProcessor :
                             if cost!=0:
                                 hover_info += (
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
+                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
 
                     hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br><br>")
 
@@ -770,10 +813,10 @@ class OutputDataProcessor :
                                 if cost!=0:
                                     hover_info += (
                                                 f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                                f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)}<br> <br>"
-                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3)} ({self.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})")
+                                                f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                                f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
+                        hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3):,}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3):,} ({self.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})")
 
             #edge is not parallel
             else:
@@ -789,10 +832,10 @@ class OutputDataProcessor :
                         if cost!=0:
                             hover_info += (
                                         f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
+                                        f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                        f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
                 
-                hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3)}<br><br>")
+                hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_2ndfile[pipe_id],3):,}<br><br>")
                 
                 if pipe_id in different_pipe_1stfile:
                     hover_info+=(f"1st File :<br>")
@@ -806,10 +849,10 @@ class OutputDataProcessor :
                             if cost!=0:
                                 hover_info += (
                                             f"&nbsp; &nbsp; &nbsp; Diameter : {round(diameter,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3)} <br>"
-                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3)} <br><br>")
-                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3)}<br> <br>"
-                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3)} ({self.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})")
+                                            f"&nbsp; &nbsp; &nbsp; Length : {round(length,3):,} <br>"
+                                            f"&nbsp; &nbsp; &nbsp; Cost : {round(cost,3):,} <br><br>")
+                    hover_info+=(f"&nbsp; &nbsp; Total Cost : {round(id_to_cost_map_1stfile[pipe_id],3):,}<br> <br>"
+                                    f"&nbsp; Difference : {round(sorted_difference_cost_pipeid_1stfile[pipe_id],3):,} ({self.percentage_difference(sorted_difference_cost_pipeid_1stfile[pipe_id], id_to_cost_map_2ndfile[pipe_id])})")
 
             edge_hovertext_map[key]=hover_info
 

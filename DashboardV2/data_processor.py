@@ -317,7 +317,7 @@ class DataProcessor:
         
     def generate_layout(self, G):
         seed_value = 42  # Set a seed value for reproducibility
-        pos = nx.spring_layout(G,k=3.0, iterations=500, seed=seed_value)
+        pos = nx.spring_layout(G,k=6, iterations=1500, seed=seed_value)
         logger.info(f"Generated layout for {G.number_of_nodes()} nodes and {G.number_of_edges()} edges.")
         return pos
     

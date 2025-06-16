@@ -324,7 +324,7 @@ def register_callbacks(app):
             diff_cost = ""
             
             if content2 is not None:
-                diff_cost += f"Difference in Cost : {round(total_cost - cost2, 3)}"
+                diff_cost += f"Difference in Cost : {round(total_cost - cost2, 1):,}"
             else:
                 diff_cost += f"Difference in Cost : "
                 
@@ -382,7 +382,7 @@ def register_callbacks(app):
                     node_data_1stfile, pipe_data_1stfile, nodeData2ndfile, pipeData2ndfile,
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
-                    f"Total Cost of 1st File: {round(total_cost,3)}", no_update, diff_cost,
+                    f"Total Cost of 1st File: {round(total_cost,3):,}", no_update, diff_cost,
                     total_cost, no_update,
                     DangerouslySetInnerHTML(par_1stfiletab_demand_1),
                     DangerouslySetInnerHTML(par_1stfiletab_pipe_1),
@@ -435,7 +435,7 @@ def register_callbacks(app):
             logger.info(f"Pipe data: {pipe_data_2ndfile}")
             
             if content1 is not None:
-                diff_cost = f"Difference in Cost : {round(cost1 - total_cost, 3)} ({output1_data_processor.percentage_difference((cost1-total_cost), cost1)})"
+                diff_cost = f"Difference in Cost : {round(cost1 - total_cost, 1):,} ({output1_data_processor.percentage_difference((cost1-total_cost), cost1)})"
             else:
                 diff_cost = f"Difference in Cost : "
             
@@ -467,7 +467,7 @@ def register_callbacks(app):
                 nodeData1stfile, pipeData1stfile, node_data_2ndfile, pipe_data_2ndfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
-                    no_update, f"Total Cost of 2nd File: {round(total_cost,3)}", diff_cost,
+                    no_update, f"Total Cost of 2nd File: {round(total_cost,3):,}", diff_cost,
                     no_update, total_cost,
                     DangerouslySetInnerHTML(par_1stfiletab_node_1),
                     DangerouslySetInnerHTML(par_1stfiletab_pipe_1),

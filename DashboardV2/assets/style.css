@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+
 /* General styling for the main container */
 #main-container {
     background-color: #F0F2F5;
@@ -8,6 +11,7 @@
     margin: 0;
     overflow: hidden;
     position: relative;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Sidebar styling */
