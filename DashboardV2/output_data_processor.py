@@ -34,7 +34,7 @@ class OutputDataProcessor :
                 cmap = mcolors.LinearSegmentedColormap.from_list("white_to_red", ["#F38181", "#FF0000"])
             else:
                 norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=mid)
-                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#2B7706", "#A6F946"])
+                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#1B4D02", "#A6F946"])
             return mcolors.to_hex(cmap(norm(value)))
 
     def process_source(self, df):
