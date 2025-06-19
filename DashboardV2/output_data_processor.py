@@ -19,23 +19,22 @@ class OutputDataProcessor :
     
     def value_to_color(self, value, min_val, max_val):
         if min_val >= 0:
-            norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)  # gamma < 1 = better spread
-            cmap = mcolors.LinearSegmentedColormap.from_list("red_scale", ["white", "red"])
+            norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)
+            cmap = mcolors.LinearSegmentedColormap.from_list("green_scale", ["#2B7706", "#A6F946"])
             return mcolors.to_hex(cmap(norm(value)))
 
         elif max_val <= 0:
-            norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)
-            cmap = mcolors.LinearSegmentedColormap.from_list("green_scale", ["#1E6C02","#88EF7D"])
+            norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)  # gamma < 1 = better spread
+            cmap = mcolors.LinearSegmentedColormap.from_list("red_scale", ["#F38181", "#FF0000"])
             return mcolors.to_hex(cmap(norm(value)))
-
         else:
             mid = 0
             if value <= 0:
-                norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=mid)
-                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#2B7706", "#A6F946"])
-            else:
                 norm = mcolors.PowerNorm(gamma=0.5, vmin=mid, vmax=max_val)
                 cmap = mcolors.LinearSegmentedColormap.from_list("white_to_red", ["#F38181", "#FF0000"])
+            else:
+                norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=mid)
+                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#2B7706", "#A6F946"])
             return mcolors.to_hex(cmap(norm(value)))
 
     def process_source(self, df):
@@ -185,7 +184,7 @@ class OutputDataProcessor :
                 y= node_pos[node][1]# Get the position of the node from the provided node_pos dictionary
             node_x.append(x)
             node_y.append(y)
-            node_text.append(f"{node}")  # Node ID label
+            node_text.append(f"{int(node)}")  # Node ID label
 
             # Generate detailed hover text for each node
             
@@ -223,7 +222,7 @@ class OutputDataProcessor :
                 y= node_pos[node][1]# Get the position of the node from the provided node_pos dictionary
             node_x.append(x)
             node_y.append(y)
-            node_text.append(f"{node}")  # Node ID label
+            node_text.append(f"{int(node)}")  # Node ID label
 
             # Generate detailed hover text for each node
             

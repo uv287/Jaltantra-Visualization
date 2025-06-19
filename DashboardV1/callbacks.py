@@ -128,6 +128,7 @@ def register_callbacks(app):
         Output('network-name', 'children'),
         Output('supply-hours', 'children'),
         Output('active-nodes', 'children'),
+        Output('source','children'),
         Output('node-data-upload1', 'data'),
         Output('pipe-data-upload1', 'data'),
         Output('node-data-upload2', 'data'),
@@ -171,12 +172,12 @@ def register_callbacks(app):
     def update_data(content ,content1, content2, content3, mainfig, mainNodeData, mainPipeData, commercial_pipe_data, nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile, inputfilename, filename):
         if (content is None) and (content1 is None) and (content2 is None) and (content3 is None):
             return (
-                    False, no_update, None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ",
+                    False, no_update, None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ", f"Source Node Id : ",
                     None, None, None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
-                     "Total Cost 1st File: ", "Total Cost 2nd File: ", "Total Cost 3rd File: ",
+                     "Total Cost 1st of File: ", "Total Cost 2nd of File: ", "Total Cost 3rd of File: ",
                     "", "",
                     "", "",
                     "", "",
@@ -293,12 +294,12 @@ def register_callbacks(app):
             input_data = df.to_dict('records')
 
             return (False, no_update,
-                    input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}",
+                    input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}", f"Source Node Id : {source_node}",
                     None, None, None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
-                    "Total Cost 1st File: ", "Total Cost 2nd File: ", "Total Cost 3rd File: ",
+                    "Total Cost 1st of File: ", "Total Cost 2nd of File: ", "Total Cost 3rd of File: ",
                     "", "",
                     "", "",
                     "", "",
@@ -338,7 +339,7 @@ def register_callbacks(app):
             if not valid:
                 logger.error("Node data validation failed. Please check the input file.")
                 return (True, "Data validation failed. Please check the 1st Output file.",
-                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                         no_update, no_update, no_update, no_update, no_update, no_update, 
                         no_update, no_update,
                         no_update, no_update,
@@ -379,7 +380,7 @@ def register_callbacks(app):
             logger.info("Pipe output 1 figures created successfully.")  
             logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
             return (False, no_update,
-                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     node_data_1stfile, pipe_data_1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile,
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
@@ -424,7 +425,7 @@ def register_callbacks(app):
             if not valid:
                 logger.error("Node data validation failed. Please check the input file.")
                 return (True, "Data validation failed. Please check the 2nd Output file.",
-                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                         no_update, no_update, no_update, no_update, no_update, no_update, 
                         no_update, no_update,
                         no_update, no_update,
@@ -464,7 +465,7 @@ def register_callbacks(app):
             ############# 2nd File data processing completed ##################
             
             return (False, no_update,
-                no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                 nodeData1stfile, pipeData1stfile, node_data_2ndfile, pipe_data_2ndfile, nodeData3rdfile, pipeData3rdfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
@@ -512,7 +513,7 @@ def register_callbacks(app):
             if not valid:
                 logger.error("Node data validation failed. Please check the input file.")
                 return (True, "Data validation failed. Please check the 3rd Output file.",
-                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                         no_update, no_update, no_update, no_update, no_update, no_update, 
                         no_update, no_update,
                         no_update, no_update,
@@ -551,7 +552,7 @@ def register_callbacks(app):
             logger.info("Pipe output 3rdfile figures created successfully.")
             
             return (False, no_update,
-                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, node_data_3rdfile, pipe_data_3rdfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,

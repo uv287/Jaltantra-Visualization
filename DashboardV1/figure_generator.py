@@ -183,8 +183,8 @@ class FigureGenerator:
             #reverse sort the list with the node
             sorted_head_difference_2ndfile = dict(sorted(head_difference_2ndfile.items(), key=lambda item: item[1], reverse=True))
 
-            para_1stfiletab_2ndfile += f"Total Nodes : {len(sorted_head_difference_2ndfile)}<br>"
-            para_1stfiletab_2ndfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
+            para_1stfiletab_2ndfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_2ndfile)}<br>"
+            para_1stfiletab_2ndfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
             para_1stfiletab_2ndfile += "----------------------------------------------------<br><br>"
             #traverse the sorted list and create the list
             for node in sorted_head_difference_2ndfile:
@@ -204,8 +204,8 @@ class FigureGenerator:
             #sort the list with the node
             sorted_head_difference_2ndfile = dict(sorted(head_difference_2ndfile.items(), key=lambda item: item[1], reverse=False))
             
-            para_2ndfiletab_1stfile += f"Total Nodes : {len(sorted_head_difference_2ndfile)}<br>"
-            para_2ndfiletab_1stfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
+            para_2ndfiletab_1stfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_2ndfile)}<br>"
+            para_2ndfiletab_1stfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
             para_2ndfiletab_1stfile += "----------------------------------------------------<br><br>"
             
             for node in sorted_head_difference_2ndfile:                        
@@ -250,8 +250,8 @@ class FigureGenerator:
             #sort the list with the node 
             sorted_head_difference_3rdfile = dict(sorted(demand_difference_3rdfile.items(), key=lambda item: item[1], reverse=True))
             
-            para_1stfiletab_3rdfile += f"Total Nodes : {len(sorted_head_difference_3rdfile)}<br>"
-            para_1stfiletab_3rdfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
+            para_1stfiletab_3rdfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_3rdfile)}<br>"
+            para_1stfiletab_3rdfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
             para_1stfiletab_3rdfile += "----------------------------------------------------<br><br>"
             
             for node in sorted_demand_difference_3rdfile:
@@ -271,8 +271,8 @@ class FigureGenerator:
             
             sorted_head_difference_3rdfile = dict(sorted(demand_difference_3rdfile.items(), key=lambda item: item[1], reverse=False))
             
-            para_3rdfiletab_1stfile += f"Total Nodes : {len(sorted_head_difference_3rdfile)}<br>"
-            para_3rdfiletab_1stfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
+            para_3rdfiletab_1stfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_3rdfile)}<br>"
+            para_3rdfiletab_1stfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
             para_3rdfiletab_1stfile += "----------------------------------------------------<br><br>"
                 
             for node in sorted_head_difference_3rdfile:
@@ -452,8 +452,8 @@ class FigureGenerator:
             #reverse sort the list
             sorted_head_difference_1stfile = dict(sorted(head_difference_1stfile.items(), key=lambda item: item[1], reverse=True))
             
-            para_2ndfiletab_1stfile += f"Total Nodes : {len(sorted_head_difference_1stfile)}<br>"
-            para_2ndfiletab_1stfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
+            para_2ndfiletab_1stfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_1stfile)}<br>"
+            para_2ndfiletab_1stfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
             para_2ndfiletab_1stfile += "----------------------------------------------------<br><br>"
             
             #traverse the sorted list and create the list 
@@ -474,8 +474,8 @@ class FigureGenerator:
             #sort the list with the node
             sorted_head_difference_1stfile = dict(sorted(head_difference_1stfile.items(), key=lambda item: item[1], reverse=False))
             
-            para_1stfiletab_2ndfile += f"Total Nodes : {len(sorted_head_difference_1stfile)}<br>"
-            para_1stfiletab_2ndfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
+            para_1stfiletab_2ndfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_1stfile)}<br>"
+            para_1stfiletab_2ndfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
             para_1stfiletab_2ndfile += "----------------------------------------------------<br><br>"
             for node in sorted_head_difference_1stfile:                        
                 para_1stfiletab_2ndfile +=(f"<b>Node : {node}</b><br>"
@@ -518,8 +518,8 @@ class FigureGenerator:
             #sort the list with the node 
             sorted_head_difference_3rdfile = dict(sorted(head_difference_3rdfile.items(), key=lambda item: item[1], reverse=True))
             
-            para_2ndfiletab_3rdfile += f"Total Nodes : {len(sorted_head_difference_3rdfile)}<br>"
-            para_2ndfiletab_3rdfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
+            para_2ndfiletab_3rdfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_3rdfile)}<br>"
+            para_2ndfiletab_3rdfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
             para_2ndfiletab_3rdfile += "----------------------------------------------------<br><br>"
             for node in sorted_demand_difference_3rdfile:
                 para_2ndfiletab_3rdfile += (f"<b>Node : {node}</b><br>"
@@ -538,8 +538,8 @@ class FigureGenerator:
 
             sorted_head_difference_3rdfile = dict(sorted(head_difference_3rdfile.items(), key=lambda item: item[1], reverse=False))
 
-            para_3rdfiletab_2ndfile += f"Total Nodes : {len(sorted_head_difference_3rdfile)}<br>"
-            para_3rdfiletab_2ndfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
+            para_3rdfiletab_2ndfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_3rdfile)}<br>"
+            para_3rdfiletab_2ndfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_3rdfile.keys())}<br><br>"
             para_3rdfiletab_2ndfile += "----------------------------------------------------<br><br>"
             for node in sorted_head_difference_3rdfile:
                 para_3rdfiletab_2ndfile += (f"Node : {node}<br>"
@@ -716,8 +716,8 @@ class FigureGenerator:
             #reverse sort the list
             sorted_head_difference_1stfile = dict(sorted(head_difference_1stfile.items(), key=lambda item: item[1], reverse=True))
             
-            para_3rdfiletab_1stfile += f"Total Nodes : {len(sorted_head_difference_1stfile)}<br>"
-            para_3rdfiletab_1stfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
+            para_3rdfiletab_1stfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_1stfile)}<br>"
+            para_3rdfiletab_1stfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
             para_3rdfiletab_1stfile += "----------------------------------------------------<br><br>"
             
             #traverse the sorted list and create the list 
@@ -738,8 +738,8 @@ class FigureGenerator:
             #sort the list with the node
             sorted_head_difference_1stfile = dict(sorted(head_difference_1stfile.items(), key=lambda item: item[1], reverse=False))
             
-            para_1stfiletab_3rdfile += f"Total Nodes : {len(sorted_head_difference_1stfile)}<br>"
-            para_1stfiletab_3rdfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
+            para_1stfiletab_3rdfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_1stfile)}<br>"
+            para_1stfiletab_3rdfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_1stfile.keys())}<br><br>"
             para_1stfiletab_3rdfile += "----------------------------------------------------<br><br>"
             
             for node in sorted_head_difference_1stfile:                        
@@ -784,8 +784,8 @@ class FigureGenerator:
             #sort the list with the node 
             sorted_head_difference_2ndfile = dict(sorted(head_difference_2ndfile.items(), key=lambda item: item[1], reverse=True))
             
-            para_3rdfiletab_2ndfile += f"Total Nodes : {len(sorted_head_difference_2ndfile)}<br>"
-            para_3rdfiletab_2ndfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
+            para_3rdfiletab_2ndfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_2ndfile)}<br>"
+            para_3rdfiletab_2ndfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
             para_3rdfiletab_2ndfile += "----------------------------------------------------<br><br>"
             for node in sorted_head_difference_2ndfile:
                 para_3rdfiletab_2ndfile += (f"Node : {node}<br>"
@@ -804,8 +804,8 @@ class FigureGenerator:
             
             sorted_head_difference_2ndfile = dict(sorted(head_difference_2ndfile.items(), key=lambda item: item[1], reverse=False))
             
-            para_2ndfiletab_3rdfile += f"Total Nodes : {len(sorted_head_difference_2ndfile)}<br>"
-            para_2ndfiletab_3rdfile += f"Nodes : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
+            para_2ndfiletab_3rdfile += f"Total Nodes with Head or Supply Difference : {len(sorted_head_difference_2ndfile)}<br>"
+            para_2ndfiletab_3rdfile += f"Nodes ID : {', '.join(str(k) for k in sorted_head_difference_2ndfile.keys())}<br><br>"
             para_2ndfiletab_3rdfile += "----------------------------------------------------<br><br>"
                 
             for node in sorted_head_difference_2ndfile:
@@ -1067,8 +1067,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_2ndfile = dict(sorted(difference_cost_pipeid_2ndfile.items(), key=lambda item: item[1], reverse=True))
             
-            par_1stfiletab_2ndfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
-            par_1stfiletab_2ndfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
+            par_1stfiletab_2ndfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
+            par_1stfiletab_2ndfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
             par_1stfiletab_2ndfile += "----------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_2ndfile:
@@ -1114,8 +1114,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_2ndfile = dict(sorted(difference_cost_pipeid_2ndfile.items(), key=lambda item: item[1], reverse=False))
             
-            par_2ndfiletab_1stfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
-            par_2ndfiletab_1stfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
+            par_2ndfiletab_1stfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
+            par_2ndfiletab_1stfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
             par_2ndfiletab_1stfile += "----------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_2ndfile:
@@ -1221,8 +1221,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_3rdfile = dict(sorted(difference_cost_pipeid_3rdfile.items(), key=lambda item: item[1], reverse=True))
             
-            par_1stfiletab_3rdfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
-            par_1stfiletab_3rdfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
+            par_1stfiletab_3rdfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
+            par_1stfiletab_3rdfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
             par_1stfiletab_3rdfile += "----------------------------------------------------<br><br>"
             
             #prepare the paragraph for 1stfile tab with 3rdfile data
@@ -1270,8 +1270,8 @@ class FigureGenerator:
             sorted_difference_cost_pipeid_3rdfile = dict(sorted(difference_cost_pipeid_3rdfile.items(), key=lambda item: item[1], reverse=False))
             
             
-            par_3rdfiletab_1stfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
-            par_3rdfiletab_1stfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
+            par_3rdfiletab_1stfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
+            par_3rdfiletab_1stfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
             par_3rdfiletab_1stfile += "----------------------------------------------------<br><br>"
             for pipe_id in sorted_difference_cost_pipeid_3rdfile:
                 par_3rdfiletab_1stfile += (f"<b>Pipe ID : {pipe_id}</b><br>"
@@ -1531,8 +1531,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_1stfile = dict(sorted(difference_cost_pipeid_1stfile.items(), key=lambda item: item[1], reverse=True))
             
-            par_2ndfiletab_1stfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
-            par_2ndfiletab_1stfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
+            par_2ndfiletab_1stfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
+            par_2ndfiletab_1stfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
             par_2ndfiletab_1stfile += "----------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_1stfile:
@@ -1578,8 +1578,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_1stfile = dict(sorted(difference_cost_pipeid_1stfile.items(), key=lambda item: item[1], reverse=False))
             
-            par_1stfiletab_2ndfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
-            par_1stfiletab_2ndfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
+            par_1stfiletab_2ndfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
+            par_1stfiletab_2ndfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
             par_1stfiletab_2ndfile += "----------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_1stfile:
@@ -1686,8 +1686,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_3rdfile = dict(sorted(difference_cost_pipeid_3rdfile.items(), key=lambda item: item[1], reverse=True))
             
-            par_2ndfiletab_3rdfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
-            par_2ndfiletab_3rdfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
+            par_2ndfiletab_3rdfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
+            par_2ndfiletab_3rdfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
             par_2ndfiletab_3rdfile += "----------------------------------------------------<br><br>"
             
             #prepare the paragraph for 2ndfile tab with 3rdfile data
@@ -1734,8 +1734,8 @@ class FigureGenerator:
             # ascending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_3rdfile = dict(sorted(difference_cost_pipeid_3rdfile.items(), key=lambda item: item[1], reverse=False))
             
-            par_2ndfiletab_3rdfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
-            par_2ndfiletab_3rdfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
+            par_2ndfiletab_3rdfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_3rdfile)}<br>"
+            par_2ndfiletab_3rdfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_3rdfile.keys())}<br><br>"
             par_2ndfiletab_3rdfile += "----------------------------------------------------<br><br>"
             
             #prepare the paragraph for 3rdfile tab with 2ndfile data
@@ -1987,8 +1987,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_1stfile = dict(sorted(difference_cost_pipeid_1stfile.items(), key=lambda item: item[1], reverse=True))
             
-            par_3rdfiletab_1stfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
-            par_3rdfiletab_1stfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
+            par_3rdfiletab_1stfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
+            par_3rdfiletab_1stfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
             par_3rdfiletab_1stfile += "----------------------------------------------------<br><br>"
             
             for pipe_id in sorted_difference_cost_pipeid_1stfile:
@@ -2034,8 +2034,8 @@ class FigureGenerator:
             sorted_difference_cost_pipeid_1stfile = dict(sorted(difference_cost_pipeid_1stfile.items(), key=lambda item: item[1], reverse=False))
             
             
-            par_1stfiletab_3rdfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
-            par_1stfiletab_3rdfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
+            par_1stfiletab_3rdfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_1stfile)}<br>"
+            par_1stfiletab_3rdfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_1stfile.keys())}<br><br>"
             par_1stfiletab_3rdfile += "----------------------------------------------------<br><br>"
             for pipe_id in sorted_difference_cost_pipeid_1stfile:
                 par_1stfiletab_3rdfile += ( f"<b>Pipe ID : {pipe_id}</b><br>"
@@ -2140,8 +2140,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_2ndfile = dict(sorted(difference_cost_pipeid_2ndfile.items(), key=lambda item: item[1], reverse=True))
             
-            par_3rdfiletab_2ndfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
-            par_3rdfiletab_2ndfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
+            par_3rdfiletab_2ndfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
+            par_3rdfiletab_2ndfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
             par_3rdfiletab_2ndfile += "----------------------------------------------------<br><br>"
             #prepare the paragraph for 2ndfile tab with 3rdfile data
             for pipe_id in sorted_difference_cost_pipeid_2ndfile:
@@ -2186,8 +2186,8 @@ class FigureGenerator:
             # descending sort the dictonary based on the cost difference
             sorted_difference_cost_pipeid_2ndfile = dict(sorted(difference_cost_pipeid_2ndfile.items(), key=lambda item: item[1], reverse=False))
             
-            par_2ndfiletab_3rdfile += f"Total Pipes : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
-            par_2ndfiletab_3rdfile += f"Pipes : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
+            par_2ndfiletab_3rdfile += f"Total Pipes with Cost, Flow, or Speed Differences : {len(sorted_difference_cost_pipeid_2ndfile)}<br>"
+            par_2ndfiletab_3rdfile += f"Pipes ID : {', '.join(str(k) for k in sorted_difference_cost_pipeid_2ndfile.keys())}<br><br>"
             par_2ndfiletab_3rdfile += "----------------------------------------------------<br><br>"
             
             #prepare the paragraph for 3rdfile tab with 2ndfile data

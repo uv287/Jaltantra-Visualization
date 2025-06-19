@@ -120,6 +120,7 @@ class Layout:
                 html.P(id='network-name', children="Network Name: "),
                 html.P(id='supply-hours', children="Supply Hours: "),
                 html.P(id='active-nodes', children="Active Nodes: "),
+                html.P(id='source', children="Source Node ID: "),
                 html.P(id='total-cost1', children="Total Cost of 1st Output File: "),
                 html.P(id='total-cost2', children="Total Cost of 2nd Output File: "),
                 html.P(id='total-cost3', children="Total Cost of 3rd Output File: ")

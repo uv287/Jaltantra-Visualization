@@ -68,7 +68,7 @@ class Layout:
                     is_open=False,  #intiallty hidden
                     className="mt-2"
                 ),
-            html.H4("Upload Data and Network Overview", className='font-weight-bold mb-4'),
+            html.H4("Upload Data and Water Network Overview", className='font-weight-bold mb-4'),
             html.Div(
                 dcc.Upload(
                     id='upload-input1',
@@ -103,10 +103,11 @@ class Layout:
                 className='mb-3'
             ),
             html.Div([
-                html.H4("Network Overview", className='font-weight-bold mt-4'),
+                html.H4("Water Network Overview", className='font-weight-bold mt-4'),
                 html.P(id='network-name', children="Network Name: "),
                 html.P(id='supply-hours', children="Supply Hours: "),
                 html.P(id='active-nodes', children="Active Nodes: "),
+                html.P(id='source', children="Source Node ID: "),
                 html.P(id='total-cost1', children="Total Cost of 1st Output File: "),
                 html.P(id='total-cost2', children="Total Cost of 2nd Output File: "),
                 html.P(id='diff-cost', children="Difference in Cost : ")
