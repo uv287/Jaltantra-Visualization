@@ -120,49 +120,50 @@ class Layout:
                 html.P(id='network-name', children="Network Name: "),
                 html.P(id='supply-hours', children="Supply Hours: "),
                 html.P(id='active-nodes', children="Active Nodes: "),
+                html.P(id='links', children="Links: "),
                 html.P(id='source', children="Source Node ID: "),
                 html.P(id='total-cost1', children="Total Cost of 1st Output File: "),
                 html.P(id='total-cost2', children="Total Cost of 2nd Output File: "),
                 html.P(id='total-cost3', children="Total Cost of 3rd Output File: ")
             ], className='card mt-4'),
-            html.H4("Do you want to change the Input?", className='text-primary mt-4 mb-4 font-weight-bold'),
-            dbc.Label("Select an option", className='text-primary font-weight-bold'),
-            dcc.Dropdown(
-                id='Changes',
-                options=[
-                    {'label': 'Node', 'value': '1'},
-                    {'label': 'Pipe', 'value': '2'},
-                    {'label': 'Commercial', 'value': '3'}
-                ],
-                placeholder='Select an option',
-                className='dropdown mb-3'
-            ),
-            dcc.Dropdown(
-                id='dropdown-2',
-                options=[],
-                placeholder='Select another option',
-                className='dropdown mb-3'
-            ),
-            dcc.Dropdown(
-                id='dropdown-3',
-                options=[],
-                placeholder='Select another option',
-                className='dropdown mb-3'
-            ),
-            dbc.Label("Enter a value", className='text-primary font-weight-bold'),
-            dbc.Input(
-                id='text-input',
-                type='text',
-                placeholder='Enter a value',
-                className='input mb-3'
-            ),
-            dbc.Button(
-                'Submit',
-                id='submit-button',
-                color="dark",
-                className='button mt-3 mb-4'
-            ),
-            html.A('Download Updated File', id='download-link', download="updated_data.xlsx", href="", target="_blank", style={'display': 'none'}),
+            # html.H4("Do you want to change the Input?", className='text-primary mt-4 mb-4 font-weight-bold'),
+            # dbc.Label("Select an option", className='text-primary font-weight-bold'),
+            # dcc.Dropdown(
+            #     id='Changes',
+            #     options=[
+            #         {'label': 'Node', 'value': '1'},
+            #         {'label': 'Pipe', 'value': '2'},
+            #         {'label': 'Commercial', 'value': '3'}
+            #     ],
+            #     placeholder='Select an option',
+            #     className='dropdown mb-3'
+            # ),
+            # dcc.Dropdown(
+            #     id='dropdown-2',
+            #     options=[],
+            #     placeholder='Select another option',
+            #     className='dropdown mb-3'
+            # ),
+            # dcc.Dropdown(
+            #     id='dropdown-3',
+            #     options=[],
+            #     placeholder='Select another option',
+            #     className='dropdown mb-3'
+            # ),
+            # dbc.Label("Enter a value", className='text-primary font-weight-bold'),
+            # dbc.Input(
+            #     id='text-input',
+            #     type='text',
+            #     placeholder='Enter a value',
+            #     className='input mb-3'
+            # ),
+            # dbc.Button(
+            #     'Submit',
+            #     id='submit-button',
+            #     color="dark",
+            #     className='button mt-3 mb-4'
+            # ),
+            # html.A('Download Updated File', id='download-link', download="updated_data.xlsx", href="", target="_blank", style={'display': 'none'}),
             
         ], style={
             'height': '100%',

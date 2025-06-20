@@ -17,25 +17,54 @@ class OutputDataProcessor :
         else:
             return f"{(abs(diff)/ base) * 100:.2f}%"
     
+    # def value_to_color(self, value, min_val, max_val):
+    #     if min_val >= 0:
+    #         norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)
+    #         cmap = mcolors.LinearSegmentedColormap.from_list("green_scale", ["#153803", "#B3F665"])
+    #         return mcolors.to_hex(cmap(norm(value)))
+
+    #     elif max_val <= 0:
+    #         norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)  # gamma < 1 = better spread
+    #         cmap = mcolors.LinearSegmentedColormap.from_list("red_scale", ["#EDBCBC", "#FF0000"])
+    #         return mcolors.to_hex(cmap(norm(value)))
+    #     else:
+    #         mid = 0
+    #         if value <= 0:
+    #             norm = mcolors.PowerNorm(gamma=0.5, vmin=mid, vmax=max_val)
+    #             cmap = mcolors.LinearSegmentedColormap.from_list("white_to_red", ["#EEB6B6", "#FF0000"])
+    #         else:
+    #             norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=mid)
+    #             cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#153803", "#B3F665"])
+    #         return mcolors.to_hex(cmap(norm(value)))
     def value_to_color(self, value, min_val, max_val):
+        def clamp(x): return max(0.0, min(1.0, x))
+
+        if min_val == max_val:
+            return "#AAAAAA"  # fallback color if all values are the same
+
         if min_val >= 0:
-            norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)
-            cmap = mcolors.LinearSegmentedColormap.from_list("green_scale", ["#2B7706", "#A6F946"])
-            return mcolors.to_hex(cmap(norm(value)))
+            # All positive values → green gradient (light to dark)
+            t = clamp((value - min_val) / (max_val - min_val))
+            cmap = mcolors.LinearSegmentedColormap.from_list("green_only", ["#B3F665", "#153803"])
+            return mcolors.to_hex(cmap(t))
 
         elif max_val <= 0:
-            norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=max_val)  # gamma < 1 = better spread
-            cmap = mcolors.LinearSegmentedColormap.from_list("red_scale", ["#F38181", "#FF0000"])
-            return mcolors.to_hex(cmap(norm(value)))
+            # All negative values → red gradient (light to dark)
+            t = clamp((value - min_val) / (max_val - min_val))
+            cmap = mcolors.LinearSegmentedColormap.from_list("red_only", ["#EDBCBC", "#FF0000"])
+            return mcolors.to_hex(cmap(t))
+
         else:
-            mid = 0
-            if value <= 0:
-                norm = mcolors.PowerNorm(gamma=0.5, vmin=mid, vmax=max_val)
-                cmap = mcolors.LinearSegmentedColormap.from_list("white_to_red", ["#F38181", "#FF0000"])
+            # Mixed: negative values → red, positive → green
+            if value < 0:
+                t = clamp(value / min_val)  # min_val is negative, value < 0 → t in [0,1]
+                cmap = mcolors.LinearSegmentedColormap.from_list("neg_red", ["#EDBCBC", "#FF0000"])
+                return mcolors.to_hex(cmap(t))
             else:
-                norm = mcolors.PowerNorm(gamma=0.5, vmin=min_val, vmax=mid)
-                cmap = mcolors.LinearSegmentedColormap.from_list("green_to_white", ["#1B4D02", "#A6F946"])
-            return mcolors.to_hex(cmap(norm(value)))
+                t = clamp(value / max_val)  # value ≥ 0
+                cmap = mcolors.LinearSegmentedColormap.from_list("pos_green", ["#B3F665", "#153803"])
+                return mcolors.to_hex(cmap(t))
+
 
     def process_source(self, df):
         source_ID = df.loc[df[0] == "Source Node ID", 3].values[0]

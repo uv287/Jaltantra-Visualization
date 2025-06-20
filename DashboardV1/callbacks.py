@@ -20,96 +20,96 @@ from logger_config import logger  # Import the logger from the logger_config.py 
 def register_callbacks(app):
     
     #update the dropdown function
-    @app.callback(
-        Output('dropdown-2', 'options'),
-        Output('dropdown-3', 'options'),
-        Input('Changes', 'value'),
-        State('node-data-store', 'data'),
-        State('pipe-data-store', 'data')
-    )
-    def update_dropdown_options(selected_value, node_data, pipe_data):
-        options_dropdown_2 = []
-        options_dropdown_3 = []
+    # @app.callback(
+    #     Output('dropdown-2', 'options'),
+    #     Output('dropdown-3', 'options'),
+    #     Input('Changes', 'value'),
+    #     State('node-data-store', 'data'),
+    #     State('pipe-data-store', 'data')
+    # )
+    # def update_dropdown_options(selected_value, node_data, pipe_data):
+    #     options_dropdown_2 = []
+    #     options_dropdown_3 = []
 
-        if selected_value is None:
-            return options_dropdown_2, options_dropdown_3  # No options if nothing is selected
+    #     if selected_value is None:
+    #         return options_dropdown_2, options_dropdown_3  # No options if nothing is selected
 
-        # Define options based on the first dropdown selection
-        if selected_value == '1':  # Node selected
-            options_dropdown_2 = [{'label': f'Node {node_id}', 'value': str(node_id)} for node_id in node_data.get("nodeID", [])]
-            options_dropdown_3 = [{'label': 'Elevation', 'value': 'Elevation'},
-                                  {'label': 'Demand', 'value': 'Demand'},]
-        elif selected_value == '2':  # Pipe selected
-            options_dropdown_2 = [{'label': f'Pipe {pipe_id}', 'value': str(pipe_id)} for pipe_id in pipe_data.get("pipeID", [])]
-            options_dropdown_3 = [{'label': 'Parallel', 'value': 'parallel'},]
-        elif selected_value == '3':  # Commercial selected
-            options_dropdown_2 = [{'label': 'Add', 'value': 'E'},
-                                  {'label': 'Remove', 'value': 'F'}]
-            options_dropdown_3 = []  # Clear dropdown-3 options if 'Commercial' is selected
+    #     # Define options based on the first dropdown selection
+    #     if selected_value == '1':  # Node selected
+    #         options_dropdown_2 = [{'label': f'Node {node_id}', 'value': str(node_id)} for node_id in node_data.get("nodeID", [])]
+    #         options_dropdown_3 = [{'label': 'Elevation', 'value': 'Elevation'},
+    #                               {'label': 'Demand', 'value': 'Demand'},]
+    #     elif selected_value == '2':  # Pipe selected
+    #         options_dropdown_2 = [{'label': f'Pipe {pipe_id}', 'value': str(pipe_id)} for pipe_id in pipe_data.get("pipeID", [])]
+    #         options_dropdown_3 = [{'label': 'Parallel', 'value': 'parallel'},]
+    #     elif selected_value == '3':  # Commercial selected
+    #         options_dropdown_2 = [{'label': 'Add', 'value': 'E'},
+    #                               {'label': 'Remove', 'value': 'F'}]
+    #         options_dropdown_3 = []  # Clear dropdown-3 options if 'Commercial' is selected
 
-        return options_dropdown_2, options_dropdown_3
-    #   {'label': 'Minimum Pressure', 'value': 'Minimum Pressure'},] 
+    #     return options_dropdown_2, options_dropdown_3
+    # #   {'label': 'Minimum Pressure', 'value': 'Minimum Pressure'},] 
     
     
-    @app.callback(
-        [Output('download-link', 'href'), Output('download-link', 'style')],
-        Input('Changes', 'value'),
-        Input('dropdown-2', 'value'),
-        Input('dropdown-3', 'value'),
-        Input('text-input','value'),
-        Input('submit-button','n_clicks'),
-        State('input-data', 'data')
-    )
-    def new_file(option1,option2,option3,textvalue,n_clicks, data):
-        if(n_clicks and n_clicks>0) :
-            if option1 and option2 and option3 and textvalue is not None:
+    # @app.callback(
+    #     [Output('download-link', 'href'), Output('download-link', 'style')],
+    #     Input('Changes', 'value'),
+    #     Input('dropdown-2', 'value'),
+    #     Input('dropdown-3', 'value'),
+    #     Input('text-input','value'),
+    #     Input('submit-button','n_clicks'),
+    #     State('input-data', 'data')
+    # )
+    # def new_file(option1,option2,option3,textvalue,n_clicks, data):
+    #     if(n_clicks and n_clicks>0) :
+    #         if option1 and option2 and option3 and textvalue is not None:
                 
-                new_inputfile=NewInputFile()
+    #             new_inputfile=NewInputFile()
                 
-                #for the Node
-                if option1=='1' :  
-                    #if elevation is changed
-                    if option3=='Elevation' :
-                        data = new_inputfile.change_elevation(data, option2, textvalue)
+    #             #for the Node
+    #             if option1=='1' :  
+    #                 #if elevation is changed
+    #                 if option3=='Elevation' :
+    #                     data = new_inputfile.change_elevation(data, option2, textvalue)
                     
-                    #if Demand is changed
-                    elif option3=='Demand' :   
-                        data = new_inputfile.change_demand(data, option2,textvalue)
+    #                 #if Demand is changed
+    #                 elif option3=='Demand' :   
+    #                     data = new_inputfile.change_demand(data, option2,textvalue)
                           
-                #for the pipe
-                if option1=='2' :    
-                    data = new_inputfile.change_pipe_parallel(data, option2, textvalue)
+    #             #for the pipe
+    #             if option1=='2' :    
+    #                 data = new_inputfile.change_pipe_parallel(data, option2, textvalue)
                       
-                #for the commercial pipe
-                if option1=='3' : 
-                    if option2=='E':   
-                        data= new_inputfile.add_commercial_pipe(data, textvalue)
+    #             #for the commercial pipe
+    #             if option1=='3' : 
+    #                 if option2=='E':   
+    #                     data= new_inputfile.add_commercial_pipe(data, textvalue)
                         
-                    if option2=='F':
-                        data = new_inputfile.remove_commercial_pipe(data, textvalue)
+    #                 if option2=='F':
+    #                     data = new_inputfile.remove_commercial_pipe(data, textvalue)
                 
-                df = pd.DataFrame(data)
+    #             df = pd.DataFrame(data)
 
-                # Save the DataFrame to an Excel file in memory
-                output = io.BytesIO()
-                with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-                    df.to_excel(writer, index=False, sheet_name='Sheet1')
-                output.seek(0)
+    #             # Save the DataFrame to an Excel file in memory
+    #             output = io.BytesIO()
+    #             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+    #                 df.to_excel(writer, index=False, sheet_name='Sheet1')
+    #             output.seek(0)
 
-                # Encode the Excel file in Base64
-                excel_data = output.getvalue()
-                encoded_excel = base64.b64encode(excel_data).decode()
+    #             # Encode the Excel file in Base64
+    #             excel_data = output.getvalue()
+    #             encoded_excel = base64.b64encode(excel_data).decode()
 
-                # Create the href for download
-                href = f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.df;base64,{encoded_excel}"
+    #             # Create the href for download
+    #             href = f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.df;base64,{encoded_excel}"
 
-                # Make the download link visible and update its href
-                return href, {'display': 'block'}
+    #             # Make the download link visible and update its href
+    #             return href, {'display': 'block'}
 
-            # If the button hasn't been clicked, keep the link hidden
-            return "", {'display': 'none'}
+    #         # If the button hasn't been clicked, keep the link hidden
+    #         return "", {'display': 'none'}
 
-        return "",{'display': 'none'}
+    #     return "",{'display': 'none'}
     
     
     #read data from the 1st file and update the graphs
@@ -128,6 +128,7 @@ def register_callbacks(app):
         Output('network-name', 'children'),
         Output('supply-hours', 'children'),
         Output('active-nodes', 'children'),
+        Output('links', 'children'),
         Output('source','children'),
         Output('node-data-upload1', 'data'),
         Output('pipe-data-upload1', 'data'),
@@ -172,7 +173,7 @@ def register_callbacks(app):
     def update_data(content ,content1, content2, content3, mainfig, mainNodeData, mainPipeData, commercial_pipe_data, nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile, inputfilename, filename):
         if (content is None) and (content1 is None) and (content2 is None) and (content3 is None):
             return (
-                    False, no_update, None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ", f"Source Node Id : ",
+                    False, no_update, None,None,None, None, None, None, None, go.Figure(), f"Network Name: ", f"Supply Hours: ", f"Active Nodes: ", f"Links: ", f"Source Node Id : ",
                     None, None, None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
@@ -269,7 +270,7 @@ def register_callbacks(app):
                 hoverinfo='text',  # Display hovertext when hovering
                 textposition='top center',
                 marker=dict(
-                    size=20,
+                    size=10,
                     color='blue',
                     line=dict(width=2, color='black')
                 )
@@ -294,7 +295,7 @@ def register_callbacks(app):
             input_data = df.to_dict('records')
 
             return (False, no_update,
-                    input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}", f"Source Node Id : {source_node}",
+                    input_data, node_data, pipe_data, commercial_pipe_data, esr_cost_data, manual_pump_data, valve_data, fig , f"Network Name: {network_name}", f"Supply Hours: {supply_hours}", f"Active Nodes: {len(node_data['Demand'])}", f"Links: {len(pipe_data['pipeID'])}", f"Source Node Id : {source_node}",
                     None, None, None, None, None, None,
                     go.Figure(), go.Figure(),
                     go.Figure(), go.Figure(),
@@ -339,7 +340,7 @@ def register_callbacks(app):
             if not valid:
                 logger.error("Node data validation failed. Please check the input file.")
                 return (True, "Data validation failed. Please check the 1st Output file.",
-                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                         no_update, no_update, no_update, no_update, no_update, no_update, 
                         no_update, no_update,
                         no_update, no_update,
@@ -380,7 +381,7 @@ def register_callbacks(app):
             logger.info("Pipe output 1 figures created successfully.")  
             logger.info(f"Total network length: {total_length}, Total cost: {round(total_cost,3)}")
             return (False, no_update,
-                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     node_data_1stfile, pipe_data_1stfile, nodeData2ndfile, pipeData2ndfile, nodeData3rdfile, pipeData3rdfile,
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
@@ -425,7 +426,7 @@ def register_callbacks(app):
             if not valid:
                 logger.error("Node data validation failed. Please check the input file.")
                 return (True, "Data validation failed. Please check the 2nd Output file.",
-                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                         no_update, no_update, no_update, no_update, no_update, no_update, 
                         no_update, no_update,
                         no_update, no_update,
@@ -465,7 +466,7 @@ def register_callbacks(app):
             ############# 2nd File data processing completed ##################
             
             return (False, no_update,
-                no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                 nodeData1stfile, pipeData1stfile, node_data_2ndfile, pipe_data_2ndfile, nodeData3rdfile, pipeData3rdfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,
@@ -513,7 +514,7 @@ def register_callbacks(app):
             if not valid:
                 logger.error("Node data validation failed. Please check the input file.")
                 return (True, "Data validation failed. Please check the 3rd Output file.",
-                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                        no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                         no_update, no_update, no_update, no_update, no_update, no_update, 
                         no_update, no_update,
                         no_update, no_update,
@@ -552,7 +553,7 @@ def register_callbacks(app):
             logger.info("Pipe output 3rdfile figures created successfully.")
             
             return (False, no_update,
-                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
+                    no_update,no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update, no_update,
                     nodeData1stfile, pipeData1stfile, nodeData2ndfile, pipeData2ndfile, node_data_3rdfile, pipe_data_3rdfile, 
                     nodeFig_1stfile, pipeFig_1stfile,
                     nodeFig_2ndfile, pipeFig_2ndfile,

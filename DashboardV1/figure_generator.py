@@ -1020,6 +1020,8 @@ class FigureGenerator:
                 if cost!=0 :
                     id_to_cost_map_2ndfile[pipe_id] += cost  # Aggregate cost for each pipeID in 2ndfile data
                     
+                    
+                    
                     # Find the pipe id which are diffrent from 2ndfile to 1stfile
                     if (pipe_id, diameter,parallel) not in pipeid_length_map_1stfile:
                         different_pipe_2ndfile.append(pipe_id)
@@ -1028,9 +1030,13 @@ class FigureGenerator:
                     elif cost != pipeid_cost_map_1stfile[(pipe_id, diameter, parallel)]:
                         different_pipe_2ndfile.append(pipe_id)
                     elif flow != pipeid_flow_map_1stfile[(pipe_id, diameter, parallel)]:
-                        different_pipe_2ndfile.append(pipe_id) 
+                        flowdiff = abs(flow - pipeid_flow_map_1stfile[(pipe_id, diameter, parallel)])
+                        if flowdiff > 0.01:
+                            different_pipe_2ndfile.append(pipe_id) 
                     elif speed != pipeif_speed_map_1stfile[(pipe_id, diameter, parallel)]:
-                        different_pipe_2ndfile.append(pipe_id)
+                        speeddiff = abs(speed - pipeif_speed_map_1stfile[(pipe_id, diameter, parallel)])
+                        if speeddiff > 0.01:
+                            different_pipe_2ndfile.append(pipe_id)
                     else:   
                         None
                     
@@ -1182,10 +1188,14 @@ class FigureGenerator:
                         different_pipe_3rdfile.append(pipe_id)
                     elif cost != pipeid_cost_map_1stfile[(pipe_id, diameter, parallel)]:
                         different_pipe_3rdfile.append(pipe_id)
-                    elif flow != pipeid_flow_map_1stfile[(pipe_id, diameter, parallel)] and cost != 0:
-                        different_pipe_3rdfile.append(pipe_id) 
-                    elif speed != pipeif_speed_map_1stfile[(pipe_id, diameter, parallel)] and cost != 0:
-                        different_pipe_3rdfile.append(pipe_id)
+                    elif flow != pipeid_flow_map_1stfile[(pipe_id, diameter, parallel)]:
+                        flowdiff = abs(flow - pipeid_flow_map_1stfile[(pipe_id, diameter, parallel)])
+                        if flowdiff > 0.01:
+                            different_pipe_3rdfile.append(pipe_id) 
+                    elif speed != pipeif_speed_map_1stfile[(pipe_id, diameter, parallel)]:
+                        speeddiff = abs(speed - pipeif_speed_map_1stfile[(pipe_id, diameter, parallel)])
+                        if speeddiff > 0.01:
+                            different_pipe_3rdfile.append(pipe_id)
                     else:   
                         None
                 
@@ -1478,6 +1488,8 @@ class FigureGenerator:
                 
                 # Find the pipe id which are diffrent from 2ndfile to 1stfile
                 if cost!=0 :
+                    
+                    # speeddiff = abs(speed - pipeif_speed_map_2ndfile[(pipe_id, diameter, parallel)])
                     if(pipe_id == 2):
                         print("Pipe ID 2 found in 1stfile data")
                     if (pipe_id, diameter,parallel) not in pipeid_length_map_2ndfile:
@@ -1490,11 +1502,15 @@ class FigureGenerator:
                         print("Pipe cost not match 1stfile data: ", pipe_id)
                         different_pipe_1stfile.append(pipe_id)
                     elif flow != pipeid_flow_map_2ndfile[(pipe_id, diameter, parallel)]:
-                        print("Pipe flow not match 1stfile data: ", pipe_id)
-                        different_pipe_1stfile.append(pipe_id) 
+                        flowdiff = abs(flow - pipeid_flow_map_2ndfile[(pipe_id, diameter, parallel)])
+                        if flowdiff > 0.01:
+                            print("Pipe flow not match 1stfile data: ", pipe_id)
+                            different_pipe_1stfile.append(pipe_id) 
                     elif speed != pipeif_speed_map_2ndfile[(pipe_id, diameter, parallel)]:
-                        print("Pipe speed not match 1stfile data: ", pipe_id)
-                        different_pipe_1stfile.append(pipe_id)
+                        speeddiff = abs(speed - pipeif_speed_map_2ndfile[(pipe_id, diameter, parallel)])
+                        if speeddiff > 0.01:
+                            print("Pipe speed not match 1stfile data: ", pipe_id)
+                            different_pipe_1stfile.append(pipe_id)
                     else:   
                         None
                 
@@ -1644,16 +1660,22 @@ class FigureGenerator:
 
                 # Find the pipe id which are diffrent from 1stfile to 3rdfile
                 if cost!=0 :
+                    
+                    
                     if (pipe_id, diameter,parallel) not in pipeid_length_map_2ndfile:
                         different_pipe_3rdfile.append(pipe_id)
                     elif length != pipeid_length_map_2ndfile[(pipe_id, diameter, parallel)]:
                         different_pipe_3rdfile.append(pipe_id)
                     elif cost != pipeid_cost_map_2ndfile[(pipe_id, diameter, parallel)]:
                         different_pipe_3rdfile.append(pipe_id)
-                    elif flow != pipeid_flow_map_2ndfile[(pipe_id, diameter, parallel)] and cost != 0:
-                        different_pipe_3rdfile.append(pipe_id) 
-                    elif speed != pipeif_speed_map_2ndfile[(pipe_id, diameter, parallel)] and cost != 0:
-                        different_pipe_3rdfile.append(pipe_id)
+                    elif flow != pipeid_flow_map_2ndfile[(pipe_id, diameter, parallel)]:
+                        flowdiff = abs(flow - pipeid_flow_map_2ndfile[(pipe_id, diameter, parallel)])
+                        if flowdiff > 0.01:
+                            different_pipe_3rdfile.append(pipe_id)
+                    elif speed != pipeif_speed_map_2ndfile[(pipe_id, diameter, parallel)]:
+                        speeddiff = abs(speed - pipeif_speed_map_2ndfile[(pipe_id, diameter, parallel)])
+                        if speeddiff > 0.01:
+                            different_pipe_3rdfile.append(pipe_id)
                     else:   
                         None
                 elif cost ==0 and parallel ==0 and no_of_pipes[pipe_id]>1 :
@@ -1945,6 +1967,8 @@ class FigureGenerator:
                 
                 # Find the pipe id which are diffrent from 3rdfile to 1stfile
                 if cost!=0 :
+                    
+                    
                     if (pipe_id, diameter,parallel) not in pipeid_length_map_3rdfile:
                         different_pipe_1stfile.append(pipe_id)
                     elif length != pipeid_length_map_3rdfile[(pipe_id, diameter, parallel)]:
@@ -1952,9 +1976,13 @@ class FigureGenerator:
                     elif cost != pipeid_cost_map_3rdfile[(pipe_id, diameter, parallel)]:
                         different_pipe_1stfile.append(pipe_id)
                     elif flow != pipeid_flow_map_3rdfile[(pipe_id, diameter, parallel)]:
-                        different_pipe_1stfile.append(pipe_id) 
-                    elif speed != pipeif_speed_map_3rdfile[(pipe_id,diameter, parallel)]:
-                        different_pipe_1stfile.append(pipe_id)
+                        flowdiff = abs(flow - pipeid_flow_map_3rdfile[(pipe_id, diameter, parallel)])
+                        if flowdiff > 0.01:
+                            different_pipe_1stfile.append(pipe_id) 
+                    elif speed != pipeif_speed_map_3rdfile[(pipe_id, diameter, parallel)]:
+                        speeddiff = abs(speed - pipeif_speed_map_3rdfile[(pipe_id, diameter, parallel)])
+                        if speeddiff > 0.01:
+                            different_pipe_1stfile.append(pipe_id)
                     else:   
                         None
                 elif cost ==0 and parallel ==0 and no_of_pipes[pipe_id]>1 :
@@ -2097,6 +2125,8 @@ class FigureGenerator:
                 
                 # Find the pipe id which are diffrent from 2ndfile to 3rdfile
                 if cost!=0 :
+                    
+                    
                     if (pipe_id, diameter,parallel) not in pipeid_length_map_3rdfile:
                         different_pipe_2ndfile.append(pipe_id)
                     elif length != pipeid_length_map_3rdfile[(pipe_id, diameter, parallel)]:
@@ -2104,12 +2134,16 @@ class FigureGenerator:
                     elif cost != pipeid_cost_map_3rdfile[(pipe_id, diameter, parallel)]:
                         # print(4)
                         different_pipe_2ndfile.append(pipe_id)
-                    elif flow != pipeid_flow_map_3rdfile[(pipe_id, diameter, parallel)] and cost != 0:
+                    elif flow != pipeid_flow_map_3rdfile[(pipe_id, diameter, parallel)]:
+                        flowdiff = abs(flow - pipeid_flow_map_3rdfile[(pipe_id, diameter, parallel)])
                         # print(5)
-                        different_pipe_2ndfile.append(pipe_id) 
-                    elif speed != pipeif_speed_map_3rdfile[(pipe_id, diameter, parallel)] and cost != 0:
+                        if flowdiff > 0.01:
+                            different_pipe_2ndfile.append(pipe_id)
+                    elif speed != pipeif_speed_map_3rdfile[(pipe_id, diameter, parallel)]:
                         # print(6)
-                        different_pipe_2ndfile.append(pipe_id)
+                        speeddiff = abs(speed - pipeif_speed_map_3rdfile[(pipe_id, diameter, parallel)])
+                        if speeddiff > 0.01:
+                            different_pipe_2ndfile.append(pipe_id)
                     else:   
                         None
                 elif cost ==0 and parallel ==0 and no_of_pipes[pipe_id]>1 :

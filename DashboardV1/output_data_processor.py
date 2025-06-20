@@ -394,7 +394,7 @@ class OutputDataProcessor :
                         edge_colors[full_key]="Dark Brown"
                         edge_text_color.append("red")
                     else:
-                        edge_color="#666666" #grey -> same length and diameter in both the file
+                        edge_color="#555555" #grey -> same length and diameter in both the file
                         edge_colors[full_key]="Dark Grey"
                         edge_text_color.append("#939393")
                     edge_text.append(f'{key}')
@@ -424,7 +424,7 @@ class OutputDataProcessor :
                             edge_colors[full_key]="Dark Brown"
                             edge_text_color.append("red")
                         else:
-                            edge_color="#666666" #grey -> same length and diameter in both the file
+                            edge_color="#555555" #grey -> same length and diameter in both the file
                             edge_colors[full_key]="Dark Grey"
                             edge_text_color.append("#939393")
                         edge_text.append(f'{key}')
@@ -455,15 +455,15 @@ class OutputDataProcessor :
                                 edge_colors[full_key]="Light Orange"
                                 edge_text_color.append("blue")
                             elif int(key.split('_')[0]) in different_pipe_3rdfile and int(key.split('_')[0]) not in different_pipe_2ndfile:
-                                edge_color="#A068C8"
+                                edge_color="#D7C3E5"
                                 edge_colors[full_key]="Light Purple"
                                 edge_text_color.append("red")   
                             elif (int(key.split('_')[0]) in different_pipe_2ndfile) and (int(key.split('_')[0]) in different_pipe_3rdfile):
-                                edge_color="#A68172"
+                                edge_color="#C8ACA1"
                                 edge_colors[full_key]="Light Brown"
                                 edge_text_color.append("red")
                             else:
-                                edge_color="#999999"
+                                edge_color="#aaaaaa"
                                 edge_colors[full_key]="Light Grey" 
                                 edge_text_color.append("#939393")
                             edge_text.append(f'{key}_2')
@@ -501,7 +501,7 @@ class OutputDataProcessor :
                                     edge_color="#6D412F"
                                     edge_colors[full_key]="Dark Brown"
                                 else:
-                                    edge_color="#666666"
+                                    edge_color="#555555"
                                     edge_colors[full_key]="Dark Grey" 
                             else : 
                                 x1=x0 + distance_from_start * normalized_vector[0]
@@ -522,7 +522,7 @@ class OutputDataProcessor :
                                     edge_color="#6D412f"
                                     edge_colors[full_key]="Standard Brown"
                                 else:
-                                    edge_color="#666666"
+                                    edge_color="#555555"
                                     edge_colors[full_key]="Standard Grey" 
                 logger.info(f"{full_key} color is the {edge_colors[full_key]}")
             # Not parallel edge
@@ -543,7 +543,7 @@ class OutputDataProcessor :
                         edge_colors[full_key]="Dark Brown"
                         edge_text_color.append("red")
                     else:
-                        edge_color="#666666"
+                        edge_color="#555555"
                         edge_colors[full_key]="Dark Grey" 
                         edge_text_color.append("#939393")
                     edge_text.append(f'{key}')
@@ -574,15 +574,15 @@ class OutputDataProcessor :
                             edge_colors[full_key]="Light Orange"
                             edge_text_color.append("blue")
                         elif key in different_pipe_3rdfile and key not in different_pipe_2ndfile:
-                            edge_color="#A068C8"
+                            edge_color="#D7C3E5"
                             edge_colors[full_key]="Light Purple"
                             edge_text_color.append("red")
                         elif (key in different_pipe_2ndfile) and (key in different_pipe_3rdfile):
-                            edge_color="#A68172"
+                            edge_color="#C8ACA1"
                             edge_colors[full_key]="Light Brown"
                             edge_text_color.append("red")
                         else:
-                            edge_color="#999999"
+                            edge_color="#aaaaaa"
                             edge_colors[full_key]="Light Grey"
                             edge_text_color.append("#939393")
                         edge_text.append(f'{key}')
@@ -615,7 +615,7 @@ class OutputDataProcessor :
                                 edge_color="#6D412F"
                                 edge_colors[full_key]="Dark Brown"
                             else:
-                                edge_color="#666666"
+                                edge_color="#555555"
                                 edge_colors[full_key]="Dark Grey" 
                         else : 
                             x1=x0 + distance_from_start * l * normalized_vector[0]
@@ -632,7 +632,7 @@ class OutputDataProcessor :
                                 edge_color="#6D412F"
                                 edge_colors[full_key]="Standard Brown"
                             else:
-                                edge_color="#666666"
+                                edge_color="#555555"
                                 edge_colors[full_key]="Standard Grey" 
                 logger.info(f"{full_key} color is the {edge_colors[full_key]}")
         
@@ -696,7 +696,7 @@ class OutputDataProcessor :
                         edge_colors[full_key]="Dark Brown"
                         edge_text_color.append("red")
                     else:
-                        edge_color="#666666" #grey -> same length and diameter in both the file
+                        edge_color="#555555" #grey -> same length and diameter in both the file
                         edge_colors[full_key]="Dark Grey"
                         edge_text_color.append("#939393")
                     edge_text.append(f'{key}')
@@ -727,7 +727,7 @@ class OutputDataProcessor :
                             edge_colors[full_key]="Dark Brown"
                             edge_text_color.append("red")
                         else:
-                            edge_color="#666666" #grey -> same length and diameter in both the file
+                            edge_color="#555555" #grey -> same length and diameter in both the file
                             edge_colors[full_key]="Dark Grey"
                             edge_text_color.append("#939393")
                         edge_text.append(f'{key}')
@@ -758,15 +758,15 @@ class OutputDataProcessor :
                                 edge_colors[full_key]="Light Orange"
                                 edge_text_color.append("blue")
                             elif int(key.split('_')[0]) in different_pipe_3rdfile and int(key.split('_')[0]) not in different_pipe_1stfile:
-                                edge_color="#A068C8"
+                                edge_color="#D7C3E5"
                                 edge_colors[full_key]="Light Purple"
                                 edge_text_color.append("red")
                             elif (int(key.split('_')[0]) in different_pipe_1stfile) and (int(key.split('_')[0]) in different_pipe_3rdfile):
-                                edge_color="#A68172"
+                                edge_color="#C8ACA1"
                                 edge_colors[full_key]="Light Brown"
                                 edge_text_color.append("red")
                             else:
-                                edge_color="#999999"
+                                edge_color="#aaaaaa"
                                 edge_colors[full_key]="Light Grey"
                                 edge_text_color.append("#939393")
                             edge_text.append(f'{key}_2')
@@ -803,7 +803,7 @@ class OutputDataProcessor :
                                     edge_color="#6D412F"
                                     edge_colors[full_key]="Dark Brown"
                                 else:
-                                    edge_color="#666666"
+                                    edge_color="#555555"
                                     edge_colors[full_key]="Dark Grey" 
                             else : 
                                 x1=x0 + distance_from_start * normalized_vector[0]
@@ -824,7 +824,7 @@ class OutputDataProcessor :
                                     edge_color="#6D412F"
                                     edge_colors[full_key]="Standard Brown"
                                 else:
-                                    edge_color="#666666"
+                                    edge_color="#555555"
                                     edge_colors[full_key]="standard Grey" 
             # Not parallel edge
             else:
@@ -846,7 +846,7 @@ class OutputDataProcessor :
                         edge_colors[full_key]="Dark Brown"
                         edge_text_color.append("red")
                     else:
-                        edge_color="#666666"
+                        edge_color="#555555"
                         edge_colors[full_key]="Dark Grey"
                         edge_text_color.append("#939393")
 
@@ -875,15 +875,15 @@ class OutputDataProcessor :
                             edge_colors[full_key]="Light Orange"
                             edge_text_color.append("blue")
                         elif key in different_pipe_3rdfile and key not in different_pipe_1stfile:
-                            edge_color="#A068C8"
+                            edge_color="#D7C3E5"
                             edge_colors[full_key]="Light Purple"
                             edge_text_color.append("red")
                         elif (key in different_pipe_1stfile) and (key in different_pipe_3rdfile):
-                            edge_color="#A68172"
+                            edge_color="#C8ACA1"
                             edge_colors[full_key]="Light Brown"
                             edge_text_color.append("red")
                         else:
-                            edge_color="#999999"
+                            edge_color="#aaaaaa"
                             edge_colors[full_key]="Light Grey"
                             edge_text_color.append("#939393")
                         edge_text.append(f'{key}')
@@ -916,7 +916,7 @@ class OutputDataProcessor :
                                 edge_color="#6D412F"
                                 edge_colors[full_key]="Dark Brown"
                             else:
-                                edge_color="#666666"
+                                edge_color="#555555"
                                 edge_colors[full_key]="Dark Grey" 
                         else : 
                             x1=x0 + distance_from_start * l * normalized_vector[0]
@@ -933,7 +933,7 @@ class OutputDataProcessor :
                                 edge_color="#6D412F"
                                 edge_colors[full_key]="Standard Brown"
                             else:
-                                edge_color="#666666"
+                                edge_color="#555555"
                                 edge_colors[full_key]="Standard Grey" 
         
             logger.info(f"{full_key} color is the {edge_colors[full_key]}")
@@ -996,7 +996,7 @@ class OutputDataProcessor :
                         edge_colors[full_key]="Dark Brown"
                         edge_text_color.append("red")
                     else:
-                        edge_color="#666666" #grey -> same length and diameter in both the file
+                        edge_color="#555555" #grey -> same length and diameter in both the file
                         edge_colors[full_key]="Dark Grey"
                         edge_text_color.append("#939393")
                     edge_text.append(f'{key}')
@@ -1024,7 +1024,7 @@ class OutputDataProcessor :
                             edge_colors[full_key]="Dark Brown"
                             edge_text_color.append("red")
                         else:
-                            edge_color="#666666" #grey -> same length and diameter in both the file
+                            edge_color="#555555" #grey -> same length and diameter in both the file
                             edge_colors[full_key]="Dark Grey"
                             edge_text_color.append("#939393")
                         edge_text.append(f'{key}')
@@ -1055,15 +1055,15 @@ class OutputDataProcessor :
                                 edge_colors[full_key]="Light Orange"
                                 edge_text_color.append("blue")
                             elif int(key.split('_')[0]) in different_pipe_2ndfile and int(key.split('_')[0]) not in different_pipe_1stfile:
-                                edge_color="#A068C8"
+                                edge_color="#D7C3E5"
                                 edge_colors[full_key]="Light Purple"
                                 edge_text_color.append("red")
                             elif (int(key.split('_')[0]) in different_pipe_1stfile) and (int(key.split('_')[0]) in different_pipe_2ndfile):
-                                edge_color="#A68172"
+                                edge_color="#C8ACA1"
                                 edge_colors[full_key]="Light Brown"
                                 edge_text_color.append("red")
                             else:
-                                edge_color="#999999"
+                                edge_color="#aaaaaa"
                                 edge_colors[full_key]="Light Grey"
                                 edge_text_color.append("#939393")
                             edge_text.append(f'{key}_2')
@@ -1100,7 +1100,7 @@ class OutputDataProcessor :
                                     edge_color="#6D412F"
                                     edge_colors[full_key]="Dark Brown"
                                 else:
-                                    edge_color="#666666"
+                                    edge_color="#555555"
                                     edge_colors[full_key]="Dark Grey" 
                             else : 
                                 x1=x0 + distance_from_start * normalized_vector[0]
@@ -1121,7 +1121,7 @@ class OutputDataProcessor :
                                     edge_color="#6D412F"
                                     edge_colors[full_key]="Standard Brown"
                                 else:
-                                    edge_color="#666666"
+                                    edge_color="#555555"
                                     edge_colors[full_key]="Standard Grey" 
             # Not parallel edge
             else:
@@ -1143,7 +1143,7 @@ class OutputDataProcessor :
                         edge_colors[full_key]="Dark Brown"
                         edge_text_color.append("red")
                     else:
-                        edge_color="#666666"
+                        edge_color="#555555"
                         edge_colors[full_key]="Dark Grey"
                         edge_text_color.append("#939393") 
                     edge_text.append(f'{key}')
@@ -1172,15 +1172,15 @@ class OutputDataProcessor :
                             edge_colors[full_key]="Light Orange"
                             edge_text_color.append("blue")
                         elif key in different_pipe_2ndfile and key not in different_pipe_1stfile:
-                            edge_color="#A068C8"
+                            edge_color="#D7C3E5"
                             edge_colors[full_key]="Light Purple"
                             edge_text_color.append("red")
                         elif (key in different_pipe_1stfile) and (key in different_pipe_2ndfile):
-                            edge_color="#A68172"
+                            edge_color="#C8ACA1"
                             edge_colors[full_key]="Light Brown"
                             edge_text_color.append("red")
                         else:
-                            edge_color="#999999"
+                            edge_color="#aaaaaa"
                             edge_colors[full_key]="Light Grey"
                             edge_text_color.append("#939393")
                         edge_text.append(f'{key}')
@@ -1213,7 +1213,7 @@ class OutputDataProcessor :
                                 edge_color="#6D412F"
                                 edge_colors[full_key]="Dark Brown"
                             else:
-                                edge_color="#666666"
+                                edge_color="#555555"
                                 edge_colors[full_key]="Dark Grey" 
                         else : 
                             x1=x0 + distance_from_start * l * normalized_vector[0]
@@ -1230,7 +1230,7 @@ class OutputDataProcessor :
                                 edge_color="#6D412F"
                                 edge_colors[full_key]="Standard Brown"
                             else:
-                                edge_color="#666666"
+                                edge_color="#555555"
                                 edge_colors[full_key]="Standard Grey" 
         
             edge_trace = go.Scatter(
