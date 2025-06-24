@@ -291,6 +291,11 @@ def register_callbacks(app):
                                 dragmode='pan'
                             ))
             
+            fig.update_layout(
+                paper_bgcolor='white',  # background outside the plot
+                plot_bgcolor='white',   # background inside the plot grid
+            )
+            
             logger.info("Input File Network created successfully.")
             input_data = df.to_dict('records')
 

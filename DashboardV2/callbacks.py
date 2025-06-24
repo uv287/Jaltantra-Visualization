@@ -192,10 +192,10 @@ def register_callbacks(app):
                                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                                 dragmode='pan'
                             ))
-            # fig.update_layout(
-            #     paper_bgcolor='white',   # Outside the plot area
-            #     plot_bgcolor='#bbbbbb'     # Inside the plot area (where graph is drawn)
-            # )
+            fig.update_layout(
+                paper_bgcolor='white',  # background outside the plot
+                plot_bgcolor='white',   # background inside the plot grid
+            )
             
             logger.info("Input File Network created successfully.")
             input_data = df.to_dict('records')

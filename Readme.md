@@ -1,14 +1,14 @@
-# 🚀 Dash Application Launcher with Conda and Tmux
+# Dash Application Launcher with Conda and Tmux
 
 This repository provides a Bash script to automate the setup and launch of two separate Dash applications using:
 
-* 🐍 Conda (for virtual environment and dependencies)
-* 🖥️ Tmux (to run apps in parallel terminal sessions)
-* 📊 Dash (interactive web apps)
+* Conda (for virtual environment and dependencies)
+* Tmux (to run apps in parallel terminal sessions)
+* Dash (interactive web apps)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── DashboardV1/
@@ -21,7 +21,7 @@ This repository provides a Bash script to automate the setup and launch of two s
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 * Miniconda or Anaconda
 * tmux
@@ -35,7 +35,7 @@ sudo apt install tmux
 
 ---
 
-## 🚦 Usage Instructions
+## Usage Instructions
 
 Make sure the script is executable:
 
@@ -61,7 +61,7 @@ Choose an option:
 
 ---
 
-## 🛠 What Each Option Does
+## What Each Option Does
 
 **Start Apps**
 
@@ -82,14 +82,14 @@ Choose an option:
 
 ---
 
-## 🔍 Accessing the Apps
+## Accessing the Apps
 
 * App 1 (Full Comparison): [http://localhost:8050](http://localhost:8050)
 * App 2 (Cost Comparison): [http://localhost:8040](http://localhost:8040)
 
 ---
 
-## 🖥️ Managing tmux Sessions
+## Managing tmux Sessions
 
 Attach to a running session:
 
@@ -106,13 +106,8 @@ Ctrl + B, then D
 
 ---
 
-## 📌 Notes
+## Notes
 
 * Make sure both apps use different ports (already set to 8050 and 8040)
 * Adjust paths or environment names in `run_dash.sh` if needed
 
----
-
-## 🧾 License
-
-MIT License – Feel free to use and modify!
