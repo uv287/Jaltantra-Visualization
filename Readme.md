@@ -69,8 +69,8 @@ Choose an option:
 * Installs dependencies from `requirements.txt`
 * Launches:
 
-  * DashboardV1 on port 8050 in tmux session `dash_app1`
-  * DashboardV2 on port 8040 in tmux session `dash_app2`
+  * DashboardV1(Multi-pipelie Detailed Comparision) on port 8050 in tmux session `dash_app1`
+  * DashboardV2(Cost Comparision) on port 8040 in tmux session `dash_app2`
 
 **Stop Apps**
 
